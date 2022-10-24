@@ -1,0 +1,15 @@
+{
+    "save_workspace": "never",
+    "load_workspace": false,
+    "initial_working_directory": "~/Documents",
+    "pdf_previewer": "rstudio",
+    "posix_terminal_shell": "bash",
+    "global_theme": "alternate",
+    "editor_theme": "Dracula",
+    "full_project_path_in_window_title": true,
+    "default_sweave_engine": "knitr",
+    "default_latex_program": "XeLaTeX",
+    "python_type": "system",
+    "python_version": "3.10.8",
+    "python_path": "/usr/bin/python3.10"
+}

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# backup and update config files
+# backup and update config filess
     # copy dirs from "$CDIR" to "$HOME/.config/"
     CDIR=$HOME/LinuxConfig/config_files
     timestamp=$(date +%Y-%m-%d_%H-%M-%S)

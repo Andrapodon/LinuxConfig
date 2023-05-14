@@ -2,14 +2,49 @@
     "save_workspace": "never",
     "load_workspace": false,
     "initial_working_directory": "~/Documents",
-    "pdf_previewer": "rstudio",
+    "pdf_previewer": "system",
     "posix_terminal_shell": "bash",
     "global_theme": "alternate",
     "editor_theme": "Dracula",
     "full_project_path_in_window_title": true,
-    "default_sweave_engine": "knitr",
     "default_latex_program": "XeLaTeX",
-    "python_type": "system",
-    "python_version": "3.10.8",
-    "python_path": "/usr/bin/python3.10"
+    "python_type": "conda",
+    "python_version": "3.9.16",
+    "python_path": "~/anaconda3/envs/CropPheno/bin/python3.9",
+    "jobs_tab_visibility": "shown",
+    "panes": {
+        "quadrants": [
+            "Source",
+            "TabSet1",
+            "Console",
+            "TabSet2",
+            "HiddenTabSet"
+        ],
+        "tabSet1": [
+            "Environment",
+            "History",
+            "Connections",
+            "Build",
+            "VCS",
+            "Tutorial",
+            "Presentation"
+        ],
+        "tabSet2": [
+            "Files",
+            "Plots",
+            "Packages",
+            "Help",
+            "Viewer",
+            "Presentations"
+        ],
+        "hiddenTabSet": [],
+        "console_left_on_top": false,
+        "console_right_on_top": true,
+        "additional_source_columns": 0
+    },
+    "default_encoding": "UTF-8",
+    "latex_shell_escape": true,
+    "rmd_auto_date": true,
+    "document_author": "Marc Jerónimo Pérez y Ropero",
+    "default_sweave_engine": "knitr"
 }

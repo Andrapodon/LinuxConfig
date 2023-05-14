@@ -19,6 +19,7 @@ set $term alacritty
 
 exec_always --no-startup-id workstyle &> /tmp/workstyle.log
 
+exec --no-startup-id autotiling
 exec --no-startup-id avizo-service
 
 exec --no-startup-id albert & 
@@ -94,8 +95,8 @@ gaps top 0px
 # Applications
 
 bindsym $mod+Shift+r exec rambox
-bindsym $mod+Shift+s exec spotify
-bindsym $mod+Shift+b exec google-chrome-beta
+bindsym $mod+Shift+s exec spotify-launcher
+bindsym $mod+Shift+f exec firefox
 
 
 

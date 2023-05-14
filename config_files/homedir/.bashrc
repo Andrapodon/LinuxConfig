@@ -25,5 +25,8 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 alias r=~/.local/bin/radian
-alias hamartia="ssh andrapodon@194.56.189.204"
+alias Server1="ssh andrapodon@194.56.189.204"
 alias ll='ls -a'
+alias Server2="ssh andrapodon@andrapodon.ch"
+export PATH="/home/marc/.local/bin:$PATH"
+

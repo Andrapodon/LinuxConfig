@@ -1,10 +1,11 @@
 ---
-- name: Symlink config files to user home
-  file:
-    src: "{{ playbook_dir }}/../config_files/config_dirs/{{ item }}"
-    dest: "{{ ansible_env.HOME }}/.config/{{ item }}"
-    state: link
-    force: yes
-  loop:
-    - alacritty
-    - htop
+- name: Find all stow packages
+  find:
+    paths: "{{ playbook_dir }}/../stow"
+    file_type: directory
+  register: stow_dirs
+
+- name: Stow all dotfiles
+  command: "stow -R -t {{ ansible_env.HOME }} -d {{ playbook_dir }}/../stow {{ item.path | basename }}"
+  loop: "{{ stow_dirs.files }}"
+  changed_when: true

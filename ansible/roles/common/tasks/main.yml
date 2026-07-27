@@ -7,4 +7,5 @@
       - vim
       - htop
       - alacritty
+      - stow
     state: present

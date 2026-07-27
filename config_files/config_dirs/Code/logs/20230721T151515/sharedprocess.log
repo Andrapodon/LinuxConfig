@@ -1,0 +1,14 @@
+2023-07-21 15:15:25.836 [info] Deleted from disk ms-azuretools.vscode-docker /home/marc/.vscode/extensions/ms-azuretools.vscode-docker-1.25.2
+2023-07-21 15:15:25.842 [info] Deleted from disk ms-python.isort /home/marc/.vscode/extensions/ms-python.isort-2023.10.0
+2023-07-21 15:15:25.843 [info] Deleted from disk ms-toolsai.jupyter /home/marc/.vscode/extensions/ms-toolsai.jupyter-2023.6.1001861915-linux-x64
+2023-07-21 15:15:25.904 [info] Deleted from disk james-yu.latex-workshop /home/marc/.vscode/extensions/james-yu.latex-workshop-9.12.3
+2023-07-21 15:15:26.034 [info] Deleted from disk ms-python.vscode-pylance /home/marc/.vscode/extensions/ms-python.vscode-pylance-2023.7.10
+2023-07-21 15:15:26.468 [info] Getting Manifest... ms-python.vscode-pylance
+2023-07-21 15:15:26.852 [info] Installing extension: ms-python.vscode-pylance
+2023-07-21 15:15:27.796 [info] Getting Manifest... ms-python.python
+2023-07-21 15:15:38.820 [warning] Extension signature verification failed with error 'UnknownError': ms-python.vscode-pylance
+2023-07-21 15:15:43.451 [info] Extracted extension to /home/marc/.vscode/extensions/.266f12a5-8c7c-4238-9992-c629c7c85a0c: ms-python.vscode-pylance
+2023-07-21 15:15:43.475 [info] Renamed to /home/marc/.vscode/extensions/ms-python.vscode-pylance-2023.7.30
+2023-07-21 15:15:43.477 [info] Extracting extension completed. ms-python.vscode-pylance
+2023-07-21 15:15:43.488 [info] Extension installed successfully: ms-python.vscode-pylance
+2023-07-21 15:15:43.493 [info] Marked extension as uninstalled ms-python.vscode-pylance-2023.7.20

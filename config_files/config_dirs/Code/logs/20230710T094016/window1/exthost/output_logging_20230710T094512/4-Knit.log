@@ -1,0 +1,9 @@
+Error in abs_path(input) : 
+  The file 'extension-output-TianyiShi.rmarkdown--1-Knit' does not exist.
+Calls: <Anonymous> -> setwd -> dirname -> abs_path
+In addition: Warning messages:
+1: In normalizePath(x, winslash = winslash, mustWork = must_work) :
+  path[1]="extension-output-TianyiShi.rmarkdown-#1-Knit": No such file or directory
+2: In normalizePath(x, winslash = winslash, mustWork = must_work) :
+  path[1]="extension-output-TianyiShi.rmarkdown--1-Knit": No such file or directory
+Execution halted

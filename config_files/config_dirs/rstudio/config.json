@@ -5,15 +5,16 @@
 	},
 	"font": {
 		"proportionalFont": "",
-		"fixedWidthFont": ""
+		"fixedWidthFont": "Adobe Courier"
 	},
 	"view": {
 		"zoomLevel": 1,
 		"windowBounds": {
-			"x": 964,
-			"y": 555,
-			"width": 949,
-			"height": 518
+			"x": 0,
+			"y": 0,
+			"width": 1908,
+			"height": 1046,
+			"maximized": true
 		},
 		"accessibility": false,
 		"disableRendererAccessibility": false

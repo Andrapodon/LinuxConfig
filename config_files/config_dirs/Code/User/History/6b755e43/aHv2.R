@@ -1,0 +1,353 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{lscape}
+\usepackage{longtable}
+\usepackage{csquotes}
+
+\title{\Huge{Experimental Design}\\Assignment III}
+\author{Marc Jerónimo Pérez y Ropero}
+\date{Zürich, \today}
+
+
+
+
+<<echo=FALSE,fig=FALSE, eval=FALSE>>=
+print(version)
+rm(list=ls())
+dir()
+
+setwd("~/Documents/ETH_Masterstudium/Experimental_Design/Uebung/Abgabe_3/")
+
+Sys.setenv(TZ= "Etc/GMT-1")
+
+functionPath <- "functions/"
+outputPath <- "output/"
+inputPath <- "Data/"
+
+# Version
+print(version)
+
+# Libraries
+
+library(tidyverse)
+library(lmerTest) #loads lme4 as dependent package
+library(emmeans)
+library(MESS) #needed for the wallyplot
+library(multcomp)
+library(desplot)
+
+Data <- read.table("Data/DelleyDef.txt", sep =
+                     "\t", skip = 5, header = TRUE)
+str(Data)
+
+
+# Define Factors
+Factors <- c("Site", "NLevel", "Replicate", "MainPlot", "SubPlot", "Entry",
+             "Genotype", "Range", "Row")
+
+Data <- Data %>% mutate(across(Factors, as.factor))
+
+str(Data)
+
+# Data Exploration
+
+ggplot(Data, aes(NLevel, DMY)) +
+  geom_boxplot(notch=TRUE) +
+  facet_grid( ~ Replicate)
+ggplot(Data, aes(NLevel, DMY)) + geom_boxplot(notch=TRUE) + facet_grid(~Replicate)
+
+YieldMap <- ggdesplot(DMY ~ Row + Range,
+                      data = Data,
+                      text = DMY,
+                      out1 = MainPlot,
+                      show.key = FALSE,
+                      flip = T,
+                      ticks = TRUE,
+                      cex = 0.8,
+                      shorten = FALSE,
+                      main = "")
+
+YieldMap
+
+mix1 <- lmer(DMY ~ Genotype + NLevel + Genotype:NLevel + Replicate +
+               (1|MainPlot), data = Data, na.action = na.exclude)
+anova(mix1) #uses the anova function of lmerTest
+
+
+Fit<-fitted(mix1)
+
+StdRes<-resid(mix1, scaled=TRUE)
+
+wallyplot(Fit, StdRes) #Needs package MESS
+
+qqnorm.wally <- function(x, y, ...) { qqnorm(y, ...) ; abline(a=0, b=1) }
+wallyplot(Fit, StdRes, FUN=qqnorm.wally, main="") #Needs package MESS
+
+
+
+#Identify extreme points
+P.05<--qnorm(0.05/2) #Probability band containing 95% of the data, of a
+#normally distributed, very large sample
+out.05 <- as.logical(abs(StdRes) > P.05) #5% outliers of a very large sample
+out.05[is.na(out.05)] <- FALSE #set missing values to FALSE
+Out.05<-Data[out.05, ] #These are the experimental units falling above
+#and below the standard deviation of 1.96, i.e. those for which out.05 is set
+#to TRUE.
+Out.05[c("SubPlot", "MainPlot", "Row", "Range", "NLevel", "Genotype",
+         "Entry", "DMY")] #use only a subset of columns
+
+N<-length(StdRes) #The number of observations
+upper.tail.Chauv<-1-1/(4*N) #the probability of extreme points according
+#Chauvenet’s criterion
+P.CC<-qnorm(upper.tail.Chauv) #The threshold (in standard deviations) for
+#extremes according to Chauvenet's criterion
+out.CC <- as.logical(abs(StdRes) > P.CC)
+out.CC[is.na(out.CC)] <- FALSE #set missing values to FALSE
+Out.CC<-Data[out.CC, ] #These are the experimental units falling above
+#and below the threshold determined for according to Chauvenet.
+Out.CC[c("SubPlot", "MainPlot", "Row", "Range", "NLevel", "Genotype", "Entry",
+"DMY")] #use only a subset of columns
+
+
+QQ<-qqnorm(StdRes)
+qqline(StdRes) # add a 1:1 trend line indicating what would be considered
+#normally distributed
+#Identify again the 5% of the values that fall into the extreme tails.
+abline(h=0, col="red") #plot the zero line
+abline(h=-qnorm(0.05/2), col="blue", lty="dashed")
+abline(h=qnorm(0.05/2), col="blue", lty="dashed")
+abline(h=P.CC, col="red", lty="dashed")
+abline(h=-P.CC, col="red", lty="dashed")
+text(QQ$x[out.05], QQ$y[out.05], labels=Data[out.05, ]$SubPlot, col="blue")
+text(QQ$x[out.CC], QQ$y[out.CC], labels=Data[out.CC, ]$SubPlot, col="red")
+
+plot(mix1)
+
+plot(mix1, form=resid(., scaled=TRUE) ~ fitted(.), abline=0)
+
+
+scatter.smooth(Fit, StdRes, ylab=("Standardized residuals"), xlab=("Fitted
+values")) #Plots a scatterplot with a smooth curve fitted by loess
+grid() #Add a grid
+abline(h=0, col="red") #plot the zero line
+abline(h=1.96, col="blue", lty="dashed") #plot dotted lines at 2 standard
+#deviations
+abline(h=-1.96, col="blue", lty="dashed") #plot dotted lines at -2 standard
+#deviations
+abline(h=P.CC, col="red", lty="dashed")
+abline(h=-P.CC, col="red", lty="dashed")
+text(Fit[out.05], StdRes[out.05], labels=Data[out.05, ]$SubPlot, col="blue")
+#Identify the extreme plots in the plot
+text(Fit[out.CC], StdRes[out.CC],labels=Data[out.CC, ]$SubPlot, col="red")
+#Identify the extreme plots in the plot
+
+Data$Range<-factor(Data$Range)
+Data$Row<-factor(Data$Row)
+
+mix2 <- lmer(DMY ~ Genotype + NLevel + Genotype:NLevel + Replicate +
+               (1|MainPlot/Range), data = Data, na.action = na.exclude)
+anova(mix2)
+
+
+anova(mix1, mix2)
+
+mix3 <- lmer(DMY ~ Genotype + NLevel + Genotype:NLevel + Replicate + Row + (1|MainPlot/Range),
+             data = Data, na.action = na.exclude)
+
+StdRes<-resid(mix3, scaled=TRUE) #your model
+P.CC<-qnorm(upper.tail.Chauv) #The threshold (in standard deviations) for
+#extremes according to Chauvenet's criterion
+P.CC <- as.logical(abs(StdRes) > P.CC)
+P.CC[is.na(P.CC)] <- FALSE #set missing values to FALSE
+Out.CC<-Data[P.CC, ] #These are the experimental units falling above and
+#below the threshold determined for according to Chauvenet.
+Out.CC[c("SubPlot", "MainPlot", "Row", "Range", "NLevel", "Genotype", "Entry",
+"DMY")] #use only a subset of columns
+
+
+Data$DMY.NA<-Data$DMY
+Data[Data$SubPlot %in% Out.CC$SubPlot,]<-NA
+mix4 <- lmer(DMY.NA ~ Genotype + NLevel + Genotype:NLevel + Row + Replicate +
+               (1| MainPlot/Range), data = Data, na.action = na.exclude)
+anova(mix4)
+
+
+Fit<-fitted(mix4)
+StdRes<-resid(mix4, scaled=TRUE)
+wallyplot(Fit, StdRes) #Needs package MESS
+qqnorm.wally <- function(x, y, ...) { qqnorm(y, ...) ; abline(a=0, b=1) }
+wallyplot(Fit, StdRes, FUN=qqnorm.wally, main="") #Needs package MESS
+
+
+GenMean1<-emmeans(mix1, ~Genotype) #Run emmeans again without the pairwise
+#statement to enable compact letter display (cld)
+multcomp::cld(GenMean1) #Get Tukey grouping in compact letter display
+
+GenMean4<-emmeans(mix4, pairwise~Genotype)
+#Obtain the marginal means and pairwise contrasts
+GenMean4
+
+contr<-GenMean4$contrasts %>% confint() %>% as.data.frame()
+mean(contr$SE)
+
+contr[contr$lower.CL >= 0,]
+contr
+
+TreatContr4<- contrast(GenMean4, "trt.vs.ctrl", ref = 4) #the reference (ref)
+#is B73 x UH007 with is number 4 in the list.
+TreatContr4
+
+
+TreatContr4<-TreatContr4 %>% as_tibble()
+TreatContr4[TreatContr4$p.value <=0.05,]
+
+OnePair<-emmeans(mix4, "Genotype")
+OnePair_2 <- OnePair[29:30]
+pairs(OnePair_2)
+
+
+ANOVA<-anova(mix4)
+
+AOV.REP<-ANOVA[,c("NumDF", "DenDF", "Mean Sq", "Pr(>F)")]
+AOV.REP$DenDF<- round(AOV.REP$DenDF, 0)
+AOV.REP$'Mean Sq'<- round(AOV.REP$'Mean Sq', 0)
+AOV.REP$'Pr(>F)'<- round(AOV.REP$'Pr(>F)', 3)
+AOV.REP # xtable!
+
+
+GenMean4<-emmeans(mix4, ~Genotype)
+GenMean4Tukey<-multcomp::cld(GenMean4) #Takes a long time to run
+GenMean4Tukey
+
+Gen.out<- GenMean4Tukey[c("Genotype", "emmean", "SE", ".group")]
+Gen.out$emmean<- round(Gen.out$emmean, 0)
+Gen.out$SE<- round(Gen.out$SE,2)
+Gen.out$.group<-gsub("1", "a", Gen.out$.group)
+Gen.out$.group<-gsub("2", "b", Gen.out$.group)
+Gen.out$.group<-gsub("3", "c", Gen.out$.group)
+Gen.out$.group<-gsub("4", "d", Gen.out$.group)
+Gen.out$.group<-gsub("5", "e", Gen.out$.group)
+Gen.out$.group<-gsub("6", "f", Gen.out$.group)
+# xtable
+
+contr<-GenMean4 %>% confint() %>% as.data.frame()
+MeanSED<-mean(contr$SE) #SEDx in the table
+MinSED<-min(contr$SE)
+MaxSED<-max(contr$SE)
+
+q <- qtukey(0.95, nmeans=36, lower.tail = TRUE, df=115)
+AverageTukeyHSD <- q*MeanSED/sqrt(2)
+AverageTukeyHSD
+@
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+In the data set from the shovelomics experiment the effect of different factors on the dry matter yield is of interest. Some factors are fixed, while some can be assigned to be random, this difference in nature of factors calls for the use of linear mixed effect models, as they can differentiate and encompass the difference in significance given the assigned nature of the factors. Pairwise comparisons will be made using the TKEY HSD method in order to compute multiple comparisons at once. A further focus of this assignment is the proper choice and presentation of computed data, so a meaningful presentation and discussion of the experiment can be done.
+
+\subsection{R-Version}
+%Code Chunk 1
+
+
+<<>>=
+print(version)
+@
+
+
+%Code Chunk 2
+
+<<echo=FALSE>>=
+setwd("~/Documents/ETH_Masterstudium/Experimental_Design/Uebung/Abgabe_3/")
+Sys.setenv(TZ= "Etc/GMT-1")
+
+functionPath <- "functions/"
+outputPath <- "output/"
+inputPath <- "Data/"
+
+# Libraries
+
+library(tidyverse)
+library(lmerTest) #loads lme4 as dependent package
+library(emmeans)
+library(MESS) #needed for the wallyplot
+library(multcomp)
+library(desplot)
+library(knitr)
+
+Data <- read.table("Data/DelleyDef.txt", sep =
+                     "\t", skip = 5, header = TRUE)
+
+# Define Factors
+Factors <- c("Site", "NLevel", "Replicate", "MainPlot", "SubPlot", "Entry",
+             "Genotype", "Range", "Row")
+
+Data <- Data %>% mutate(across(Factors, as.factor))
+
+
+
+# Data Exploration
+
+@
+\section{Q I}
+\textbf{Observe the boxplots and calculate the mean yield per N treatment. Hint: you can use the tidyverse commands group\_by() and summarize() use in ED2020\_08(1p) } \\
+
+Here is the boxplot:
+\begin{figure}[ht]
+<<fig=TRUE,engine=R>>=
+
+ggplot(Data, aes(NLevel, DMY)) +
+  geom_boxplot(notch=TRUE) +
+  facet_grid( ~ Replicate) +
+  theme(panel.border = element_rect(color ="black",fill = NA,size = 2))
+@
+\label{1}
+\caption{Histogramm of fry matter yield($dtha^{-1}$) against factor N-Level inside factor Replication}
+\end{figure}
+
+The following statements produce the mean DMY for each level of NLevel:
+
+<<>>=
+Data %>% group_by(NLevel) %>%
+summarize(Nlevel_mean = mean(DMY, na.rm=TRUE))
+@
+
+
+\textbf{What is the approximate yield advantage of the high N treatment (0.5p) and would you
+consider this as relevant (0.5p)?}
+
+The average yield advantage is $(142-104)dtha^{-1}=38dtha^{-1}$, this is a relevant difference. However, it is important to explore whether the difference is significant.
+
+\textbf{Is there an observable replication effect with regard to the difference between the treatments (0.5p)?}
+
+Figure \ref{1} displays an observable difference in replication 1 and 3 that is higher than in treatment 2.
+\section{Q II}
+\subsection{Q II.1}
+
+\textbf{Identify the residual plot of model mix 1 in the 3x3 panel based on visual observation. Did you identify
+the right plot? Interpret the residual plot with regard to its bias (1p) and heteroscedasticity (1p). Do you
+think the basic assumption of homogeneous variance is met? Justify your answer (0.5p). Use Figure 4 as help for the interpretation.}
+
+
+
+
+
+
+\end{document}

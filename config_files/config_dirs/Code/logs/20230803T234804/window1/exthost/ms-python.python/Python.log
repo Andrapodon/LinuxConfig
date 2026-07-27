@@ -1,0 +1,17 @@
+2023-08-03 23:49:21.496 [info] Experiment 'pythonPromptNewFormatterExt' is active
+2023-08-03 23:49:21.496 [info] Experiment 'pythonPromptNewToolsExt' is active
+2023-08-03 23:49:21.496 [info] Experiment 'pythonTestAdapter' is active
+2023-08-03 23:49:21.496 [info] Python interpreter path: /bin/python
+2023-08-03 23:49:21.496 [info] Test server listening.
+2023-08-03 23:49:21.617 [warning] Retry failed, storage update failed for key PYTHON_GLOBAL_STORAGE_KEYS
+2023-08-03 23:49:21.617 [warning] Retry failed, storage update failed for key PYTHON_GLOBAL_STORAGE_KEYS
+2023-08-03 23:49:21.617 [warning] Retry failed, storage update failed for key PYTHON_WORKSPACE_STORAGE_KEYS
+2023-08-03 23:49:21.617 [warning] Retry failed, storage update failed for key PYTHON_WORKSPACE_STORAGE_KEYS
+2023-08-03 23:49:21.617 [warning] Retry failed, storage update failed for key PYTHON_WORKSPACE_STORAGE_KEYS
+2023-08-03 23:49:21.795 [info] > conda info --json
+2023-08-03 23:49:24.328 [info] Starting Pylance language server.
+2023-08-03 23:49:24.836 [info] > /opt/miniconda3/bin/conda info --json
+2023-08-03 23:49:28.787 [info] > ~/.conda/bin/conda info --json
+2023-08-03 23:49:28.827 [info] > ~/anaconda3/bin/conda info --json
+2023-08-03 23:49:31.102 [info] > ~/anaconda3/envs/inf1/bin/python -I ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/get_output_via_markers.py ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/interpreterInfo.py
+2023-08-03 23:49:31.154 [info] > /opt/miniconda3/bin/python -I ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/get_output_via_markers.py ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/interpreterInfo.py

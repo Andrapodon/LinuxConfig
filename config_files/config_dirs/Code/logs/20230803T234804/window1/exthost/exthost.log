@@ -1,0 +1,43 @@
+2023-08-03 23:48:09.534 [info] Extension host with pid 33991 started
+2023-08-03 23:48:09.534 [info] Skipping acquiring lock for /home/marc/.config/Code/User/workspaceStorage/7f84e83dd8871373e38089230ecbb9df.
+2023-08-03 23:48:09.894 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-08-03 23:48:10.021 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-08-03 23:48:10.292 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-08-03 23:48:10.664 [info] Eager extensions activated
+2023-08-03 23:48:10.778 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-08-03 23:48:10.783 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-08-03 23:48:10.923 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2023-08-03 23:48:12.696 [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+2023-08-03 23:48:15.768 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-08-03 23:48:18.238 [info] ExtensionService#_doActivateExtension donjayamanne.python-environment-manager, startup: false, activationEvent: 'onView:pythonEnvironments'
+2023-08-03 23:48:42.442 [info] Extension host terminating: renderer closed the MessagePort
+2023-08-03 23:48:42.466 [info] Extension host with pid 33991 exiting with code 0
+2023-08-03 23:48:44.453 [info] Extension host with pid 34155 started
+2023-08-03 23:48:44.453 [info] Skipping acquiring lock for /home/marc/.config/Code/User/workspaceStorage/7f84e83dd8871373e38089230ecbb9df.
+2023-08-03 23:48:44.655 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-08-03 23:48:44.803 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-08-03 23:48:44.827 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-08-03 23:48:44.877 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-08-03 23:48:44.990 [info] Eager extensions activated
+2023-08-03 23:48:45.064 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-08-03 23:48:45.068 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-08-03 23:48:45.583 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2023-08-03 23:48:45.955 [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+2023-08-03 23:49:17.411 [info] ExtensionService#_doActivateExtension vscode.ipynb, startup: false, activationEvent: 'onCommand:ipynb.newUntitledIpynb'
+2023-08-03 23:49:17.461 [info] ExtensionService#_doActivateExtension ms-toolsai.jupyter, startup: false, activationEvent: 'onNotebook:jupyter-notebook'
+2023-08-03 23:49:17.835 [info] ExtensionService#_doActivateExtension ms-toolsai.vscode-jupyter-cell-tags, startup: false, activationEvent: 'onNotebook:jupyter-notebook'
+2023-08-03 23:49:17.873 [info] ExtensionService#_doActivateExtension ms-toolsai.vscode-jupyter-slideshow, startup: false, activationEvent: 'onNotebook:jupyter-notebook'
+2023-08-03 23:49:17.895 [info] ExtensionService#_doActivateExtension ms-toolsai.jupyter-renderers, startup: false, activationEvent: 'onNotebook:*'
+2023-08-03 23:49:19.379 [info] ExtensionService#_doActivateExtension ms-python.python, startup: false, activationEvent: 'api', root cause: ms-toolsai.jupyter
+2023-08-03 23:49:19.747 [info] ExtensionService#_doActivateExtension batisteo.vscode-django, startup: false, activationEvent: 'onLanguage:python'
+2023-08-03 23:49:19.763 [info] ExtensionService#_doActivateExtension KevinRose.vsc-python-indent, startup: false, activationEvent: 'onLanguage:python'
+2023-08-03 23:49:19.768 [info] ExtensionService#_doActivateExtension mgesbert.python-path, startup: false, activationEvent: 'onLanguage:python'
+2023-08-03 23:49:19.770 [info] ExtensionService#_doActivateExtension njpwerner.autodocstring, startup: false, activationEvent: 'onLanguage:python'
+2023-08-03 23:49:19.801 [info] ExtensionService#_doActivateExtension VisualStudioExptTeam.intellicode-api-usage-examples, startup: false, activationEvent: 'onLanguage:python'
+2023-08-03 23:49:20.002 [info] ExtensionService#_doActivateExtension VisualStudioExptTeam.vscodeintellicode, startup: false, activationEvent: 'onLanguage:python'
+2023-08-03 23:49:20.684 [info] ExtensionService#_doActivateExtension ms-python.isort, startup: false, activationEvent: 'onLanguage:python'
+2023-08-03 23:49:20.771 [info] ExtensionService#_doActivateExtension ms-python.vscode-pylance, startup: false, activationEvent: 'onLanguage:python'
+2023-08-03 23:49:28.328 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2023-08-03 23:49:28.629 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2023-08-03 23:56:04.447 [info] Extension host terminating: renderer closed the MessagePort
+2023-08-03 23:56:04.539 [info] Extension host with pid 34155 exiting with code 0

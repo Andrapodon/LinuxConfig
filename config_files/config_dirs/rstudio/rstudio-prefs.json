@@ -2,27 +2,23 @@
     "save_workspace": "never",
     "load_workspace": false,
     "initial_working_directory": "~/Documents",
-    "pdf_previewer": "system",
+    "pdf_previewer": "rstudio",
     "posix_terminal_shell": "bash",
-    "global_theme": "alternate",
     "editor_theme": "Dracula",
     "full_project_path_in_window_title": true,
-    "default_latex_program": "XeLaTeX",
-    "python_type": "conda",
-    "python_version": "3.9.16",
-    "python_path": "~/anaconda3/envs/CropPheno/bin/python3.9",
+    "default_latex_program": "LuaLaTeX",
     "jobs_tab_visibility": "shown",
     "panes": {
         "quadrants": [
             "Source",
             "TabSet1",
             "Console",
-            "TabSet2",
-            "HiddenTabSet"
+            "TabSet2"
         ],
         "tabSet1": [
             "Environment",
             "History",
+            "Plots",
             "Connections",
             "Build",
             "VCS",
@@ -31,7 +27,6 @@
         ],
         "tabSet2": [
             "Files",
-            "Plots",
             "Packages",
             "Help",
             "Viewer",
@@ -40,11 +35,32 @@
         "hiddenTabSet": [],
         "console_left_on_top": false,
         "console_right_on_top": true,
-        "additional_source_columns": 0
+        "additional_source_columns": 0,
+        "sidebar": [
+            "Chat"
+        ],
+        "sidebar_visible": true,
+        "sidebar_location": "right"
     },
     "default_encoding": "UTF-8",
     "latex_shell_escape": true,
     "rmd_auto_date": true,
     "document_author": "Marc Jerónimo Pérez y Ropero",
-    "default_sweave_engine": "knitr"
+    "default_sweave_engine": "knitr",
+    "knit_working_dir": "project",
+    "insert_native_pipe_operator": true,
+    "tab_multiline_completion": true,
+    "spelling_dictionary_language": "de_DE",
+    "doc_outline_show": "sections_and_chunks",
+    "highlight_r_function_calls": true,
+    "python_project_environment_automatic_activate": false,
+    "color_preview": false,
+    "console_code_completion": false,
+    "source_with_echo": true,
+    "insert_numbered_latex_sections": true,
+    "copilot_completions_trigger": "manual",
+    "copilot_enabled": true,
+    "copilot_indexing_enabled": true,
+    "copilot_completions_delay": 1000,
+    "rmd_viewer_type": "pane"
 }

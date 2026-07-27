@@ -1,0 +1,6 @@
+{
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "python.condaPath": "/home/marc/anaconda3/condabin/conda"
+}

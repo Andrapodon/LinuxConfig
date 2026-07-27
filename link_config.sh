@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # backup and update config filess
     # copy dirs from "$CDIR" to "$HOME/.config/"

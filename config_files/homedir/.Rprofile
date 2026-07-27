@@ -3,6 +3,7 @@ local({
     r <- getOption("repos")
     r["CRAN"] <- "https://stat.ethz.ch/CRAN/"
     options(repos = r)
+    options(rstudio.help.showDataPreview = FALSE)
 })
 
 # syler

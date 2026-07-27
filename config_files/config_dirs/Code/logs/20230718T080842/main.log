@@ -1,0 +1,8 @@
+2023-07-18 08:08:42.545 [info] update#setState idle
+2023-07-18 08:09:12.551 [info] update#setState checking for updates
+2023-07-18 08:09:22.562 [error] Error: net::ERR_NAME_NOT_RESOLVED
+    at SimpleURLLoaderWrapper.<anonymous> (node:electron/js2c/browser_init:2:49312)
+    at SimpleURLLoaderWrapper.emit (node:events:513:28)
+2023-07-18 08:09:22.564 [info] update#setState idle
+2023-07-18 08:11:04.408 [info] Extension host with pid 1327 exited with code: 0, signal: unknown.
+2023-07-18 08:16:07.933 [info] Extension host with pid 1526 exited with code: 0, signal: unknown.

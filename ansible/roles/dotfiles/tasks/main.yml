@@ -1,0 +1,10 @@
+---
+- name: Symlink config files to user home
+  file:
+    src: "{{ playbook_dir }}/../config_files/config_dirs/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/{{ item }}"
+    state: link
+    force: yes
+  loop:
+    - alacritty
+    - htop

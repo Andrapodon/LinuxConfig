@@ -1,0 +1,18 @@
+Visual Studio Code (1.80.1, undefined, desktop)
+Jupyter Extension Version: 2023.6.1101941928.
+Python Extension Version: 2023.12.0.
+Platform: linux (x64).
+No workspace folder opened.
+08:12:20.401 [info] User belongs to experiment group 'jupyterEnhancedDataViewer'
+08:12:20.401 [info] User belongs to experiment group 'jupyterTest'
+08:12:21.115 [info] Start refreshing Interpreter Kernel Picker (1689660741115)
+08:12:21.122 [info] Using Pylance
+08:12:28.536 [warn] Failed to get activated env vars for /bin/python in 67ms
+08:12:28.552 [info] Process Execution: /bin/python -c "import site;print("USER_BASE_VALUE");print(site.USER_BASE);print("USER_BASE_VALUE");"
+08:12:28.612 [info] Process Execution: /bin/python -m pip list
+08:12:29.857 [info] End refreshing Interpreter Kernel Picker (1689660741115)
+08:12:30.788 [warn] No interpreter for Pylance for Notebook URI "~/Downloads/Test.ipynb"
+08:12:52.047 [warn] No interpreter for Pylance for Notebook URI "~/Downloads/Test.ipynb"
+08:16:07.836 [info] Disposing HostJupyterExecution
+08:16:07.836 [info] Shutting down notebooks for 2aafe2d4-c016-447b-a5be-e5922a9f404c
+08:16:07.837 [info] Disposing HostJupyterExecution

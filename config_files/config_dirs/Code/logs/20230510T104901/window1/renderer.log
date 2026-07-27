@@ -1,0 +1,58 @@
+2023-05-10 10:49:06.186 [warning] Via 'product.json#extensionEnabledApiProposals' extension 'ms-vscode.vscode-selfhost-test-provider' wants API proposal 'testContinuousRun' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.
+2023-05-10 10:49:06.265 [info] Initial editor state {"filesToOpenOrCreate":[{"fileUri":{"$mid":1,"path":"/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb","scheme":"file"},"type":1,"exists":true,"options":{}}],"filesToDiff":[],"filesToMerge":[]}
+2023-05-10 10:49:07.943 [error] FAILED to destory notebook Unable to read file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb' (Error: Unable to resolve nonexistent file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb')
+2023-05-10 10:49:07.944 [warning] NotebookEditorWidget#setInput failed Unable to read file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb' (Error: Unable to resolve nonexistent file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb')
+2023-05-10 10:49:07.944 [error] Error: Unable to read file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb' (Error: Unable to resolve nonexistent file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb')
+    at e.FileService.w (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:624:17839)
+    at e.FileService.v (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:624:17501)
+    at async wo.S (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2307:50200)
+    at async e.StoredFileWorkingCopyManager.hb (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2307:62334)
+    at async Zn.load (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1566:17073)
+    at async o.b (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2307:69752)
+    at async e.NotebookModelResolverServiceImpl.resolve (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2307:72096)
+    at async $n.resolve (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1063:809)
+    at async Uo.setInput (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2589:17774)
+    at async e.EditorPanes.M (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:23399)
+    at async e.EditorPanes.D (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:21994)
+    at async e.EditorPanes.openEditor (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:20897)
+    at async vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2462:13516
+    at async an.openEditors (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2462:13980)
+    at async Promise.all (index 0)
+    at async Object.q [as settled] (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:97:21381)
+    at async e.EditorService.openEditors (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2298:105408)
+    at async vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2492:27924
+    at async Promise.all (index 0)
+    at async Promise.all (index 0)
+    at async Promise.all (index 0)
+    at async Object.q [as settled] (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:97:21381)
+2023-05-10 10:49:09.665 [error] Error: The editor could not be opened because the file was not found.
+    at lu.cc (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2285:93538)
+    at async lu.setInput (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2285:92524)
+    at async e.EditorPanes.M (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:23399)
+    at async e.EditorPanes.D (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:21994)
+    at async e.EditorPanes.openEditor (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:20897)
+    at async vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2462:13516
+2023-05-10 10:49:13.165 [info] [perf] Render performance baseline is 77ms
+2023-05-10 10:49:14.638 [error] Error: The editor could not be opened because the file was not found.
+    at lu.cc (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2285:93538)
+    at async lu.setInput (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2285:92524)
+    at async e.EditorPanes.M (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:23399)
+    at async e.EditorPanes.D (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:21994)
+    at async e.EditorPanes.openEditor (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:20897)
+    at async vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2462:13516
+2023-05-10 10:49:17.224 [error] FAILED to destory notebook Unable to read file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb' (Error: Unable to resolve nonexistent file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb')
+2023-05-10 10:49:17.224 [warning] NotebookEditorWidget#setInput failed Unable to read file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb' (Error: Unable to resolve nonexistent file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb')
+2023-05-10 10:49:17.224 [error] Error: Unable to read file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb' (Error: Unable to resolve nonexistent file '/home/marc/.cache/.fr-8TFC41/Jupyter_trait_extraction/Trait_extraction.ipynb')
+    at e.FileService.w (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:624:17839)
+    at e.FileService.v (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:624:17501)
+    at async wo.S (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2307:50200)
+    at async e.StoredFileWorkingCopyManager.hb (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2307:62334)
+    at async Zn.load (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1566:17073)
+    at async o.b (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2307:69752)
+    at async e.NotebookModelResolverServiceImpl.resolve (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2307:72096)
+    at async $n.resolve (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1063:809)
+    at async Uo.setInput (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2589:17774)
+    at async e.EditorPanes.M (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:23399)
+    at async e.EditorPanes.D (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:21994)
+    at async e.EditorPanes.openEditor (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2283:20897)
+    at async vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2462:13516

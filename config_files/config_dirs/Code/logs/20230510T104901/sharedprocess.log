@@ -1,0 +1,40 @@
+2023-05-10 10:49:12.985 [info] Getting Manifest... james-yu.latex-workshop
+2023-05-10 10:49:12.989 [info] Getting Manifest... ms-azuretools.vscode-docker
+2023-05-10 10:49:12.991 [info] Getting Manifest... ms-python.python
+2023-05-10 10:49:12.993 [info] Getting Manifest... ms-python.vscode-pylance
+2023-05-10 10:49:12.994 [info] Getting Manifest... ms-toolsai.jupyter
+2023-05-10 10:49:12.996 [info] Getting Manifest... reditorsupport.r
+2023-05-10 10:49:13.124 [info] Installing extension: ms-toolsai.jupyter
+2023-05-10 10:49:13.131 [info] Installing extension: ms-azuretools.vscode-docker
+2023-05-10 10:49:13.141 [info] Installing extension: ms-python.vscode-pylance
+2023-05-10 10:49:13.145 [info] Installing extension: ms-python.python
+2023-05-10 10:49:13.205 [info] Installing extension: james-yu.latex-workshop
+2023-05-10 10:49:13.207 [info] Installing extension: reditorsupport.r
+2023-05-10 10:49:14.721 [info] Getting Manifest... ms-python.python
+2023-05-10 10:49:15.049 [info] Waiting for already requested installing extension ms-python.python ms-python.vscode-pylance
+2023-05-10 10:49:15.440 [warning] Extension signature verification failed with error 'UnknownError': ms-toolsai.jupyter
+2023-05-10 10:49:15.690 [warning] Extension signature verification failed with error 'UnknownError': ms-azuretools.vscode-docker
+2023-05-10 10:49:15.717 [warning] Extension signature verification failed with error 'UnknownError': james-yu.latex-workshop
+2023-05-10 10:49:16.123 [warning] Extension signature verification failed with error 'UnknownError': reditorsupport.r
+2023-05-10 10:49:16.192 [warning] Extension signature verification failed with error 'UnknownError': ms-python.python
+2023-05-10 10:49:16.232 [warning] Extension signature verification failed with error 'UnknownError': ms-python.vscode-pylance
+2023-05-10 10:49:16.446 [info] Extracted extension to /home/marc/.vscode/extensions/.f8502874-6e50-4eec-8129-d64a05a30872: ms-azuretools.vscode-docker
+2023-05-10 10:49:16.470 [info] Renamed to /home/marc/.vscode/extensions/ms-azuretools.vscode-docker-1.25.0
+2023-05-10 10:49:16.521 [info] Extracting extension completed. ms-azuretools.vscode-docker
+2023-05-10 10:49:16.551 [info] Extension installed successfully: ms-azuretools.vscode-docker
+2023-05-10 10:49:16.575 [info] Marked extension as uninstalled ms-azuretools.vscode-docker-1.24.0
+2023-05-10 10:49:16.862 [info] Extracted extension to /home/marc/.vscode/extensions/.ba24c372-af9b-4f63-860e-5bd6d910d31c: reditorsupport.r
+2023-05-10 10:49:16.871 [info] Renamed to /home/marc/.vscode/extensions/reditorsupport.r-2.8.0
+2023-05-10 10:49:16.876 [info] Extracting extension completed. reditorsupport.r
+2023-05-10 10:49:16.890 [info] Extension installed successfully: reditorsupport.r
+2023-05-10 10:49:16.898 [info] Marked extension as uninstalled reditorsupport.r-2.7.2
+2023-05-10 10:49:17.292 [info] Extracted extension to /home/marc/.vscode/extensions/.8e1c6bfd-beee-42a5-8eb3-ad1f0da38fdf: ms-toolsai.jupyter
+2023-05-10 10:49:17.303 [info] Renamed to /home/marc/.vscode/extensions/ms-toolsai.jupyter-2023.4.1011241018-linux-x64
+2023-05-10 10:49:17.314 [info] Extracting extension completed. ms-toolsai.jupyter
+2023-05-10 10:49:17.329 [info] Extension installed successfully: ms-toolsai.jupyter
+2023-05-10 10:49:17.341 [info] Marked extension as uninstalled ms-toolsai.jupyter-2023.3.1000892223
+2023-05-10 10:49:19.982 [info] Extracted extension to /home/marc/.vscode/extensions/.86661586-f657-4ea5-95d0-debb3bf90eff: james-yu.latex-workshop
+2023-05-10 10:49:20.004 [info] Renamed to /home/marc/.vscode/extensions/james-yu.latex-workshop-9.10.0
+2023-05-10 10:49:20.009 [info] Extracting extension completed. james-yu.latex-workshop
+2023-05-10 10:49:20.020 [info] Extension installed successfully: james-yu.latex-workshop
+2023-05-10 10:49:20.028 [info] Marked extension as uninstalled james-yu.latex-workshop-9.8.2

@@ -1,0 +1,14 @@
+---
+- name: Arch Linux Laptop Provisioning
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Ensure yay (AUR helper) is installed
+      command: pacman -Q yay
+      ignore_errors: yes
+      register: yay_check
+      changed_when: false
+
+    - name: System is ready for automation!
+      debug:
+        msg: "Ansible is correctly initialized on {{ ansible_hostname }}"

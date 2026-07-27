@@ -1,3 +1,3 @@
-2023/05/11-19:06:16.038 1223 Reusing MANIFEST /home/marc/.config/rstudio/Local Storage/leveldb/MANIFEST-000001
-2023/05/11-19:06:16.039 1223 Recovering log #3
-2023/05/11-19:06:16.039 1223 Reusing old log /home/marc/.config/rstudio/Local Storage/leveldb/000003.log 
+2025/10/21-08:04:41.377 86b Reusing MANIFEST /home/marc/.config/rstudio/Local Storage/leveldb/MANIFEST-000001
+2025/10/21-08:04:41.400 86b Recovering log #27
+2025/10/21-08:04:41.401 86b Reusing old log /home/marc/.config/rstudio/Local Storage/leveldb/000027.log 

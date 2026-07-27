@@ -1,0 +1,29 @@
+2023-08-03 23:49:24.250 [info] [Info  - 11:49:24 PM] (34264) Pylance language server 2023.7.30 (pyright 74d8f3c4) starting
+2023-08-03 23:49:24.251 [info] [Info  - 11:49:24 PM] (34264) Server root directory: /home/marc/.vscode/extensions/ms-python.vscode-pylance-2023.7.30/dist
+2023-08-03 23:49:24.270 [info] [Info  - 11:49:24 PM] (34264) Starting service instance "Age2HD"
+2023-08-03 23:49:24.504 [info] [Info  - 11:49:24 PM] (34264) Setting pythonPath for service "Age2HD": "/bin/python"
+2023-08-03 23:49:24.519 [info] [Warn  - 11:49:24 PM] (34264) stubPath /home/marc/.local/share/Steam/steamapps/common/Age2HD/typings is not a valid directory.
+2023-08-03 23:49:24.622 [info] [Info  - 11:49:24 PM] (34264) Assuming Python version 3.11
+2023-08-03 23:49:25.572 [info] [Info  - 11:49:25 PM] (34264) No source files found.
+2023-08-03 23:49:25.617 [info] [Info  - 11:49:25 PM] (34264) Starting service instance "Age2HD"
+2023-08-03 23:49:25.736 [info] [Warn  - 11:49:25 PM] (34264) stubPath /home/marc/.local/share/Steam/steamapps/common/Age2HD/typings is not a valid directory.
+2023-08-03 23:49:26.734 [info] [Info  - 11:49:26 PM] (34264) No source files found.
+2023-08-03 23:49:29.503 [info] [Info  - 11:49:29 PM] (34264) Background analysis(1) root directory: /home/marc/.vscode/extensions/ms-python.vscode-pylance-2023.7.30/dist
+2023-08-03 23:49:29.504 [info] [Info  - 11:49:29 PM] (34264) Background analysis(1) started
+2023-08-03 23:49:29.506 [info] [Info  - 11:49:29 PM] (34264) Background analysis(2) root directory: /home/marc/.vscode/extensions/ms-python.vscode-pylance-2023.7.30/dist
+2023-08-03 23:49:29.506 [info] [Info  - 11:49:29 PM] (34264) Background analysis(2) started
+2023-08-03 23:49:29.930 [info] [Info  - 11:49:29 PM] (34264) Indexer background runner(3) root directory: /home/marc/.vscode/extensions/ms-python.vscode-pylance-2023.7.30/dist (index)
+2023-08-03 23:49:29.933 [info] [Info  - 11:49:29 PM] (34264) Indexing(3) started
+2023-08-03 23:49:33.224 [info] [Info  - 11:49:33 PM] (34264) [IDX(3)] Long operation: scan packages /home/marc/.local/share/Steam/steamapps/common/Age2HD (3275ms)
+2023-08-03 23:49:33.225 [info] [Info  - 11:49:33 PM] (34264) scanned(3) 244 files over 1 exec env
+2023-08-03 23:49:39.789 [info] [Info  - 11:49:39 PM] (34264) [IDX(3)] Long operation: index execution environment /home/marc/.local/share/Steam/steamapps/common/Age2HD (6460ms)
+2023-08-03 23:49:39.804 [info] [Info  - 11:49:39 PM] (34264) [IDX(3)] Long operation: index packages /home/marc/.local/share/Steam/steamapps/common/Age2HD (6483ms)
+2023-08-03 23:49:39.804 [info] [Info  - 11:49:39 PM] (34264) indexed(3) 154 files over 1 exec env
+2023-08-03 23:49:39.855 [info] [Info  - 11:49:39 PM] (34264) Indexing finished(3).
+2023-08-03 23:53:53.365 [info] [Info  - 11:53:53 PM] (34264) Indexer background runner(4) root directory: /home/marc/.vscode/extensions/ms-python.vscode-pylance-2023.7.30/dist (refresh)
+2023-08-03 23:53:53.365 [info] [Info  - 11:53:53 PM] (34264) Indexing(4) started
+2023-08-03 23:53:54.434 [info] [Info  - 11:53:54 PM] (34264) scanned(4) 276 files over 1 exec env
+2023-08-03 23:53:57.411 [info] [Info  - 11:53:57 PM] (34264) [IDX(4)] Long operation: index execution environment /home/marc/.local/share/Steam/steamapps/common/Age2HD (2879ms)
+2023-08-03 23:53:57.413 [info] [Info  - 11:53:57 PM] (34264) [IDX(4)] Long operation: index packages /home/marc/.local/share/Steam/steamapps/common/Age2HD (2889ms)
+2023-08-03 23:53:57.413 [info] [Info  - 11:53:57 PM] (34264) indexed(4) 178 files over 1 exec env
+2023-08-03 23:53:57.433 [info] [Info  - 11:53:57 PM] (34264) Indexing finished(4).

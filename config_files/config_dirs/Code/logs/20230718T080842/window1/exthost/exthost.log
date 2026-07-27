@@ -1,0 +1,70 @@
+2023-07-18 08:08:45.862 [info] Extension host with pid 1327 started
+2023-07-18 08:08:46.271 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-07-18 08:08:46.323 [info] ExtensionService#_doActivateExtension TianyiShi.rmarkdown, startup: false, activationEvent: 'onLanguage:rmarkdown'
+2023-07-18 08:08:46.512 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-07-18 08:08:46.657 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-07-18 08:08:46.821 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-07-18 08:08:47.412 [info] Eager extensions activated
+2023-07-18 08:08:47.651 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-07-18 08:08:47.658 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-07-18 08:08:48.354 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2023-07-18 08:08:48.547 [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+2023-07-18 08:09:11.709 [error] TypeError: Cannot read properties of undefined (reading 'document')
+	at i.a [as value] (/home/marc/.vscode/extensions/tianyishi.rmarkdown-0.0.14/lib/extension.js:1:21643)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:103:16537)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at e.$kL.acceptDocumentsAndEditorsDelta (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:13399)
+	at e.$kL.$acceptDocumentsAndEditorsDelta (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:11770)
+	at t.N (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:11199)
+	at t.M (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10965)
+	at t.H (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10046)
+	at t.G (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:9122)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:7952)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:76:13931)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:30341)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:76:13931)
+	at MessagePortMain.<anonymous> (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:28621)
+	at MessagePortMain.emit (node:events:513:28)
+	at MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:367)
+2023-07-18 08:09:11.892 [warning] TextEditor is closed/disposed
+2023-07-18 08:09:11.892 [warning] TextEditor is closed/disposed
+2023-07-18 08:09:11.892 [warning] TextEditor is closed/disposed
+2023-07-18 08:11:04.394 [info] Extension host terminating: renderer closed the MessagePort
+2023-07-18 08:11:04.405 [info] Extension host with pid 1327 exiting with code 0
+2023-07-18 08:11:06.057 [info] Extension host with pid 1526 started
+2023-07-18 08:11:06.316 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-07-18 08:11:06.379 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-07-18 08:11:06.389 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-07-18 08:11:06.421 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-07-18 08:11:06.496 [info] Eager extensions activated
+2023-07-18 08:11:06.523 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-07-18 08:11:06.526 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-07-18 08:11:06.775 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2023-07-18 08:11:06.820 [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+2023-07-18 08:12:19.407 [info] ExtensionService#_doActivateExtension vscode.extension-editing, startup: false, activationEvent: 'onLanguage:json'
+2023-07-18 08:12:19.431 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:json'
+2023-07-18 08:12:19.551 [info] ExtensionService#_doActivateExtension vscode.npm, startup: false, activationEvent: 'onLanguage:json'
+2023-07-18 08:12:19.678 [info] ExtensionService#_doActivateExtension vscode.ipynb, startup: false, activationEvent: 'onNotebookSerializer:jupyter-notebook'
+2023-07-18 08:12:19.775 [info] ExtensionService#_doActivateExtension ms-toolsai.jupyter, startup: false, activationEvent: 'onNotebook:jupyter-notebook'
+2023-07-18 08:12:20.188 [info] ExtensionService#_doActivateExtension ms-toolsai.vscode-jupyter-cell-tags, startup: false, activationEvent: 'onNotebook:jupyter-notebook'
+2023-07-18 08:12:20.208 [info] ExtensionService#_doActivateExtension ms-toolsai.vscode-jupyter-slideshow, startup: false, activationEvent: 'onNotebook:jupyter-notebook'
+2023-07-18 08:12:20.226 [info] ExtensionService#_doActivateExtension ms-toolsai.jupyter-renderers, startup: false, activationEvent: 'onNotebook:*'
+2023-07-18 08:12:21.267 [info] ExtensionService#_doActivateExtension ms-python.python, startup: false, activationEvent: 'api', root cause: ms-toolsai.jupyter
+2023-07-18 08:12:21.571 [info] ExtensionService#_doActivateExtension batisteo.vscode-django, startup: false, activationEvent: 'onLanguage:python'
+2023-07-18 08:12:21.590 [info] ExtensionService#_doActivateExtension KevinRose.vsc-python-indent, startup: false, activationEvent: 'onLanguage:python'
+2023-07-18 08:12:21.596 [info] ExtensionService#_doActivateExtension mgesbert.python-path, startup: false, activationEvent: 'onLanguage:python'
+2023-07-18 08:12:21.600 [info] ExtensionService#_doActivateExtension njpwerner.autodocstring, startup: false, activationEvent: 'onLanguage:python'
+2023-07-18 08:12:21.636 [info] ExtensionService#_doActivateExtension VisualStudioExptTeam.intellicode-api-usage-examples, startup: false, activationEvent: 'onLanguage:python'
+2023-07-18 08:12:21.812 [info] ExtensionService#_doActivateExtension VisualStudioExptTeam.vscodeintellicode, startup: false, activationEvent: 'onLanguage:python'
+2023-07-18 08:12:22.437 [info] ExtensionService#_doActivateExtension ms-python.isort, startup: false, activationEvent: 'onLanguage:python'
+2023-07-18 08:12:22.526 [info] ExtensionService#_doActivateExtension ms-python.vscode-pylance, startup: false, activationEvent: 'onLanguage:python'
+2023-07-18 08:12:50.953 [info] ExtensionService#_doActivateExtension samghelms.jupyter-notebook-vscode, startup: false, activationEvent: 'onLanguage:ipython'
+2023-07-18 08:16:07.809 [info] Extension host terminating: renderer closed the MessagePort
+2023-07-18 08:16:07.888 [info] Extension host with pid 1526 exiting with code 0

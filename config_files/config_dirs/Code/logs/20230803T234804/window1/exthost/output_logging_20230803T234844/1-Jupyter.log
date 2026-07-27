@@ -1,0 +1,70 @@
+Visual Studio Code (1.81.0, undefined, desktop)
+Jupyter Extension Version: 2023.7.1002162226.
+Python Extension Version: 2023.12.0.
+Platform: linux (x64).
+Workspace folder ~/.local/share/Steam/steamapps/common/Age2HD, Home = /home/marc
+23:49:18.038 [info] User belongs to experiment group 'FastKernelPicker'
+23:49:18.038 [info] User belongs to experiment group 'NewRemoteUriStorage'
+23:49:18.038 [info] User belongs to experiment group 'PasswordManager'
+23:49:18.038 [info] User belongs to experiment group 'NewJupyterSession'
+23:49:19.246 [info] Start refreshing Kernel Picker (1691099359246)
+23:49:19.257 [info] Using Pylance
+23:49:22.111 [warn] Failed to get activated env vars for /bin/python in 1444ms
+23:49:22.148 [info] Process Execution: /bin/python -c "import site;print("USER_BASE_VALUE");print(site.USER_BASE);print("USER_BASE_VALUE");"
+23:49:22.387 [info] Process Execution: /bin/python -m pip list
+23:49:24.371 [warn] No interpreter for Pylance for Notebook URI "Untitled-1.ipynb"
+23:49:32.576 [info] End refreshing Kernel Picker (1691099359246)
+23:51:46.221 [error] Failed to parse URI  [TypeError: Invalid URL
+	at new NodeError (node:internal/errors:387:5)
+	at URL.onParseError (node:internal/url:564:9)
+	at new URL (node:internal/url:640:5)
+	at xE (~/.vscode/extensions/ms-toolsai.jupyter-2023.7.1002162226-linux-x64/out/extension.node.js:24:573848)
+	at r.value (~/.vscode/extensions/ms-toolsai.jupyter-2023.7.1002162226-linux-x64/out/extension.node.js:24:569952)
+	at f.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:1902)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:2119)
+	at o._fireDidAccept (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:104:113001)
+	at f.$onDidAccept (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:104:111230)
+	at t.N (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:7983)
+	at t.M (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:7749)
+	at t.H (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:6830)
+	at t.G (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:5906)
+	at r.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:4736)
+	at f.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:1902)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:2119)
+	at y.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:79:13931)
+	at r.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:130:30355)
+	at f.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:1902)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:2119)
+	at y.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:79:13931)
+	at MessagePortMain.<anonymous> (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:130:28635)
+	at MessagePortMain.emit (node:events:513:28)
+	at MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:367)] {
+  input: '',
+  code: 'ERR_INVALID_URL'
+}
+23:55:24.344 [warn] Password for http://localhost:9999/ was invalid.
+23:55:24.379 [warn] Uri verification error [t [Error]: Forbidden
+	at t.create (~/.vscode/extensions/ms-toolsai.jupyter-2023.7.1002162226-linux-x64/out/extension.node.js:2:68089)
+	at process.processTicksAndRejections (node:internal/process/task_queues:96:5)
+	at async t.listRunning (~/.vscode/extensions/ms-toolsai.jupyter-2023.7.1002162226-linux-x64/out/extension.node.js:2:55954)
+	at async gm.getRunningKernels (~/.vscode/extensions/ms-toolsai.jupyter-2023.7.1002162226-linux-x64/out/extension.node.js:17:169061)
+	at async Promise.all (index 0)
+	at async ko.validateRemoteUriNew (~/.vscode/extensions/ms-toolsai.jupyter-2023.7.1002162226-linux-x64/out/extension.node.js:2:1707330)
+	at async r.value (~/.vscode/extensions/ms-toolsai.jupyter-2023.7.1002162226-linux-x64/out/extension.node.js:24:570971)] {
+  response: L [Response] {
+    size: 0,
+    timeout: 0,
+    [Symbol(Body internals)]: { body: [PassThrough], disturbed: true, error: null },
+    [Symbol(Response internals)]: {
+      url: 'http://localhost:9999/api/kernels?1691099724365',
+      status: 403,
+      statusText: 'Forbidden',
+      headers: [T [Headers]],
+      counter: 0
+    }
+  },
+  traceback: ''
+}
+23:56:04.474 [info] Disposing HostJupyterExecution
+23:56:04.475 [info] Shutting down notebooks for 1372fcee-f7e6-46ea-9633-f4c16a38001f
+23:56:04.475 [info] Disposing HostJupyterExecution

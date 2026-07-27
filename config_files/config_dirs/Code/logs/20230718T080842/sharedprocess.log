@@ -1,0 +1,62 @@
+2023-07-18 08:08:47.111 [info] Deleted from disk ms-toolsai.jupyter-keymap /home/marc/.vscode/extensions/ms-toolsai.jupyter-keymap-1.1.0
+2023-07-18 08:08:47.588 [info] Deleted from disk reditorsupport.r /home/marc/.vscode/extensions/reditorsupport.r-2.8.0
+2023-07-18 08:08:47.913 [info] Deleted from disk ms-azuretools.vscode-docker /home/marc/.vscode/extensions/ms-azuretools.vscode-docker-1.25.0
+2023-07-18 08:08:47.925 [info] Deleted from disk ms-toolsai.jupyter /home/marc/.vscode/extensions/ms-toolsai.jupyter-2023.4.1011241018-linux-x64
+2023-07-18 08:08:47.944 [info] Deleted from disk ms-toolsai.jupyter-renderers /home/marc/.vscode/extensions/ms-toolsai.jupyter-renderers-1.0.15
+2023-07-18 08:08:48.125 [info] Deleted from disk james-yu.latex-workshop /home/marc/.vscode/extensions/james-yu.latex-workshop-9.10.0
+2023-07-18 08:08:48.126 [info] Deleted from disk ms-python.isort /home/marc/.vscode/extensions/ms-python.isort-2022.8.0
+2023-07-18 08:08:48.273 [info] Deleted from disk ms-python.vscode-pylance /home/marc/.vscode/extensions/ms-python.vscode-pylance-2023.3.40
+2023-07-18 08:08:48.294 [info] Deleted from disk ms-python.python /home/marc/.vscode/extensions/ms-python.python-2023.6.0
+2023-07-18 08:08:54.307 [info] Getting Manifest... james-yu.latex-workshop
+2023-07-18 08:08:54.309 [info] Getting Manifest... ms-azuretools.vscode-docker
+2023-07-18 08:08:54.310 [info] Getting Manifest... ms-python.isort
+2023-07-18 08:08:54.311 [info] Getting Manifest... ms-python.vscode-pylance
+2023-07-18 08:08:54.311 [info] Getting Manifest... ms-toolsai.jupyter
+2023-07-18 08:08:54.876 [info] Installing extension: james-yu.latex-workshop
+2023-07-18 08:08:54.881 [info] Installing extension: ms-azuretools.vscode-docker
+2023-07-18 08:08:54.884 [info] Installing extension: ms-toolsai.jupyter
+2023-07-18 08:08:54.885 [info] Installing extension: ms-python.isort
+2023-07-18 08:08:55.049 [info] Installing extension: ms-python.vscode-pylance
+2023-07-18 08:09:07.176 [info] Getting Manifest... ms-python.python
+2023-07-18 08:09:08.555 [info] Getting Manifest... ms-python.python
+2023-07-18 08:09:16.826 [error] [uncaught exception in sharedProcess]: A system error occurred (read ECONNRESET): Error: read ECONNRESET
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
+2023-07-18 08:09:24.706 [error] [uncaught exception in sharedProcess]: A system error occurred (getaddrinfo EAI_AGAIN mobile.events.data.microsoft.com): Error: getaddrinfo EAI_AGAIN mobile.events.data.microsoft.com
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:109:26)
+2023-07-18 08:09:52.792 [info] Getting Manifest... samghelms.jupyter-notebook-vscode
+2023-07-18 08:09:52.803 [info] Installing extension: samghelms.jupyter-notebook-vscode
+2023-07-18 08:09:58.395 [warning] Extension signature verification failed with error 'UnknownError': ms-azuretools.vscode-docker
+2023-07-18 08:09:58.396 [warning] Extension signature verification failed with error 'UnknownError': ms-python.isort
+2023-07-18 08:09:58.669 [info] Extracted extension to /home/marc/.vscode/extensions/.51605413-3884-479a-a304-01eeb8af22e0: ms-azuretools.vscode-docker
+2023-07-18 08:09:58.678 [info] Renamed to /home/marc/.vscode/extensions/ms-azuretools.vscode-docker-1.26.0
+2023-07-18 08:09:58.703 [info] Extracting extension completed. ms-azuretools.vscode-docker
+2023-07-18 08:09:58.735 [info] Extension installed successfully: ms-azuretools.vscode-docker
+2023-07-18 08:09:58.747 [info] Marked extension as uninstalled ms-azuretools.vscode-docker-1.25.2
+2023-07-18 08:09:59.002 [info] Extracted extension to /home/marc/.vscode/extensions/.131607c7-5d74-4a92-8884-0d7e5e720579: ms-python.isort
+2023-07-18 08:09:59.008 [info] Renamed to /home/marc/.vscode/extensions/ms-python.isort-2023.10.1
+2023-07-18 08:09:59.011 [info] Extracting extension completed. ms-python.isort
+2023-07-18 08:09:59.025 [info] Extension installed successfully: ms-python.isort
+2023-07-18 08:09:59.030 [info] Marked extension as uninstalled ms-python.isort-2023.10.0
+2023-07-18 08:10:10.272 [warning] Extension signature verification failed with error 'UnknownError': james-yu.latex-workshop
+2023-07-18 08:10:12.120 [info] Extracted extension to /home/marc/.vscode/extensions/.5b0b3f6f-8655-4529-8294-e7ded5c1e503: james-yu.latex-workshop
+2023-07-18 08:10:12.190 [info] Renamed to /home/marc/.vscode/extensions/james-yu.latex-workshop-9.13.1
+2023-07-18 08:10:12.193 [info] Extracting extension completed. james-yu.latex-workshop
+2023-07-18 08:10:12.207 [info] Extension installed successfully: james-yu.latex-workshop
+2023-07-18 08:10:12.214 [info] Marked extension as uninstalled james-yu.latex-workshop-9.12.3
+2023-07-18 08:10:12.339 [warning] Extension signature verification failed with error 'UnknownError': ms-toolsai.jupyter
+2023-07-18 08:10:12.723 [info] Extracted extension to /home/marc/.vscode/extensions/.eb5dacfc-cef3-44f5-b5fe-a1b8e0d6ec46: ms-toolsai.jupyter
+2023-07-18 08:10:12.737 [info] Renamed to /home/marc/.vscode/extensions/ms-toolsai.jupyter-2023.6.1101941928-linux-x64
+2023-07-18 08:10:12.772 [info] Extracting extension completed. ms-toolsai.jupyter
+2023-07-18 08:10:12.784 [info] Extension installed successfully: ms-toolsai.jupyter
+2023-07-18 08:10:12.794 [info] Marked extension as uninstalled ms-toolsai.jupyter-2023.6.1001861915-linux-x64
+2023-07-18 08:10:22.806 [warning] Extension signature verification failed with error 'UnknownError': ms-python.vscode-pylance
+2023-07-18 08:10:26.989 [info] Extracted extension to /home/marc/.vscode/extensions/.79600d76-ead7-4836-b294-c7e42b18107e: ms-python.vscode-pylance
+2023-07-18 08:10:27.028 [info] Renamed to /home/marc/.vscode/extensions/ms-python.vscode-pylance-2023.7.20
+2023-07-18 08:10:27.042 [info] Extracting extension completed. ms-python.vscode-pylance
+2023-07-18 08:10:27.055 [info] Extension installed successfully: ms-python.vscode-pylance
+2023-07-18 08:10:27.062 [info] Marked extension as uninstalled ms-python.vscode-pylance-2023.7.10
+2023-07-18 08:12:28.661 [warning] Extension signature verification failed with error 'UnknownError': samghelms.jupyter-notebook-vscode
+2023-07-18 08:12:50.669 [info] Extracted extension to /home/marc/.vscode/extensions/.96e56245-83a7-4f45-bf9a-3b10cfe36812: samghelms.jupyter-notebook-vscode
+2023-07-18 08:12:50.685 [info] Renamed to /home/marc/.vscode/extensions/samghelms.jupyter-notebook-vscode-0.0.2
+2023-07-18 08:12:50.688 [info] Extracting extension completed. samghelms.jupyter-notebook-vscode
+2023-07-18 08:12:50.699 [info] Extension installed successfully: samghelms.jupyter-notebook-vscode

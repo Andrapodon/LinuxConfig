@@ -1,0 +1,29 @@
+2023-07-10 09:40:19.918 [error] Error: The editor could not be opened because the file was not found.
+    at Eh.bc (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2290:19256)
+    at async Eh.setInput (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2290:18343)
+    at async e.$Kub.M (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2288:20301)
+    at async e.$Kub.D (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2288:18969)
+    at async e.$Kub.openEditor (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2288:17957)
+    at async vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2473:12434
+2023-07-10 09:40:23.937 [info] [perf] Render performance baseline is 69ms
+2023-07-10 09:40:35.767 [error] Error: The editor could not be opened because the file was not found.
+    at Eh.bc (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2290:19256)
+    at async Eh.setInput (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2290:18343)
+    at async e.$Kub.M (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2288:20301)
+    at async e.$Kub.D (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2288:18969)
+    at async e.$Kub.openEditor (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2288:17957)
+    at async vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2473:12434
+2023-07-10 09:45:17.299 [info] [perf] Render performance baseline is 108ms
+2023-07-10 09:45:25.750 [error] Variable ${workspaceFolder} can not be resolved. Please open a folder.: Error: Variable ${workspaceFolder} can not be resolved. Please open a folder.
+    at n (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1147:23664)
+    at e.$x9b.o (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1147:24647)
+    at vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1147:22926
+    at w (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:69:29143)
+    at e.$x9b.m (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1147:22836)
+    at e.$x9b.l (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1147:22539)
+    at vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1147:22605
+    at Array.map (<anonymous>)
+    at e.$x9b.l (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1147:22593)
+    at e.$x9b.j (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1147:22008)
+    at async e.$x9b.resolveAnyMap (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1147:22144)
+    at async e.$x9b.resolveWithInteraction (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1147:28433)

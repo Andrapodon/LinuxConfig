@@ -1,0 +1,166 @@
+2023-08-03 23:49:21.805 [info] Name: isort
+2023-08-03 23:49:21.805 [info] Module: isort
+2023-08-03 23:49:21.805 [info] Python extension loading
+2023-08-03 23:49:21.805 [info] Waiting for interpreter from python extension.
+2023-08-03 23:49:21.805 [info] No interpreter found from setting isort.interpreter
+2023-08-03 23:49:21.805 [info] Getting interpreter from ms-python.python extension for workspace /home/marc/.local/share/Steam/steamapps/common/Age2HD
+2023-08-03 23:49:21.805 [info] Python extension loaded
+2023-08-03 23:49:21.805 [info] Interpreter from ms-python.python extension for /home/marc/.local/share/Steam/steamapps/common/Age2HD: /bin/python
+2023-08-03 23:49:21.805 [info] No interpreter found from setting isort.interpreter
+2023-08-03 23:49:21.805 [info] Getting interpreter from ms-python.python extension for workspace /home/marc/.local/share/Steam/steamapps/common/Age2HD
+2023-08-03 23:49:21.805 [info] Interpreter from ms-python.python extension for /home/marc/.local/share/Steam/steamapps/common/Age2HD: /bin/python
+2023-08-03 23:49:21.805 [info] Server run command: /bin/python /home/marc/.vscode/extensions/ms-python.isort-2023.10.1/bundled/tool/lsp_server.py
+2023-08-03 23:49:21.805 [info] Server: Start requested.
+2023-08-03 23:49:23.720 [info] CWD Server: /home/marc/.local/share/Steam/steamapps/common/Age2HD
+2023-08-03 23:49:23.721 [info] sys.path used to run Server:
+   /home/marc/.vscode/extensions/ms-python.isort-2023.10.1/bundled/libs
+   /home/marc/.vscode/extensions/ms-python.isort-2023.10.1/bundled/tool
+   /usr/lib/python311.zip
+   /usr/lib/python3.11
+   /usr/lib/python3.11/lib-dynload
+   /usr/lib/python3.11/site-packages
+2023-08-03 23:49:23.721 [info] Settings used to run Server:
+[
+    {
+        "check": false,
+        "cwd": "/home/marc/.local/share/Steam/steamapps/common/Age2HD",
+        "workspace": "file:///home/marc/.local/share/Steam/steamapps/common/Age2HD",
+        "args": [],
+        "path": [],
+        "severity": {
+            "W": "Warning",
+            "E": "Hint"
+        },
+        "interpreter": [
+            "/bin/python"
+        ],
+        "importStrategy": "useBundled",
+        "showNotifications": "off"
+    }
+]
+
+2023-08-03 23:49:23.721 [info] Global settings:
+{
+    "check": false,
+    "cwd": "/home/marc",
+    "workspace": "/home/marc",
+    "args": [],
+    "path": [],
+    "severity": {
+        "W": "Warning",
+        "E": "Hint"
+    },
+    "interpreter": [],
+    "importStrategy": "useBundled",
+    "showNotifications": "off"
+}
+
+2023-08-03 23:49:23.732 [info] /bin/python -m isort --version-number
+2023-08-03 23:49:23.733 [info] CWD Linter: /home/marc/.local/share/Steam/steamapps/common/Age2HD
+2023-08-03 23:49:23.745 [info] Version info for isort running for /home/marc/.local/share/Steam/steamapps/common/Age2HD:
+5.11.5
+
+2023-08-03 23:49:23.746 [info] SUPPORTED isort>=5.10.1
+FOUND isort==5.11.5
+
+2023-08-03 23:49:23.828 [info] [Trace - 11:49:23 PM] Received notification 'textDocument/publishDiagnostics'.
+2023-08-03 23:50:01.307 [info] [Trace - 11:50:01 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:01.570 [info] [Trace - 11:50:01 PM] Sending request 'textDocument/codeAction - (1)'.
+2023-08-03 23:50:01.599 [info] [Trace - 11:50:01 PM] Received response 'textDocument/codeAction - (1)' in 29ms.
+2023-08-03 23:50:02.013 [info] [Trace - 11:50:02 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:02.234 [info] [Trace - 11:50:02 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:02.425 [info] [Trace - 11:50:02 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:04.484 [info] [Trace - 11:50:04 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:04.628 [info] [Trace - 11:50:04 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:04.883 [info] [Trace - 11:50:04 PM] Sending request 'textDocument/codeAction - (2)'.
+2023-08-03 23:50:04.886 [info] [Trace - 11:50:04 PM] Received response 'textDocument/codeAction - (2)' in 2ms.
+2023-08-03 23:50:05.148 [info] [Trace - 11:50:05 PM] Sending request 'textDocument/codeAction - (3)'.
+2023-08-03 23:50:05.154 [info] [Trace - 11:50:05 PM] Received response 'textDocument/codeAction - (3)' in 5ms.
+2023-08-03 23:50:05.238 [info] [Trace - 11:50:05 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:05.495 [info] [Trace - 11:50:05 PM] Sending request 'textDocument/codeAction - (4)'.
+2023-08-03 23:50:05.497 [info] [Trace - 11:50:05 PM] Received response 'textDocument/codeAction - (4)' in 2ms.
+2023-08-03 23:50:05.623 [info] [Trace - 11:50:05 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:05.881 [info] [Trace - 11:50:05 PM] Sending request 'textDocument/codeAction - (5)'.
+2023-08-03 23:50:05.886 [info] [Trace - 11:50:05 PM] Received response 'textDocument/codeAction - (5)' in 5ms.
+2023-08-03 23:50:06.134 [info] [Trace - 11:50:06 PM] Sending request 'textDocument/codeAction - (6)'.
+2023-08-03 23:50:06.136 [info] [Trace - 11:50:06 PM] Received response 'textDocument/codeAction - (6)' in 2ms.
+2023-08-03 23:50:07.623 [info] [Trace - 11:50:07 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:09.513 [info] [Trace - 11:50:09 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:09.766 [info] [Trace - 11:50:09 PM] Sending request 'textDocument/codeAction - (7)'.
+2023-08-03 23:50:09.769 [info] [Trace - 11:50:09 PM] Received response 'textDocument/codeAction - (7)' in 3ms.
+2023-08-03 23:50:14.153 [info] [Trace - 11:50:14 PM] Sending request 'textDocument/codeAction - (8)'.
+2023-08-03 23:50:14.155 [info] [Trace - 11:50:14 PM] Received response 'textDocument/codeAction - (8)' in 2ms.
+2023-08-03 23:50:46.763 [info] [Trace - 11:50:46 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:53.311 [info] [Trace - 11:50:53 PM] Sending request 'textDocument/codeAction - (9)'.
+2023-08-03 23:50:53.314 [info] [Trace - 11:50:53 PM] Received response 'textDocument/codeAction - (9)' in 3ms.
+2023-08-03 23:50:54.192 [info] [Trace - 11:50:54 PM] Sending request 'textDocument/codeAction - (10)'.
+2023-08-03 23:50:54.194 [info] [Trace - 11:50:54 PM] Received response 'textDocument/codeAction - (10)' in 2ms.
+2023-08-03 23:50:54.624 [info] [Trace - 11:50:54 PM] Sending request 'textDocument/codeAction - (11)'.
+2023-08-03 23:50:54.655 [info] [Trace - 11:50:54 PM] Received response 'textDocument/codeAction - (11)' in 30ms.
+2023-08-03 23:50:57.369 [info] [Trace - 11:50:57 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:57.598 [info] [Trace - 11:50:57 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:57.792 [info] [Trace - 11:50:57 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:57.965 [info] [Trace - 11:50:57 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:58.128 [info] [Trace - 11:50:58 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:50:58.312 [info] [Trace - 11:50:58 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:02.061 [info] [Trace - 11:51:02 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:02.314 [info] [Trace - 11:51:02 PM] Sending request 'textDocument/codeAction - (12)'.
+2023-08-03 23:51:02.317 [info] [Trace - 11:51:02 PM] Received response 'textDocument/codeAction - (12)' in 3ms.
+2023-08-03 23:51:02.579 [info] [Trace - 11:51:02 PM] Sending request 'textDocument/codeAction - (13)'.
+2023-08-03 23:51:02.581 [info] [Trace - 11:51:02 PM] Received response 'textDocument/codeAction - (13)' in 2ms.
+2023-08-03 23:51:08.300 [info] [Trace - 11:51:08 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:08.552 [info] [Trace - 11:51:08 PM] Sending request 'textDocument/codeAction - (14)'.
+2023-08-03 23:51:08.555 [info] [Trace - 11:51:08 PM] Received response 'textDocument/codeAction - (14)' in 2ms.
+2023-08-03 23:51:08.818 [info] [Trace - 11:51:08 PM] Sending request 'textDocument/codeAction - (15)'.
+2023-08-03 23:51:08.820 [info] [Trace - 11:51:08 PM] Received response 'textDocument/codeAction - (15)' in 3ms.
+2023-08-03 23:51:09.777 [info] [Trace - 11:51:09 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:10.030 [info] [Trace - 11:51:10 PM] Sending request 'textDocument/codeAction - (16)'.
+2023-08-03 23:51:10.033 [info] [Trace - 11:51:10 PM] Received response 'textDocument/codeAction - (16)' in 3ms.
+2023-08-03 23:51:10.296 [info] [Trace - 11:51:10 PM] Sending request 'textDocument/codeAction - (17)'.
+2023-08-03 23:51:10.298 [info] [Trace - 11:51:10 PM] Received response 'textDocument/codeAction - (17)' in 2ms.
+2023-08-03 23:51:11.519 [info] [Trace - 11:51:11 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:11.772 [info] [Trace - 11:51:11 PM] Sending request 'textDocument/codeAction - (18)'.
+2023-08-03 23:51:11.774 [info] [Trace - 11:51:11 PM] Received response 'textDocument/codeAction - (18)' in 2ms.
+2023-08-03 23:51:11.823 [info] [Trace - 11:51:11 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:12.075 [info] [Trace - 11:51:12 PM] Sending request 'textDocument/codeAction - (19)'.
+2023-08-03 23:51:12.079 [info] [Trace - 11:51:12 PM] Received response 'textDocument/codeAction - (19)' in 4ms.
+2023-08-03 23:51:12.333 [info] [Trace - 11:51:12 PM] Sending request 'textDocument/codeAction - (20)'.
+2023-08-03 23:51:12.336 [info] [Trace - 11:51:12 PM] Received response 'textDocument/codeAction - (20)' in 4ms.
+2023-08-03 23:51:12.838 [info] [Trace - 11:51:12 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:13.090 [info] [Trace - 11:51:13 PM] Sending request 'textDocument/codeAction - (21)'.
+2023-08-03 23:51:13.093 [info] [Trace - 11:51:13 PM] Received response 'textDocument/codeAction - (21)' in 3ms.
+2023-08-03 23:51:13.355 [info] [Trace - 11:51:13 PM] Sending request 'textDocument/codeAction - (22)'.
+2023-08-03 23:51:13.357 [info] [Trace - 11:51:13 PM] Received response 'textDocument/codeAction - (22)' in 3ms.
+2023-08-03 23:51:13.723 [info] [Trace - 11:51:13 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:13.979 [info] [Trace - 11:51:13 PM] Sending request 'textDocument/codeAction - (23)'.
+2023-08-03 23:51:13.982 [info] [Trace - 11:51:13 PM] Received response 'textDocument/codeAction - (23)' in 3ms.
+2023-08-03 23:51:14.168 [info] [Trace - 11:51:14 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:14.420 [info] [Trace - 11:51:14 PM] Sending request 'textDocument/codeAction - (24)'.
+2023-08-03 23:51:14.423 [info] [Trace - 11:51:14 PM] Received response 'textDocument/codeAction - (24)' in 3ms.
+2023-08-03 23:51:14.677 [info] [Trace - 11:51:14 PM] Sending request 'textDocument/codeAction - (25)'.
+2023-08-03 23:51:14.681 [info] [Trace - 11:51:14 PM] Received response 'textDocument/codeAction - (25)' in 4ms.
+2023-08-03 23:51:15.399 [info] [Trace - 11:51:15 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:15.652 [info] [Trace - 11:51:15 PM] Sending request 'textDocument/codeAction - (26)'.
+2023-08-03 23:51:15.654 [info] [Trace - 11:51:15 PM] Received response 'textDocument/codeAction - (26)' in 2ms.
+2023-08-03 23:51:15.757 [info] [Trace - 11:51:15 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:16.009 [info] [Trace - 11:51:16 PM] Sending request 'textDocument/codeAction - (27)'.
+2023-08-03 23:51:16.012 [info] [Trace - 11:51:16 PM] Received response 'textDocument/codeAction - (27)' in 3ms.
+2023-08-03 23:51:16.270 [info] [Trace - 11:51:16 PM] Sending request 'textDocument/codeAction - (28)'.
+2023-08-03 23:51:16.273 [info] [Trace - 11:51:16 PM] Received response 'textDocument/codeAction - (28)' in 3ms.
+2023-08-03 23:51:16.278 [info] [Trace - 11:51:16 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:16.537 [info] [Trace - 11:51:16 PM] Sending request 'textDocument/codeAction - (29)'.
+2023-08-03 23:51:16.540 [info] [Trace - 11:51:16 PM] Received response 'textDocument/codeAction - (29)' in 3ms.
+2023-08-03 23:51:16.808 [info] [Trace - 11:51:16 PM] Sending request 'textDocument/codeAction - (30)'.
+2023-08-03 23:51:16.811 [info] [Trace - 11:51:16 PM] Received response 'textDocument/codeAction - (30)' in 3ms.
+2023-08-03 23:51:16.846 [info] [Trace - 11:51:16 PM] Sending notification 'textDocument/didChange'.
+2023-08-03 23:51:17.097 [info] [Trace - 11:51:17 PM] Sending request 'textDocument/codeAction - (31)'.
+2023-08-03 23:51:17.100 [info] [Trace - 11:51:17 PM] Received response 'textDocument/codeAction - (31)' in 3ms.
+2023-08-03 23:51:17.368 [info] [Trace - 11:51:17 PM] Sending request 'textDocument/codeAction - (32)'.
+2023-08-03 23:51:17.371 [info] [Trace - 11:51:17 PM] Received response 'textDocument/codeAction - (32)' in 3ms.
+2023-08-03 23:51:30.834 [info] [Trace - 11:51:30 PM] Sending request 'textDocument/codeAction - (33)'.
+2023-08-03 23:51:30.837 [info] [Trace - 11:51:30 PM] Received response 'textDocument/codeAction - (33)' in 3ms.
+2023-08-03 23:53:54.151 [info] [Trace - 11:53:54 PM] Sending request 'textDocument/codeAction - (34)'.
+2023-08-03 23:53:54.155 [info] [Trace - 11:53:54 PM] Received response 'textDocument/codeAction - (34)' in 4ms.
+2023-08-03 23:56:04.480 [info] [Trace - 11:56:04 PM] Sending request 'shutdown - (35)'.
+2023-08-03 23:56:04.529 [info] [Trace - 11:56:04 PM] Received response 'shutdown - (35)' in 60ms.
+2023-08-03 23:56:04.529 [info] [Trace - 11:56:04 PM] Sending notification 'exit'.

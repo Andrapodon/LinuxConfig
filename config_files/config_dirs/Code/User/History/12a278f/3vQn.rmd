@@ -1,0 +1,121 @@
+---
+title: "Genomic Selection"
+subtitle: |
+  | Molecular Plant Breeding
+  | Towards Dr. Steven Yates
+author: "Marc Jerónimo Pérez y Ropero"
+date: "`r format(Sys.time(), '%d.%m.%Y')`"
+output: 
+  pdf_document: 
+    includes:
+      in_header: preamble.tex
+editor_options: 
+  markdown: 
+    wrap: 72
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+rm(list = ls())
+library(knitr)
+library(gdata)
+library("BGLR")
+
+```
+
+```{=tex}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+```
+
+
+```{r Wheat Data Import, echo=TRUE}
+data(wheat)
+
+Y <- wheat.Y
+# get the genotypic data, already coded as 0 and 1
+X <- wheat.X
+n <- nrow(X)
+# how much genotypic data do we have?
+p <- ncol(X)
+# just use the first mega environment as the trait later
+y <- Y[,1]
+
+```
+
+
+```{r Data Set Preparation, include=FALSE}
+yNA <- y
+yNA
+set.seed(123)
+tst <- sample(1:n,size=100,replace=F)
+tst
+yNA[tst] <- NA
+geno_centered <- X
+whichNa <- tst
+```
+
+
+
+```{r Model Parameters & Run Model, include=FALSE}
+
+nIter <- 5000
+burnIn <- 500
+
+#Structure Input data for the method BGLR
+ETA <- list(MRK = list(X = geno_centered, model = "BRR"))
+fmBRR <- BGLR(y = yNA, ETA = ETA, nIter = nIter, burnIn = burnIn, saveAt = "BRR_")
+
+
+
+```
+
+
+```{r Results, include=FALSE}
+r_BRRtest  <- cor(y[whichNa],  fmBRR$yHat[whichNa], use="pairwise.complete.obs")
+# what is the correlation between the predicted and training data set?
+r_BRRtrain <- cor(y[-whichNa], fmBRR$yHat[-whichNa],use="pairwise.complete.obs")
+
+```
+
+
+
+```{r make a graph with the results,fig.width=7,fig.height=7, echo=TRUE}
+# set the colours, call all genotypes "train"
+COLO <- rep("train",n)
+# and then rename the ones we deleted from the dataset as test
+COLO[whichNa] <- "test"
+
+# generate a scatter plot of the data
+plot(x=y,y=fmBRR$yHat,col=as.factor(COLO),xlab="observed",ylab="predicted",cex=0.5,main="Bayesian Ridge Regression, yield")
+# now add a legend with the results from the correlations "round"ed to two decimal places
+legend("bottomright", legend=c(paste("train, cor =",round(r_BRRtrain,2)), paste("test, cor =",round(r_BRRtest,2))),fill=c("red", "black"), cex=1.0)
+# now fit a trend line to the data using the training data
+abline(lm(fmBRR$yHat[whichNa] ~ y[whichNa]),col="black")
+# now fit a trand line to the data using the test data
+abline(lm(fmBRR$yHat[-whichNa] ~ y[-whichNa]),col="red")
+
+```
+
+
+```{r five fold cross validation, include=FALSE}
+TST <- sample(1:5,size=n,replace=T)
+source("02.Crossvaliationfunction.R")
+
+CROSSRESULTS <- CROSSVALIDATION(1)
+CROSSRESULTS <- rbind(CROSSRESULTS,CROSSVALIDATION(2))
+CROSSRESULTS <- rbind(CROSSRESULTS,CROSSVALIDATION(3))
+CROSSRESULTS <- rbind(CROSSRESULTS,CROSSVALIDATION(4))
+CROSSRESULTS <- rbind(CROSSRESULTS,CROSSVALIDATION(5))
+
+
+```
+
+
+```{r crossvalidationboxplot, fig.width=4,fig.height=4, echo=TRUE}
+boxplot(COR ~ MODEL,data=CROSSRESULTS)
+
+```
+

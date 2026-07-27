@@ -1,0 +1,144 @@
+2023-07-10 09:40:21.040 [info] Extension host with pid 6362 started
+2023-07-10 09:40:21.333 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-07-10 09:40:21.388 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-07-10 09:40:21.538 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-07-10 09:40:21.780 [info] Eager extensions activated
+2023-07-10 09:40:21.828 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-07-10 09:40:21.836 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-07-10 09:40:21.890 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2023-07-10 09:40:33.751 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2023-07-10 09:40:33.854 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2023-07-10 09:40:33.938 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-07-10 09:40:34.086 [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+2023-07-10 09:40:54.048 [info] ExtensionService#_doActivateExtension TianyiShi.rmarkdown, startup: false, activationEvent: 'onLanguage:rmarkdown'
+2023-07-10 09:41:48.108 [info] ExtensionService#_doActivateExtension REditorSupport.r, startup: false, activationEvent: 'onView:workspaceViewer'
+2023-07-10 09:42:13.972 [error] TypeError: Cannot read properties of undefined (reading 'document')
+	at i.a [as value] (/home/marc/.vscode/extensions/tianyishi.rmarkdown-0.0.14/lib/extension.js:1:21643)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.x (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1972)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2188)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:103:16537)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at e.$kL.acceptDocumentsAndEditorsDelta (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:13399)
+	at e.$kL.$acceptDocumentsAndEditorsDelta (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:11770)
+	at t.N (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:11199)
+	at t.M (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10965)
+	at t.H (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10046)
+	at t.G (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:9122)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:7952)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:76:13931)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:30341)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:76:13931)
+	at MessagePortMain.<anonymous> (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:28621)
+	at MessagePortMain.emit (node:events:513:28)
+	at MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:367)
+2023-07-10 09:43:20.390 [error] TypeError: Cannot read properties of undefined (reading 'document')
+	at i.a [as value] (/home/marc/.vscode/extensions/tianyishi.rmarkdown-0.0.14/lib/extension.js:1:21643)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.x (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1972)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2188)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:103:16537)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at e.$kL.acceptDocumentsAndEditorsDelta (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:13399)
+	at e.$kL.$acceptDocumentsAndEditorsDelta (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:11770)
+	at t.N (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:11199)
+	at t.M (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10965)
+	at t.H (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10046)
+	at t.G (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:9122)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:7952)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:76:13931)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:30341)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:76:13931)
+	at MessagePortMain.<anonymous> (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:28621)
+	at MessagePortMain.emit (node:events:513:28)
+	at MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:367)
+2023-07-10 09:45:08.003 [error] TypeError: Cannot read properties of undefined (reading 'document')
+	at i.a [as value] (/home/marc/.vscode/extensions/tianyishi.rmarkdown-0.0.14/lib/extension.js:1:21643)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.x (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1972)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2188)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:103:16537)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at e.$kL.acceptDocumentsAndEditorsDelta (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:13399)
+	at e.$kL.$acceptDocumentsAndEditorsDelta (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:11770)
+	at t.N (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:11199)
+	at t.M (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10965)
+	at t.H (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10046)
+	at t.G (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:9122)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:7952)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:76:13931)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:30341)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:76:13931)
+	at MessagePortMain.<anonymous> (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:28621)
+	at MessagePortMain.emit (node:events:513:28)
+	at MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:367)
+2023-07-10 09:45:10.872 [info] Extension host terminating: renderer closed the MessagePort
+2023-07-10 09:45:10.926 [info] Extension host with pid 6362 exiting with code 0
+2023-07-10 09:45:12.333 [info] Extension host with pid 6798 started
+2023-07-10 09:45:12.832 [info] ExtensionService#_doActivateExtension REditorSupport.r, startup: false, activationEvent: 'onView:workspaceViewer'
+2023-07-10 09:45:13.374 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-07-10 09:45:13.387 [info] ExtensionService#_doActivateExtension TianyiShi.rmarkdown, startup: false, activationEvent: 'onLanguage:rmarkdown'
+2023-07-10 09:45:13.839 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-07-10 09:45:14.734 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-07-10 09:45:14.784 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-07-10 09:45:15.001 [info] Eager extensions activated
+2023-07-10 09:45:15.053 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-07-10 09:45:15.059 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-07-10 09:45:15.175 [error] Error: Client is not running and can't be stopped. It's current state is: starting
+	at b.shutdown (/home/marc/.vscode/extensions/reditorsupport.r-2.8.1/dist/extension.js:2:1525510)
+	at b.stop (/home/marc/.vscode/extensions/reditorsupport.r-2.8.1/dist/extension.js:2:1525091)
+	at b.stop (/home/marc/.vscode/extensions/reditorsupport.r-2.8.1/dist/extension.js:2:1687381)
+	at ChildProcess.<anonymous> (/home/marc/.vscode/extensions/reditorsupport.r-2.8.1/dist/extension.js:2:1329862)
+	at ChildProcess.emit (node:events:525:35)
+	at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+2023-07-10 09:45:16.434 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2023-07-10 09:45:16.644 [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+2023-07-10 09:47:23.302 [error] TypeError: Cannot read properties of undefined (reading 'document')
+	at i.a [as value] (/home/marc/.vscode/extensions/tianyishi.rmarkdown-0.0.14/lib/extension.js:1:21643)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.x (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1972)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2188)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:103:16537)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at e.$kL.acceptDocumentsAndEditorsDelta (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:13399)
+	at e.$kL.$acceptDocumentsAndEditorsDelta (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:11770)
+	at t.N (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:11199)
+	at t.M (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10965)
+	at t.H (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10046)
+	at t.G (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:9122)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:7952)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:76:13931)
+	at i.value (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:30341)
+	at p.w (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:1902)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:60:2119)
+	at f.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:76:13931)
+	at MessagePortMain.<anonymous> (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:28621)
+	at MessagePortMain.emit (node:events:513:28)
+	at MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:367)
+2023-07-10 09:47:57.471 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2023-07-10 09:47:57.499 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2023-07-10 10:36:00.412 [info] ExtensionService#_doActivateExtension vscode.grunt, startup: false, activationEvent: 'onTaskType:grunt'
+2023-07-10 10:36:00.423 [info] ExtensionService#_doActivateExtension vscode.gulp, startup: false, activationEvent: 'onTaskType:gulp'
+2023-07-10 10:36:00.426 [info] ExtensionService#_doActivateExtension vscode.jake, startup: false, activationEvent: 'onTaskType:jake'
+2023-07-10 10:36:00.428 [info] ExtensionService#_doActivateExtension vscode.npm, startup: false, activationEvent: 'onTaskType:npm'
+2023-07-10 10:36:00.464 [info] ExtensionService#_doActivateExtension ms-azuretools.vscode-docker, startup: false, activationEvent: 'onTaskType:docker-build'
+2023-07-10 10:40:58.777 [info] Extension host terminating: renderer closed the MessagePort
+2023-07-10 10:40:58.841 [info] Extension host with pid 6798 exiting with code 0

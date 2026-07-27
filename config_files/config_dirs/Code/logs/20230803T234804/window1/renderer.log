@@ -1,0 +1,6 @@
+2023-08-03 23:48:14.462 [info] [perf] Render performance baseline is 80ms
+2023-08-03 23:48:47.297 [info] [perf] Render performance baseline is 171ms
+2023-08-03 23:48:57.118 [error] Unknown error while installing extension ms-python.python: Error: Unknown error while installing extension ms-python.python
+    at H.installFromGallery (/opt/visual-studio-code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:82:65028)
+2023-08-03 23:49:00.378 [error] Unknown error while installing extension ms-python.vscode-pylance: Error: Unknown error while installing extension ms-python.vscode-pylance
+    at H.installFromGallery (/opt/visual-studio-code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:82:65028)

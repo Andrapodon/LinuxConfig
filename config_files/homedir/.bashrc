@@ -29,4 +29,5 @@ alias Server1="ssh andrapodon@194.56.189.204"
 alias ll='ls -a'
 alias Server2="ssh andrapodon@andrapodon.ch"
 export PATH="/home/marc/.local/bin:$PATH"
-
+alias ETH-VPN="sudo openconnect -u marcpe@student-net.ethz.ch --useragent=AnyConnect -g student-net sslvpn.ethz.ch"
+alias r="radian"

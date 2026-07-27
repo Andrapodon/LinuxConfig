@@ -1,0 +1,103 @@
+[VSC-R] marcpe_MPBExIV.rmd process started
+==> rmarkdown::render('/home/marc/Documents/ETH_Masterstudium/Molecular Plant Breeding/Assignments/Assignment IV/marcpe_MPBExIV.rmd', output_format = 'pdf_document')
+
+
+processing file: marcpe_MPBExIV.rmd
+
+1/17                                
+
+2/17 [setup]                        
+
+3/17                                
+
+4/17 [Wheat Data Import]            
+
+5/17                                
+
+6/17 [Data Set Preparation]         
+
+7/17                                
+
+8/17 [Model Parameters & Run Model] 
+
+9/17                                
+
+10/17 [Results]                      
+
+11/17                                
+
+12/17 [make a graph with the results]
+
+13/17                                
+
+14/17 [five fold cross validation]   
+
+15/17                                
+
+16/17 [crossvalidationboxplot]       
+
+17/17                                
+
+output file: marcpe_MPBExIV.knit.md
+
+
+/sbin/pandoc +RTS -K512m -RTS marcpe_MPBExIV.knit.md --to latex --from markdown+autolink_bare_uris+tex_math_single_backslash --output marcpe_MPBExIV.tex --lua-filter /usr/lib/R/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/lib/R/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --highlight-style tango --pdf-engine pdflatex --include-in-header preamble.tex --variable graphics --variable 'geometry:margin=1in' --citeproc 
+
+
+Output created: marcpe_MPBExIV.pdf
+
+<<<vsc>>>/home/marc/Documents/ETH_Masterstudium/Molecular Plant Breeding/Assignments/Assignment IV/marcpe_MPBExIV.pdf<<<vsc>>>
+[VSC-R] marcpe_MPBExIV.rmd process exited with exit code null
+[VSC-R] marcpe_MPBExIV.rmd process started
+==> rmarkdown::render('/home/marc/Documents/ETH_Masterstudium/Molecular Plant Breeding/Assignments/Assignment IV/marcpe_MPBExIV.rmd', output_format = 'pdf_document')
+
+
+processing file: marcpe_MPBExIV.rmd
+
+1/17                                
+
+2/17 [setup]                        
+
+3/17                                
+
+4/17 [Wheat Data Import]            
+
+5
+/17                                
+
+6/17 [Data Set Preparation]         
+
+7/17                                
+
+8/17 [Model Parameters & Run Model] 
+
+9/17                                
+
+10/17 [Results]                      
+
+11/17                                
+12/17 [make a graph with the results]
+
+13/17                                
+
+14/17 [five fold cross validation]   
+
+15/17                                
+
+16/17 [crossvalidationboxplot]       
+
+17
+/17                                
+
+output file: marcpe_MPBExIV.knit.md
+
+
+/sbin/pandoc +RTS -K512m -RTS marcpe_MPBExIV.knit.md --to latex --from markdown+autolink_bare_uris+tex_math_single_backslash --output marcpe_MPBExIV.tex --lua-filter /usr/lib/R/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/lib/R/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --highlight-style tango --pdf-engine pdflatex --include-in-header preamble.tex --variable graphics --variable 'geometry:margin=1in' --citeproc 
+
+
+Output created: marcpe_MPBExIV.pdf
+
+<<<vsc>>>/home/marc/Documents/ETH_Masterstudium/Molecular Plant Breeding/Assignments/Assignment IV/marcpe_MPBExIV.pdf<<<vsc>>>
+[VSC-R] marcpe_MPBExIV.rmd process exited with exit code null
+[VSC-R] terminating R process
+[VSC-R] terminating R process

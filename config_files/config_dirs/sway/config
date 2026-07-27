@@ -17,24 +17,29 @@ set $right l
 set $term alacritty
 # Your preferred application launcher
 
+exec wl-paste -t text --watch clipman store
 exec_always --no-startup-id workstyle &> /tmp/workstyle.log
 
-exec --no-startup-id autotiling
-exec --no-startup-id avizo-service
+exec --no-startup-id autotiling &
+exec --no-startup-id swaync &
 
-exec --no-startup-id albert & 
+
+exec --no-startup-id albert &
 bindsym --release Super_L exec --no-startup-id albert toggle
+
+#exec --no-startup-id wofi & 
+#bindsym --release Super_L exec  wofi --show run
 
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu wofi
 
-
+xwayland enable
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/marc/Pictures/Wallpaper_5.jpg fill
+output * bg /home/marc/LinuxConfig/pictures/Wallpaper.jpg fill
 #
 # Example configuration:
 #
@@ -59,11 +64,13 @@ output * bg /home/marc/Pictures/Wallpaper_5.jpg fill
 #
 # Example configuration:
 #
-   input "2:7:SynPS/2_Synaptics_TouchPad" {
+input "type:touchpad" {
        dwt enabled
+       tap_button_map lrm
        tap enabled
        natural_scroll enabled
        middle_emulation enabled
+       dwtp enabled
    }
 
 input * {
@@ -74,14 +81,14 @@ input * {
 
 # Volume- and Brightnesscontrol
 
-exec "avizo-service"
+exec "avizo-service" &
 
-bindsym XF86AudioRaiseVolume exec volumectl -u up
-bindsym XF86AudioLowerVolume exec volumectl -u down
-bindsym XF86AudioMicMute exec volumectl -m toggle-mute
-bindsym XF86AudioMute exec volumectl -u toggle-mute
-bindsym XF86MonBrightnessUp exec lightctl up
-bindsym XF86MonBrightnessDown exec lightctl down
+bindsym XF86AudioRaiseVolume exec volumectl up
+bindsym XF86AudioLowerVolume exec volumectl down
+bindsym XF86AudioMicMute exec volumectl toggle
+bindsym XF86AudioMute exec volumectl toggle
+bindsym XF86MonBrightnessUp exec brightnessctl set +20
+bindsym XF86MonBrightnessDown exec brightnessctl set 20-
 
 # Screenshot
 
@@ -94,10 +101,10 @@ gaps top 0px
 
 # Applications
 
-bindsym $mod+Shift+r exec rambox
 bindsym $mod+Shift+s exec spotify-launcher
 bindsym $mod+Shift+f exec firefox
-
+bindsym $mod+Shift+n exec joplin-desktop
+bindsym $mod+Shift+g exec gamemoderun chromium "https://play.geforcenow.com"
 
 
 
@@ -217,7 +224,7 @@ bindsym $mod+Shift+f exec firefox
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    bindsym $mod+p scratchpad show
 #
 # Resizing containers:
 #
@@ -301,3 +308,11 @@ include /etc/sway/config.d/*
 		client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 		client.background       #FFFFFF
 
+
+
+
+output eDP-1 pos 0 0 res 1920x1080
+output HDMI-A-1 pos 1920 0 res 1920x1080
+
+workspace 8 output HDMI-A-1
+workspace 9 output HDMI-A-1

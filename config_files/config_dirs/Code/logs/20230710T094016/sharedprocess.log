@@ -1,0 +1,82 @@
+2023-07-10 09:40:25.407 [info] Getting Manifest... james-yu.latex-workshop
+2023-07-10 09:40:25.413 [info] Getting Manifest... ms-azuretools.vscode-docker
+2023-07-10 09:40:25.419 [info] Getting Manifest... ms-python.isort
+2023-07-10 09:40:25.422 [info] Getting Manifest... ms-python.python
+2023-07-10 09:40:25.427 [info] Getting Manifest... ms-python.vscode-pylance
+2023-07-10 09:40:25.433 [info] Getting Manifest... ms-toolsai.jupyter
+2023-07-10 09:40:25.439 [info] Getting Manifest... ms-toolsai.jupyter-keymap
+2023-07-10 09:40:25.444 [info] Getting Manifest... ms-toolsai.jupyter-renderers
+2023-07-10 09:40:25.451 [info] Getting Manifest... reditorsupport.r
+2023-07-10 09:40:25.500 [info] Installing extension: james-yu.latex-workshop
+2023-07-10 09:40:25.579 [info] Installing extension: ms-toolsai.jupyter-keymap
+2023-07-10 09:40:25.586 [info] Installing extension: ms-toolsai.jupyter-renderers
+2023-07-10 09:40:25.587 [info] Installing extension: ms-toolsai.jupyter
+2023-07-10 09:40:25.591 [info] Installing extension: ms-python.python
+2023-07-10 09:40:25.673 [info] Installing extension: ms-python.vscode-pylance
+2023-07-10 09:40:25.675 [info] Installing extension: reditorsupport.r
+2023-07-10 09:40:25.676 [info] Installing extension: ms-python.isort
+2023-07-10 09:40:25.678 [info] Installing extension: ms-azuretools.vscode-docker
+2023-07-10 09:40:27.966 [warning] Extension signature verification failed with error 'UnknownError': ms-toolsai.jupyter-keymap
+2023-07-10 09:40:27.994 [info] Extracted extension to /home/marc/.vscode/extensions/.7495519f-ae48-4738-8d1e-2d86884448c6: ms-toolsai.jupyter-keymap
+2023-07-10 09:40:28.000 [info] Renamed to /home/marc/.vscode/extensions/ms-toolsai.jupyter-keymap-1.1.2
+2023-07-10 09:40:28.003 [info] Extracting extension completed. ms-toolsai.jupyter-keymap
+2023-07-10 09:40:28.028 [info] Extension installed successfully: ms-toolsai.jupyter-keymap
+2023-07-10 09:40:28.033 [info] Marked extension as uninstalled ms-toolsai.jupyter-keymap-1.1.0
+2023-07-10 09:40:28.475 [warning] Extension signature verification failed with error 'UnknownError': ms-azuretools.vscode-docker
+2023-07-10 09:40:28.609 [info] Extracted extension to /home/marc/.vscode/extensions/.40c32f41-64dc-4fbc-afe4-28f1c9b409f7: ms-azuretools.vscode-docker
+2023-07-10 09:40:28.630 [info] Renamed to /home/marc/.vscode/extensions/ms-azuretools.vscode-docker-1.25.2
+2023-07-10 09:40:28.633 [info] Extracting extension completed. ms-azuretools.vscode-docker
+2023-07-10 09:40:28.661 [info] Extension installed successfully: ms-azuretools.vscode-docker
+2023-07-10 09:40:28.669 [info] Marked extension as uninstalled ms-azuretools.vscode-docker-1.25.0
+2023-07-10 09:40:28.895 [info] Getting Manifest... ms-python.python
+2023-07-10 09:40:28.983 [info] Getting Manifest... ms-python.python
+2023-07-10 09:40:29.021 [info] Waiting for already requested installing extension ms-python.python ms-python.vscode-pylance
+2023-07-10 09:40:29.238 [warning] Extension signature verification failed with error 'UnknownError': james-yu.latex-workshop
+2023-07-10 09:40:29.390 [info] Waiting for already requested installing extension ms-python.python ms-python.isort
+2023-07-10 09:40:29.599 [warning] Extension signature verification failed with error 'UnknownError': ms-toolsai.jupyter-renderers
+2023-07-10 09:40:29.635 [warning] Extension signature verification failed with error 'UnknownError': reditorsupport.r
+2023-07-10 09:40:29.645 [warning] Extension signature verification failed with error 'UnknownError': ms-python.python
+2023-07-10 09:40:29.645 [warning] Extension signature verification failed with error 'UnknownError': ms-toolsai.jupyter
+2023-07-10 09:40:30.094 [warning] Extension signature verification failed with error 'UnknownError': ms-python.isort
+2023-07-10 09:40:30.156 [warning] Extension signature verification failed with error 'UnknownError': ms-python.vscode-pylance
+2023-07-10 09:40:30.386 [info] Extracted extension to /home/marc/.vscode/extensions/.ca4dc2c5-a364-4aba-be74-caaf10db0d15: reditorsupport.r
+2023-07-10 09:40:30.410 [info] Renamed to /home/marc/.vscode/extensions/reditorsupport.r-2.8.1
+2023-07-10 09:40:30.415 [info] Extracting extension completed. reditorsupport.r
+2023-07-10 09:40:30.427 [info] Extension installed successfully: reditorsupport.r
+2023-07-10 09:40:30.437 [info] Marked extension as uninstalled reditorsupport.r-2.8.0
+2023-07-10 09:40:30.936 [info] Extracted extension to /home/marc/.vscode/extensions/.c0dca6ed-87d4-4862-8c8e-4d88cccca079: ms-toolsai.jupyter-renderers
+2023-07-10 09:40:30.943 [info] Renamed to /home/marc/.vscode/extensions/ms-toolsai.jupyter-renderers-1.0.17
+2023-07-10 09:40:30.948 [info] Extracting extension completed. ms-toolsai.jupyter-renderers
+2023-07-10 09:40:30.959 [info] Extension installed successfully: ms-toolsai.jupyter-renderers
+2023-07-10 09:40:30.968 [info] Marked extension as uninstalled ms-toolsai.jupyter-renderers-1.0.15
+2023-07-10 09:40:31.128 [info] Extracted extension to /home/marc/.vscode/extensions/.feaeb9ad-e9ca-4ac7-8989-8150f4076494: ms-python.isort
+2023-07-10 09:40:31.135 [info] Renamed to /home/marc/.vscode/extensions/ms-python.isort-2023.10.0
+2023-07-10 09:40:31.140 [info] Extracting extension completed. ms-python.isort
+2023-07-10 09:40:31.158 [info] Marked extension as uninstalled ms-python.isort-2022.8.0
+2023-07-10 09:40:31.175 [info] Extracted extension to /home/marc/.vscode/extensions/.1fa78a0a-1a4b-4f4a-acb1-0a82ba4162ac: ms-toolsai.jupyter
+2023-07-10 09:40:31.182 [info] Renamed to /home/marc/.vscode/extensions/ms-toolsai.jupyter-2023.6.1001861915-linux-x64
+2023-07-10 09:40:31.192 [info] Extracting extension completed. ms-toolsai.jupyter
+2023-07-10 09:40:31.203 [info] Extension installed successfully: ms-toolsai.jupyter
+2023-07-10 09:40:31.222 [info] Marked extension as uninstalled ms-toolsai.jupyter-2023.4.1011241018-linux-x64
+2023-07-10 09:40:33.400 [info] Extracted extension to /home/marc/.vscode/extensions/.c7c2ae94-85d7-44d0-a7f0-258505e6b657: james-yu.latex-workshop
+2023-07-10 09:40:33.419 [info] Renamed to /home/marc/.vscode/extensions/james-yu.latex-workshop-9.12.3
+2023-07-10 09:40:33.423 [info] Extracting extension completed. james-yu.latex-workshop
+2023-07-10 09:40:33.434 [info] Extension installed successfully: james-yu.latex-workshop
+2023-07-10 09:40:33.440 [info] Marked extension as uninstalled james-yu.latex-workshop-9.10.0
+2023-07-10 09:40:34.814 [info] Extracted extension to /home/marc/.vscode/extensions/.082f54f5-cc65-48a5-9768-f7567dbebf73: ms-python.python
+2023-07-10 09:40:34.821 [info] Renamed to /home/marc/.vscode/extensions/ms-python.python-2023.12.0
+2023-07-10 09:40:34.828 [info] Extracting extension completed. ms-python.python
+2023-07-10 09:40:34.837 [info] Extension installed successfully: ms-python.python
+2023-07-10 09:40:34.839 [info] Finished waiting for already requested installing extension ms-python.python ms-python.vscode-pylance
+2023-07-10 09:40:34.839 [info] Finished waiting for already requested installing extension ms-python.python ms-python.isort
+2023-07-10 09:40:34.839 [info] Extension installed successfully: ms-python.isort
+2023-07-10 09:40:34.850 [info] Marked extension as uninstalled ms-python.python-2023.6.0
+2023-07-10 09:40:36.722 [info] Extracted extension to /home/marc/.vscode/extensions/.804ef2dd-f0a1-40cb-a808-698b93f8b914: ms-python.vscode-pylance
+2023-07-10 09:40:36.737 [info] Renamed to /home/marc/.vscode/extensions/ms-python.vscode-pylance-2023.7.10
+2023-07-10 09:40:36.739 [info] Extracting extension completed. ms-python.vscode-pylance
+2023-07-10 09:40:36.749 [info] Extension installed successfully: ms-python.vscode-pylance
+2023-07-10 09:40:36.756 [info] Marked extension as uninstalled ms-python.vscode-pylance-2023.3.40
+2023-07-10 09:40:49.233 [error] [uncaught exception in sharedProcess]: A system error occurred (read ECONNRESET): Error: read ECONNRESET
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
+2023-07-10 09:42:15.187 [error] [uncaught exception in sharedProcess]: A system error occurred (read ECONNRESET): Error: read ECONNRESET
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)

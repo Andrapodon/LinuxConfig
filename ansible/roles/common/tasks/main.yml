@@ -1,0 +1,10 @@
+---
+- name: Ensure essential packages are installed
+  become: true
+  pacman:
+    name:
+      - git
+      - vim
+      - htop
+      - alacritty
+    state: present

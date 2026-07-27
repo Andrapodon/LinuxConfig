@@ -1,0 +1,19 @@
+untitled:Untitled-1.ipynb?jupyter-notebook {"typeId":"notebook/jupyter-notebook"}
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x = {A=3,B=4,C=5}\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "orig_nbformat": 4
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

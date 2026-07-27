@@ -1,0 +1,2 @@
+2023-07-06 20:39:17.208 [info] Initial editor state {"filesToOpenOrCreate":[{"fileUri":{"$mid":1,"path":"/home/marc/Banane.pod","scheme":"file"},"type":1,"exists":true,"options":{}}],"filesToDiff":[],"filesToMerge":[]}
+2023-07-06 20:39:20.557 [info] [perf] Render performance baseline is 40ms

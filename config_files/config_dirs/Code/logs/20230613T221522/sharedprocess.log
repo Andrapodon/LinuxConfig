@@ -1,0 +1,6 @@
+2023-06-13 22:15:27.499 [info] Deleted from disk reditorsupport.r /home/marc/.vscode/extensions/reditorsupport.r-2.7.2
+2023-06-13 22:15:27.683 [info] Deleted from disk ms-azuretools.vscode-docker /home/marc/.vscode/extensions/ms-azuretools.vscode-docker-1.24.0
+2023-06-13 22:15:27.693 [info] Deleted from disk ms-toolsai.jupyter /home/marc/.vscode/extensions/ms-toolsai.jupyter-2023.3.1000892223
+2023-06-13 22:15:27.768 [info] Deleted from disk james-yu.latex-workshop /home/marc/.vscode/extensions/james-yu.latex-workshop-9.8.2
+2023-06-13 22:15:28.049 [error] [uncaught exception in sharedProcess]: A system error occurred (getaddrinfo EAI_AGAIN mobile.events.data.microsoft.com): Error: getaddrinfo EAI_AGAIN mobile.events.data.microsoft.com
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:109:26)

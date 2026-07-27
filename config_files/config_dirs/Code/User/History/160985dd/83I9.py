@@ -1,0 +1,445 @@
+# Author: Lukas Roth, lukas.roth@usys.ethz.ch
+
+########################################################################################################################
+# Imports
+########################################################################################################################
+
+# IMPORTANT:
+# Ensure that all the following imports and path definitions work properly
+# before excecuting the script line by line
+
+from pathlib import Path
+
+import geojson
+import imageio
+import matplotlib as mpl
+import numpy as np
+import pandas as pd
+# load packages
+import rawpy
+from matplotlib import pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import f1_score, make_scorer
+from sklearn.model_selection import RandomizedSearchCV, cross_val_score
+
+# local file
+import segmentation.image_functions as image_functions
+
+mpl.use("Qt5Agg")
+
+# Paths and constants
+base_path_project = Path("./").resolve()
+
+# FIP campaign
+FIP_campaign = "2018_03_23_14_15_Lot1"
+
+# Test image for  the following samples
+current_image = "FPWWE020002_RGB1_20180323_141551"
+# Subsection to use for plots
+x_from, x_to, y_from, y_to = 2500, 2800, 1500, 1800
+
+### Input paths
+path_FIP_campaigns = base_path_project / "FIP_campaigns"
+path_current_FIP_campaign = path_FIP_campaigns / FIP_campaign
+path_current_RAW_images = path_current_FIP_campaign / "RAW"
+# Name of image to use for this excercise
+path_current_image = path_current_RAW_images / (f"{current_image}.CR2")
+
+### Output paths
+path_current_trainings = path_current_FIP_campaign / "segmentation_training"
+path_current_previews = path_current_FIP_campaign / "previews"
+path_current_masks = path_current_FIP_campaign / "image_masks"
+path_current_segmentation = path_current_FIP_campaign / "segmentation"
+path_current_traits_csvs = path_current_FIP_campaign / "traits_csvs"
+path_current_colorspace_temps = path_current_FIP_campaign / "colorspace_temps"
+
+for path in (
+    path_current_trainings,
+    path_current_previews,
+    path_current_masks,
+    path_current_segmentation,
+    path_current_colorspace_temps,
+    path_current_traits_csvs,
+):
+    path.mkdir(exist_ok=True)
+
+########################################################################################################################
+# 1. Read RAW file and demosaic to 8bit
+########################################################################################################################
+
+# Read RAW file
+image_raw = rawpy.imread(str(path_current_image))
+# Get array with DN (digital numbers)
+a_DN = image_raw.raw_image_visible
+# Check dimensions of image
+a_DN.shape
+# Check data type and theoretical min and max values
+np.iinfo(a_DN.dtype)
+# Check effective min and max values
+a_DN.min(), a_DN.max()
+# TODO Q1.1: What are the dimensions of the RAW image? (1 point)
+# TODO Q1.2:
+#   - What are the theoretical and effective minimum and maximum values?
+#   - Is the available data range well used? (2 points)
+
+# Display array
+plt.imshow(a_DN[x_from:x_to, y_from:y_to], cmap="gray")
+plt.show()
+# TODO Q1.3:
+#   - What explains the pattern you see in the RAW image?
+#   - Why did I choose to display the RAW image in grey instead of color? (2 points)
+
+# Demosaic RAM image to 8 bit RGB using
+a_RGB_8bit = image_functions.preview_raw_image(image_raw)
+
+# Display array
+plt.imshow(a_RGB_8bit[x_from:x_to, y_from:y_to])
+plt.show()
+
+# Check shape
+a_RGB_8bit.shape
+# Check data type
+np.iinfo(a_RGB_8bit.dtype)
+# Min and max values
+a_RGB_8bit.min(), a_RGB_8bit.max()
+
+# Color depth difference of 8bit RGB to RAW image
+(a_DN.max() - a_DN.min()) / (a_RGB_8bit.max() - a_RGB_8bit.min())
+
+# TODO Q1.4: What are the dimensions of the RGB image? (1 point)
+# TODO Q1.5:
+#   What are the theoretical minimum and maximum values of the data type,
+#   and what are the effective (used) minimum and maximum values in the array?
+#   Is the available data range well used? (1 point)
+# TODO Q1.6:
+#   - Has the color depth changed between the RAW image and 8bit RGB image?
+#   - Why is this of importance for digital phenotyping? (2 points)
+
+# Save 8bit RGB as preview file
+imageio.imwrite(path_current_previews / (f"{current_image}.tif"), a_RGB_8bit)
+
+########################################################################################################################
+# 2. Demosaic to 16bit RGB and convert to other color spaces
+########################################################################################################################
+
+# Demosaic to 16bit XYZ color space and convert to other color spaces
+# (RGB, HSV, Lab, ...)
+color_spaces, descriptors, descriptor_names = image_functions.demosaic_raw_image(
+    image_raw
+)
+
+# If you get an "MemoryError" then please uncomment the following lines & execute them.
+# ATTENTION: This will reduce the size of the original image,
+# and you will get different results than other students
+"""
+del image_raw
+a_DN = a_DN[2500:3000, 1500:2000]
+a_RGB_8bit = a_RGB_8bit[2500:3000, 1500:2000]
+x_from, x_to, y_from, y_to = 0, 200, 0, 200
+
+color_spaces = [0, 0, 0, 0, 0, 0]
+color_spaces[0] = np.load(
+    path_current_colorspace_temps / (current_image + "_color_spaces_0.npy")
+)
+color_spaces[1] = np.load(
+    path_current_colorspace_temps / (current_image + "_color_spaces_1.npy")
+)
+color_spaces[2] = np.load(
+    path_current_colorspace_temps / (current_image + "_color_spaces_2.npy")
+)
+color_spaces[3] = np.load(
+    path_current_colorspace_temps / (current_image + "_color_spaces_3.npy")
+)
+color_spaces[4] = np.load(
+    path_current_colorspace_temps / (current_image + "_color_spaces_4.npy")
+)
+color_spaces[5] = np.load(
+    path_current_colorspace_temps / (current_image + "_color_spaces_5.npy")
+)
+a_XYZ_16bit, a_RGB_16bitf, a_HSV_16bitf, a_Lab_16bitf, a_ExG, a_ExR = color_spaces
+descriptors = np.concatenate(
+    [
+        a_XYZ_16bit,
+        a_RGB_16bitf,
+        a_HSV_16bitf,
+        a_Lab_16bitf,
+        np.stack([a_ExG, a_ExR], axis=2),
+    ],
+    axis=2,
+)
+descriptor_names = [
+    "X",
+    "Y",
+    "Z",
+    "sR",
+    "sG",
+    "sB",
+    "H",
+    "S",
+    "V",
+    "L",
+    "a",
+    "b",
+    "ExR",
+    "ExG",
+]
+"""
+# end here
+
+
+# Extract color spaces from destriptor list
+_, a_RGB_16bitf, a_HSV_16bitf, a_Lab_16bitf, a_ExG, a_ExR = color_spaces
+# TODO Q2.1: Which library did I use to convert the XYZ data
+#   to the RGB, HSV and Lab color space? (1 point)
+# HINT: The function 'demosaic_raw_image' is in the file 'image_functions.py'
+
+# Check shape
+a_RGB_16bitf.shape
+# Check data type
+np.finfo(a_RGB_16bitf.dtype)
+# Min and max values
+a_RGB_16bitf.min(), a_RGB_16bitf.max()
+# TODO Q2.2:
+#   - The minimum and maximum values in the a_RGB_16bitf array differ from
+#     the one in the RAW image (a_DN).
+#   - Did the information content changed too? Explain your answer (2 points)
+
+# Plot color spaces
+image_functions.plot_color_spaces(
+    a_RGB_8bit,
+    a_RGB_16bitf,
+    a_HSV_16bitf,
+    a_Lab_16bitf,
+    a_ExG,
+    a_ExR,
+    subsection=(x_from, x_to, y_from, y_to),
+)
+
+# TODO Q2.3: Which color space would you choose to separate plant pixel
+#   from soil pixel? (1 point)
+
+
+########################################################################################################################
+# 3. Create training set
+########################################################################################################################
+
+# Reload from file
+if (path_current_trainings / (f"{current_image}_coords.csv")).exists():
+    df_training_coords = pd.read_csv(
+        path_current_trainings / (f"{current_image}_coords.csv")
+    )
+    training_coordinates = df_training_coords.to_dict(orient="records")
+else:
+    training_coordinates = []
+
+# TODO: Use the following line to create a training coordinate set
+#   (mark soil and plant by placing markers using the left and right mouse button).
+#   If you zoom into the plot, make sure that you delesect the zoom icon
+#   to be able to select training coordinates
+# TODO: CLOSE the window if you are done with training.
+#   Select at least 100 positions for plant and soil pixels, respectively.
+
+# TODO Q3.1: Make a screenshot of the window with
+#   the final training postitions for documentation purpose (1 point)
+training_coordinates = image_functions.capture_training_positions_GUI(
+    a_RGB_8bit, training_coordinates=training_coordinates
+)
+# Test how many coordinates were collected
+len(training_coordinates)
+# If you need more training samples, execute the line
+# with "image_functions.capture_training_positions_GUI(..." again
+
+
+########################################################################################################################
+# 4. Train random forest classifier
+########################################################################################################################
+
+# Get training and corresponding response (0=soil, 1=plant)
+training, response = image_functions.extract_training_from_coordinates(
+    descriptors, training_coordinates
+)
+# Check shapes of return values
+training.shape
+response.shape
+# TODO Q4.1: What are the dimensions of the to returned arrays?
+# Please explain both returned arrays - what do they contain?
+# Why do they differ in size? (2 points)
+
+# Initialize a random forest classifier
+# For more details about random forest classifiers,
+# please visit the corresponding course materials
+clf_no_tuning = RandomForestClassifier(
+    bootstrap=False, random_state=1, n_jobs=-1  # don't reuse trainings
+)
+# Train the classifier: Uses the training to train a random forest
+clf_no_tuning.fit(training, response)
+
+# Initializing a random forest classifier will set its hyperparameters
+# (that are parameters that define/constrain the architecture of the "forest of trees"
+# before the actual training process) to a default:
+clf_no_tuning.get_params()
+
+# Some of these parameters are critical to avoid overfitting,
+# we should tune them to find the optimal setting.
+# Hints on which parameters are critical can be found in literature.
+# For our task, these are (presumably):
+#
+# n_estimators: maximum of decision trees ("Trees in the forest")
+# max_depth: maximum depth of decision nodes for each decision tree
+# max_features: maximum of features (channels) that are considered when forming a decision node
+# min_samples_leaf: minimum of data points needed to form a final leaf
+# min_samples_split: minimum of data points needed to create a decision node
+
+# We can generate a grid of (presumably reasonable) parameter values:
+n_estimators = [10, 50, 100, 400, 600]
+max_features = [2, 4, 6, 8, 10]
+max_depth = [60, 70, 95, 110, 150, 250, 500, None]
+min_samples_split = [2, 4, 8, 10]
+min_samples_leaf = [1, 2, 4, 6]
+
+random_grid = {
+    "n_estimators": n_estimators,
+    "max_features": max_features,
+    "max_depth": max_depth,
+    "min_samples_split": min_samples_split,
+    "min_samples_leaf": min_samples_leaf,
+}
+
+# To compare the performance of different hyperparameter sets,
+# we have to split our dataset in training and validation sets.
+# The training is used to train models with different hyperparameter settings,
+# the validation to check the performance of those models.
+# We therefore split our training set in 5 folds (cv = 5) and perform cross-validations
+# for models with randomly selected hyperparameters from the search grid:
+f1_scorer = make_scorer(f1_score)
+clf_tuning = RandomizedSearchCV(
+    estimator=clf_no_tuning,
+    param_distributions=random_grid,
+    n_iter=200,
+    cv=5,
+    verbose=1,
+    scoring=f1_scorer,
+    random_state=1,
+    n_jobs=-1,
+)
+clf_tuning.fit(training, response)
+
+# We can now extract the hyperparameters of the tuned random forest classifier:
+clf_tuning.best_params_
+# Anc compare it with the default values:
+{key: clf_no_tuning.get_params()[key] for key in clf_tuning.best_params_}
+
+# And we can get the F1-scores (https://en.wikipedia.org/wiki/F-score) for both
+# ATTENTION: Do not confuse these with overall perdictor performance:
+# For such a metric we would need another unseen test set, or a nested tuning/testing,
+# but the training we collected above is most probably too small
+cross_val_score(clf_no_tuning, training, response, cv=5).mean()
+clf_tuning.best_score_
+# TODO Q4.2: List the default and the best fitting parameters
+#   and the corresponding F1-scores.
+# How well do the default parameter settings of sklearn match our situation?
+# HINT: In the sklearn documentation you can read that:
+#   if “auto” is set for max_features, then max_features=sqrt(n_features)
+#   if None is set for max_depth, then nodes are expanded until all leaves are pure
+#   or until all leaves contain less than min_samples_split samples. (3 point)
+
+
+########################################################################################################################
+# 5. Predict
+########################################################################################################################
+
+# Use the prediction method of the random forest classifier to predict the image
+# The predict() method needs a 2-dimensional array
+# (first dimension: samples, second dimension: features)
+# We therefore need to flatten the array from 3 to 2 dimensions:
+descriptors_flatten = descriptors.reshape(-1, descriptors.shape[-1])
+
+# Predict (ATTENTION: this step may take a while, please wait until the process is done)
+a_segmented_flatten = clf_tuning.predict(descriptors_flatten)
+
+# Reshape result to 3-dimensional array and convert to uint8 (0: soil, 1: plant)
+a_segmented = np.uint8(
+    np.round(a_segmented_flatten.reshape((descriptors.shape[0], descriptors.shape[1])))
+)
+# Save as image
+imageio.imwrite(
+    path_current_segmentation / (f"{current_image}.tiff"), a_segmented * 255
+)
+# TODO Q5.1: Open the image you just wrote (folder 'segmentation',
+# refresh folder if it appears to be empty) and evaluate the image.
+# What does it show? (1 point)
+
+# Check: Display result in GUI
+# TODO: Add training samples in GUI if needed
+training_coordinates = image_functions.capture_training_positions_GUI(
+    a_RGB_8bit, a_segmented, training_coordinates
+)
+
+# Save coordinates
+df_training_coords = pd.DataFrame(training_coordinates)
+df_training_coords.to_csv(
+    path_current_trainings / (f"{current_image}_coords.csv"), index=False
+)
+# TODO: Open the csv that you just wrote (folder 'segmentation_training',
+# refresh folder if it appears to be empty).
+# TODO Q5.2: What is the name of the file? Where does this name come from? (1 point)
+# TODO Q5.3: What is the content of the file? Why do we save this content? (1 point)
+
+# Save trainings
+df_trainings = pd.DataFrame(training, columns=descriptor_names)
+df_trainings["response"] = response
+df_trainings.to_csv(
+    path_current_trainings / (f"{current_image}_trainings.csv"),
+    columns=descriptor_names.append("response"),
+    index=False,
+)
+# TODO: Open the csv that you just wrote
+# (folder 'segmentation_training',
+# refresh folder if it appears to be empty).
+# TODO Q5.4: What is the content of the file? Why do we save this content? (2 points)
+
+# TODO: Repeate step 4 and 5 until you are satisfied with the result
+# Congratulations, you just performed 'active learning'!
+
+
+########################################################################################################################
+# 6. Identify the plot shape
+########################################################################################################################
+
+# Start GUI to select plot corners
+corners = image_functions.capture_plot_shape_GUI(a_RGB_8bit)
+# TODO Q6.1: What was difficult when selecting the corners of the plot?
+# Please provide suggestions how to solve this problem. (2 points)
+
+# Save polygon as geojson file
+image_functions.write_geojson_polygon_mask(
+    corners, current_image[0:11], current_image, path_current_masks
+)
+# TODO Q6.2: Open the produced file in a text editor and check the saved coordinates.
+# Why are there 5 x,y-pairs and not 4? (1 point)
+
+# Re-read geojson
+with open(path_current_masks / (f"{current_image}.geojson"), "r") as infile:
+    polygon_mask = geojson.load(infile)
+# Plot shape on RGB image
+image_functions.capture_training_positions_GUI(
+    a_RGB_8bit, a_segmented, training_coordinates=[], polygon_mask=polygon_mask
+)
+
+
+########################################################################################################################
+# 7. Extract canopy cover value
+########################################################################################################################
+
+# Calculate canopy cover value using zonal statistics
+df_data = image_functions.zonal_stat(polygon_mask, a_segmented)
+# Save dataframe
+df_data.to_csv(path_current_traits_csvs / "canopy_coverage.csv", index=False)
+# TODO Q7.1: Open the produced file in a text editor and check the values.
+# Which statistical aggregation functions were used? (1 point)
+# TODO Q7.2: Please interpret the results (2 points)
+
+# TODO Q8: Please upload your answer and the following 3 files to moodle:
+# image_masks/*.geojson
+# segmentation_training/*_coords.csv
+# segmentation_training/*_trainings.csv

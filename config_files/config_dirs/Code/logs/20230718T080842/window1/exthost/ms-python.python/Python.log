@@ -1,0 +1,39 @@
+2023-07-18 08:12:22.994 [info] Experiment 'pythonPromptNewToolsExt' is active
+2023-07-18 08:12:22.994 [info] > conda info --json
+2023-07-18 08:12:22.995 [info] Test server listening.
+2023-07-18 08:12:23.060 [info] Found: /bin/python --> /bin/python3.11
+2023-07-18 08:12:23.077 [warning] Retry failed, storage update failed for key PYTHON_WORKSPACE_STORAGE_KEYS
+2023-07-18 08:12:23.077 [warning] Retry failed, storage update failed for key PYTHON_WORKSPACE_STORAGE_KEYS
+2023-07-18 08:12:23.078 [info] Found: /bin/python3 --> /bin/python3.11
+2023-07-18 08:12:23.078 [info] Found: /bin/python3.11 --> /bin/python3.11
+2023-07-18 08:12:23.252 [info] Found: /sbin/python --> /sbin/python3.11
+2023-07-18 08:12:23.256 [info] Found: /sbin/python3 --> /sbin/python3.11
+2023-07-18 08:12:23.256 [info] Found: /sbin/python3.11 --> /sbin/python3.11
+2023-07-18 08:12:23.269 [info] Found: /usr/bin/python --> /usr/bin/python3.11
+2023-07-18 08:12:23.270 [info] Found: /usr/bin/python3 --> /usr/bin/python3.11
+2023-07-18 08:12:23.271 [info] Found: /usr/bin/python3.11 --> /usr/bin/python3.11
+2023-07-18 08:12:23.349 [info] Found: /usr/sbin/python --> /usr/sbin/python3.11
+2023-07-18 08:12:23.350 [info] Found: /usr/sbin/python3 --> /usr/sbin/python3.11
+2023-07-18 08:12:23.350 [info] Found: /usr/sbin/python3.11 --> /usr/sbin/python3.11
+2023-07-18 08:12:23.378 [info] > /bin/python -I ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/get_output_via_markers.py ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/interpreterInfo.py
+2023-07-18 08:12:23.410 [info] > /sbin/python -I ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/get_output_via_markers.py ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/interpreterInfo.py
+2023-07-18 08:12:23.486 [info] > /usr/bin/python -I ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/get_output_via_markers.py ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/interpreterInfo.py
+2023-07-18 08:12:23.516 [info] > /usr/sbin/python -I ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/get_output_via_markers.py ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/interpreterInfo.py
+2023-07-18 08:12:28.103 [info] > ~/anaconda3/bin/python -I ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/get_output_via_markers.py ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/interpreterInfo.py
+2023-07-18 08:12:28.116 [info] > ~/anaconda3/envs/CropPheno/bin/python -I ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/get_output_via_markers.py ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/interpreterInfo.py
+2023-07-18 08:12:28.221 [info] > ~/anaconda3/envs/inf1/bin/python -I ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/get_output_via_markers.py ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/interpreterInfo.py
+2023-07-18 08:12:28.257 [info] > /opt/miniconda3/bin/python -I ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/get_output_via_markers.py ~/.vscode/extensions/ms-python.python-2023.12.0/pythonFiles/interpreterInfo.py
+2023-07-18 08:12:28.471 [info] Python interpreter path: /bin/python
+2023-07-18 08:12:28.518 [info] Found: /bin/python --> /bin/python3.11
+2023-07-18 08:12:28.529 [info] Found: /bin/python3 --> /bin/python3.11
+2023-07-18 08:12:28.553 [info] Found: /bin/python3.11 --> /bin/python3.11
+2023-07-18 08:12:28.652 [info] Found: /sbin/python --> /sbin/python3.11
+2023-07-18 08:12:28.653 [info] Found: /sbin/python3 --> /sbin/python3.11
+2023-07-18 08:12:28.654 [info] Found: /sbin/python3.11 --> /sbin/python3.11
+2023-07-18 08:12:28.672 [info] Found: /usr/bin/python --> /usr/bin/python3.11
+2023-07-18 08:12:28.673 [info] Found: /usr/bin/python3 --> /usr/bin/python3.11
+2023-07-18 08:12:28.674 [info] Found: /usr/bin/python3.11 --> /usr/bin/python3.11
+2023-07-18 08:12:28.764 [info] Found: /usr/sbin/python --> /usr/sbin/python3.11
+2023-07-18 08:12:28.765 [info] Found: /usr/sbin/python3 --> /usr/sbin/python3.11
+2023-07-18 08:12:28.765 [info] Found: /usr/sbin/python3.11 --> /usr/sbin/python3.11
+2023-07-18 08:12:30.751 [info] Starting Pylance language server.

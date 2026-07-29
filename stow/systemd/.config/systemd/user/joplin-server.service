@@ -1,0 +1,14 @@
+[Unit]
+Description=Joplin CLI API Server
+PartOf=workspace.target
+
+[Service]
+Type=simple
+Environment="DISPLAY=:0"
+Environment="WAYLAND_DISPLAY=wayland-1"
+ExecStart=/usr/sbin/joplin server start
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=workspace.target

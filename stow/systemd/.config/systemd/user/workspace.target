@@ -1,0 +1,6 @@
+[Unit]
+Description=User Workspace (Antigravity, Zotero, Joplin)
+Wants=antigravity-ide.service zotero.service joplin-server.service
+
+[Install]
+WantedBy=default.target

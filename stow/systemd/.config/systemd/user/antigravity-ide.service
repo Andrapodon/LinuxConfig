@@ -1,0 +1,14 @@
+[Unit]
+Description=Antigravity IDE
+PartOf=workspace.target
+
+[Service]
+Type=forking
+Environment="DISPLAY=:0"
+Environment="WAYLAND_DISPLAY=wayland-1"
+ExecStart=/usr/sbin/antigravity-ide
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=workspace.target

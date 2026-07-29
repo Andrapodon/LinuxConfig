@@ -27,9 +27,6 @@ exec --no-startup-id swaync &
 exec --no-startup-id albert &
 bindsym --release Super_L exec --no-startup-id albert toggle
 
-#exec --no-startup-id wofi & 
-#bindsym --release Super_L exec  wofi --show run
-
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu wofi
@@ -40,30 +37,7 @@ xwayland enable
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /home/marc/LinuxConfig/pictures/Wallpaper.jpg fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
 ### Input configuration
-#
-# Example configuration:
-#
 input "type:touchpad" {
        dwt enabled
        tap_button_map lrm
@@ -105,12 +79,9 @@ bindsym $mod+Shift+s exec spotify-launcher
 bindsym $mod+Shift+f exec firefox
 bindsym $mod+Shift+n exec joplin-desktop
 bindsym $mod+Shift+g exec gamemoderun chromium "https://play.geforcenow.com"
+bindsym $mod+Shift+w exec systemctl --user is-active --quiet workspace.target && systemctl --user stop workspace.target || systemctl --user start workspace.target
 
 
-
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
 
 ### Key bindings
 #
@@ -250,37 +221,8 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-
-
 bar swaybar_command waybar
 
-
-
-#bar {
-#    position top
-#
-#    # When the status_command prints a new line to stdout, swaybar updates.
-#   # The default just shows the current date and time.
-#   status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-#
-#
-#	colors {
-#			background #000000
-#			statusline #FFFFFF
-#			separator  #666666
-#			# 07d7c1 nice green
-#			# focused_workspace  #C50ED2 #C50ED2 #FFFFFF
-#			focused_workspace  #C50ED2 #111111 #C50ED2
-#			active_workspace   #C50ED2 #222222 #FFFFFF
-#			inactive_workspace #7d7c13 #111111 #DDDDDD
-#			urgent_workspace   #FF435E #FF435E #FFFFFF
-#			binding_mode       #FF435E #FF435E #FFFFFF
-#		}
-#}
 
 
 include /etc/sway/config.d/*
@@ -316,3 +258,13 @@ output HDMI-A-1 pos 1920 0 res 1920x1080
 
 workspace 8 output HDMI-A-1
 workspace 9 output HDMI-A-1
+
+# Assign Zotero and Joplin to the Scratchpad (a hidden workspace you don't have to keep tidy)
+for_window [class="Zotero"] move scratchpad
+for_window [class="Joplin"] move scratchpad
+for_window [app_id="joplin"] move scratchpad
+
+# Alternatively, if you want them on workspace 9 instead, comment out the lines above and uncomment the lines below:
+# assign [class="Zotero"] workspace number 9
+# assign [class="Joplin"] workspace number 9
+# assign [app_id="joplin"] workspace number 9

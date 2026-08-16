@@ -8,3 +8,5 @@
 	name = Hieronymus
 [credential]
 	helper = cache
+[protocol "file"]
+	allow = user

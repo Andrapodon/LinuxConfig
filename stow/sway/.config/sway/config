@@ -17,19 +17,27 @@ set $right l
 set $term alacritty
 # Your preferred application launcher
 
-exec wl-paste -t text --watch clipman store
+# Removed clipman in favor of cliphist
 exec_always --no-startup-id workstyle &> /tmp/workstyle.log
 
 exec --no-startup-id autotiling &
 exec --no-startup-id swaync &
+exec --no-startup-id udiskie -t &
+
+# Autostart cliphist to store text and images
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
+
+# Show cliphist menu with fuzzel
+bindsym $mod+c exec cliphist list | fuzzel -d | cliphist decode | wl-copy
 
 
-exec --no-startup-id albert &
-bindsym --release Super_L exec --no-startup-id albert toggle
+# exec --no-startup-id albert &
+# bindsym --release Super_L exec --no-startup-id albert toggle
 
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu wofi
+set $menu fuzzel
 
 xwayland enable
 
@@ -75,9 +83,10 @@ gaps top 0px
 
 # Applications
 
+bindsym $mod+Shift+y exec $term -e yazi
 bindsym $mod+Shift+s exec spotify-launcher
 bindsym $mod+Shift+f exec firefox
-bindsym $mod+Shift+n exec joplin-desktop
+bindsym $mod+Shift+n exec joplin
 bindsym $mod+Shift+g exec gamemoderun chromium "https://play.geforcenow.com"
 bindsym $mod+Shift+w exec systemctl --user is-active --quiet workspace.target && systemctl --user stop workspace.target || systemctl --user start workspace.target
 
@@ -259,12 +268,10 @@ output HDMI-A-1 pos 1920 0 res 1920x1080
 workspace 8 output HDMI-A-1
 workspace 9 output HDMI-A-1
 
-# Assign Zotero and Joplin to the Scratchpad (a hidden workspace you don't have to keep tidy)
-for_window [class="Zotero"] move scratchpad
-for_window [class="Joplin"] move scratchpad
-for_window [app_id="joplin"] move scratchpad
-
-# Alternatively, if you want them on workspace 9 instead, comment out the lines above and uncomment the lines below:
-# assign [class="Zotero"] workspace number 9
-# assign [class="Joplin"] workspace number 9
-# assign [app_id="joplin"] workspace number 9
+# Assign JabRef and Joplin to the Scratchpad (a hidden workspace you don't have to keep tidy)
+for_window [app_id="org.jabref.jabref"] move scratchpad
+for_window [class="org.jabref.jabref"] move scratchpad
+for_window [class="(?i)(@joplin/app-desktop|joplin)"] move scratchpad
+for_window [app_id="(?i)(@joplin/app-desktop|joplin)"] move scratchpad
+# assign [class="(?i)(@joplin/app-desktop|joplin)"] workspace number 9
+# assign [app_id="(?i)(@joplin/app-desktop|joplin)"] workspace number 9

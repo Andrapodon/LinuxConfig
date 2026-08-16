@@ -1,14 +1,12 @@
 [Unit]
-Description=Antigravity IDE
+Description=Joplin Desktop App
 PartOf=workspace.target
 
 [Service]
-Type=forking
+Type=simple
 Environment="DISPLAY=:0"
 Environment="WAYLAND_DISPLAY=wayland-1"
-ExecStart=/usr/bin/gamemoderun /usr/sbin/antigravity-ide
-KillMode=mixed
-TimeoutStopSec=5
+ExecStart=/usr/bin/joplin
 Restart=on-failure
 RestartSec=5
 

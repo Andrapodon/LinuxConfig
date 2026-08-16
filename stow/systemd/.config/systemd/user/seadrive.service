@@ -1,0 +1,15 @@
+[Unit]
+Description=Seafile Drive Client
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment="DISPLAY=:0"
+Environment="WAYLAND_DISPLAY=wayland-1"
+# Check for an active internet connection exactly once at startup
+ExecStartPre=/bin/sh -c 'ping -c 1 -W 3 8.8.8.8 >/dev/null 2>&1'
+ExecStart=/usr/sbin/seadrive-gui
+
+[Install]
+WantedBy=default.target

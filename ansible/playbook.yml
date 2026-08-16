@@ -2,6 +2,11 @@
 - name: Arch Linux Laptop Provisioning
   hosts: localhost
   become: false
+  
+  roles:
+    - common
+    - dotfiles
+
   tasks:
     - name: Ensure yay (AUR helper) is installed
       command: pacman -Q yay
@@ -11,4 +16,4 @@
 
     - name: System is ready for automation!
       debug:
-        msg: "Ansible is correctly initialized on {{ ansible_hostname }}"
+        msg: "Ansible is correctly initialized on {{ ansible_facts['hostname'] }}"

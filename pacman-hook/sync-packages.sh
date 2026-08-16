@@ -8,9 +8,10 @@ pacman -Qqen > /home/marc/LinuxConfig/pkglist-pacman.txt
 pacman -Qqem > /home/marc/LinuxConfig/pkglist-aur.txt
 
 cd /home/marc/LinuxConfig
-# Only commit if there are changes
-if ! git diff --quiet pkglist-pacman.txt pkglist-aur.txt; then
-    git add pkglist-pacman.txt pkglist-aur.txt
+git add pkglist-pacman.txt pkglist-aur.txt
+
+# Only commit if there are staged changes
+if ! git diff --cached --quiet; then
     git commit -m "Auto-sync package lists via pacman hook"
     # git push  # Uncomment if you want it to push automatically too!
 fi

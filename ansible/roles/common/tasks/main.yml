@@ -5,7 +5,35 @@
     name:
       - git
       - vim
+      - nano
       - htop
       - alacritty
       - stow
+      - sway
+      - waybar
+      - fuzzel
+      - obsidian
+      - ranger
+      - keepassxc
     state: present
+
+- name: Ensure AUR packages are installed via yay
+  become: false
+  command: yay -S --noconfirm --needed {{ item }}
+  loop:
+    - visual-studio-code-bin  # Example AUR package
+    - albert                  # Because you have an albert stow config
+  register: yay_install
+  changed_when: "'there is nothing to do' not in yay_install.stdout and 'up to date' not in yay_install.stdout"
+  ignore_errors: true
+
+- name: Update GRUB Configuration (e.g. timeout or submenu)
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/default/grub
+    regexp: '^{{ item.key }}='
+    line: '{{ item.key }}="{{ item.value }}"'
+  loop:
+    - { key: 'GRUB_TIMEOUT', value: '3' }
+    - { key: 'GRUB_DISABLE_SUBMENU', value: 'y' }
+  notify: Update GRUB

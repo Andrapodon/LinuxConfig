@@ -1,0 +1,93 @@
+---
+- name: Arch Linux Live USB Installer
+  hosts: localhost
+  become: true
+  vars:
+    # You MUST pass the target disk at runtime: 
+    # ansible-playbook live_install.yml -e "target_disk=/dev/nvme0n1"
+    target_disk: "/dev/sda" 
+    boot_partition_size: "1GiB" # Plenty of space for multiple kernels!
+
+  tasks:
+    - name: Ensure target disk is defined
+      fail:
+        msg: "Please provide the target disk. e.g. -e 'target_disk=/dev/nvme0n1'"
+      when: target_disk is not defined or target_disk == ""
+
+    - name: Create GPT partition table
+      community.general.parted:
+        device: "{{ target_disk }}"
+        label: gpt
+        state: present
+
+    - name: Create EFI boot partition (Generous Size)
+      community.general.parted:
+        device: "{{ target_disk }}"
+        number: 1
+        flags: [ boot, esp ]
+        state: present
+        part_end: "{{ boot_partition_size }}"
+
+    - name: Create Root partition (Remaining space)
+      community.general.parted:
+        device: "{{ target_disk }}"
+        number: 2
+        state: present
+        part_start: "{{ boot_partition_size }}"
+
+    - name: Format EFI boot partition
+      community.general.filesystem:
+        fstype: vfat
+        dev: "{{ target_disk }}p1" # Change to '1' instead of 'p1' if using /dev/sda1
+
+    - name: Format Root partition
+      community.general.filesystem:
+        fstype: ext4
+        dev: "{{ target_disk }}p2" # Change to '2' instead of 'p2' if using /dev/sda2
+
+    - name: Mount Root partition to /mnt
+      ansible.posix.mount:
+        path: /mnt
+        src: "{{ target_disk }}p2"
+        fstype: ext4
+        state: mounted
+
+    - name: Ensure /mnt/boot directory exists
+      file:
+        path: /mnt/boot
+        state: directory
+
+    - name: Mount EFI boot partition to /mnt/boot
+      ansible.posix.mount:
+        path: /mnt/boot
+        src: "{{ target_disk }}p1"
+        fstype: vfat
+        state: mounted
+
+    - name: Install Base System (Pacstrap)
+      command: pacstrap -K /mnt base linux linux-firmware sudo nano grub efibootmgr networkmanager git ansible
+
+    - name: Generate fstab
+      shell: genfstab -U /mnt >> /mnt/etc/fstab
+
+    - name: Configure System inside arch-chroot
+      shell: |
+        arch-chroot /mnt /bin/bash -c "
+        ln -sf /usr/share/zoneinfo/UTC /etc/localtime
+        hwclock --systohc
+        echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
+        locale-gen
+        echo 'LANG=en_US.UTF-8' > /etc/locale.conf
+        echo 'archlaptop' > /etc/hostname
+        
+        # Install GRUB Bootloader
+        grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+        grub-mkconfig -o /boot/grub/grub.cfg
+        
+        # Enable NetworkManager
+        systemctl enable NetworkManager
+        "
+    
+    - name: Setup complete message
+      debug:
+        msg: "Installation complete! You can now reboot. Don't forget to clone your repo and run playbook.yml for user configs."

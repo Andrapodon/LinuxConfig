@@ -235,10 +235,6 @@ system-config-printer
 terminus-font
 texlive-basic
 texstudio
-thunar
-thunar-archive-plugin
-thunar-media-tags-plugin
-thunar-volman
 tmux
 traceroute
 transmission-gtk

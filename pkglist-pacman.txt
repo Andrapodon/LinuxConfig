@@ -129,6 +129,7 @@ ly
 lzop
 mangohud
 mkinitcpio-nfs-utils
+mpv
 mythes-en
 nano
 nano-syntax-highlighting

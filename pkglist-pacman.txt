@@ -235,6 +235,7 @@ system-config-printer
 terminus-font
 texlive-basic
 texstudio
+throttled
 tmux
 traceroute
 transmission-gtk

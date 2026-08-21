@@ -299,6 +299,7 @@ xorg-xwayland
 xorg-xwininfo
 xournalpp
 xterm
+yarn
 yazi
 yt-dlp
 zathura

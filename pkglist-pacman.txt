@@ -194,7 +194,6 @@ python-pypandoc
 python-pyqt5
 python-pysmbc
 python-requests
-python-sphinx_rtd_theme
 python-virtualenv
 python-wxpython
 qopenvpn

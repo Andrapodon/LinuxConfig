@@ -5,14 +5,12 @@ brother-ql720nw
 debtap
 efisc2026
 epson-inkjet-printer-escpr
-epson-inkjet-printer-escpr-debug
 heroic-games-launcher-bin
 iat
 jabref-bin
 joplin-beta-bin
 mkinitcpio-firmware
 orca-slicer-bin
-papis
 python-click-completion
 quarto-cli-bin
 rclone-browser-git

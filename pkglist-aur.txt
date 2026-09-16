@@ -6,6 +6,7 @@ debtap
 efisc2026
 epson-inkjet-printer-escpr
 heroic-games-launcher-bin
+heroic-games-launcher-bin-debug
 iat
 jabref-bin
 joplin-beta-bin

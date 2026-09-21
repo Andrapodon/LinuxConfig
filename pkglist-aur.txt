@@ -25,3 +25,4 @@ volumectl
 whatscli
 wireguird
 yay
+zapzap-bin

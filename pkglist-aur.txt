@@ -11,6 +11,7 @@ jabref-bin
 joplin-beta-bin
 mkinitcpio-firmware
 orca-slicer-bin
+proton-drive-cli-bin
 python-click-completion
 quarto-cli-bin
 rclone-browser-git

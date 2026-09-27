@@ -306,6 +306,7 @@ yarn
 yazi
 yt-dlp
 zathura
+zathura-pdf-mupdf
 zed
 zip
 zram-generator

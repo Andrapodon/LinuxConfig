@@ -78,7 +78,6 @@ gparted
 grim
 grub
 gst-libav
-gst-plugin-gtk
 gst-plugin-pipewire
 gst-plugins-good
 gst-plugins-ugly
@@ -226,6 +225,7 @@ spotify-launcher
 sslh
 steam
 stow
+stress
 swappy
 sway
 swaybg

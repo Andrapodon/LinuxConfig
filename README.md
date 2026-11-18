@@ -1,16 +1,16 @@
 # Arch Linux Sway Workstation Setup (`LinuxConfig`)
 
-Automated two-stage provisioning for a UEFI + Btrfs Arch Linux laptop with **GRUB snapshot booting** (`snapper` + `snap-pac` + `grub-btrfs` + `breeze-grub`), **GNU Stow** dotfiles, and **3-2-1 remote backups** via **Borgmatic** (`Homelab` + `Hetzner Storage Box`).
+Automated two-stage provisioning for a UEFI + Btrfs Arch Linux laptop with **GRUB snapshot booting** (`snapper` + `snap-pac` + `grub-btrfs` + custom `bioshock.png`), **GNU Stow** dotfiles, and **3-2-1 remote backups** via **Borgmatic** (`Homelab` + `Hetzner Storage Box`).
 
 ## Architecture Overview
 
 1. **Stage 1 — `archinstall-config/` (run once from the Arch Live ISO)**
    - Targets **`archinstall 4.5+`** cleanly.
-   - `install-bootstrap.sh` inspects your target disk via `generate_config.py`, calculates exact 1 MiB-aligned partition sizes, mounts the FAT32 ESP at `/efi` (so kernels in `/boot` stay inside the `@` Btrfs subvolume), creates `@`, `@home`, `@snapshots`, `@log`, `@pkg`, configures `snapper` + `grub-btrfs` (`/efi/grub`) + `grub-btrfs-overlayfs`, validates the config with `archinstall --dry-run`, and runs the installation.
+   - `install-bootstrap.sh` inspects your target disk via `generate_config.py`, calculates exact 1 MiB-aligned partition sizes, mounts the FAT32 ESP at `/efi` (so kernels in `/boot` stay inside the `@` Btrfs subvolume), creates `@`, `@home`, `@snapshots`, `@log`, `@pkg`, configures `snapper` + `grub-btrfs` (`/efi/grub`) + `grub-btrfs-overlayfs` + `bioshock.png`, validates the config with `archinstall --dry-run`, and runs the installation.
 2. **Stage 2 — `ansible/` (run post-boot, idempotent)**
    - Enables `[multilib]`, `ParallelDownloads`, and bootstraps `yay-bin`.
    - Installs curated Sway/Wayland, Productivity, R/Quarto/LaTeX, Container, CAD/3D, Creative, Gaming, Printing, and Laptop packages defined in [all.yml](ansible/inventory/group_vars/all.yml).
-   - Enforces Snapper + `grub-btrfs` + `breeze-grub` configuration.
+   - Enforces Snapper + `grub-btrfs` + `GRUB_BACKGROUND="/efi/grub/bioshock.png"` configuration.
    - Stows dotfiles under `stow/` cleanly into `$HOME` and clones `Andrapodon/config.nvim` into `~/.config/nvim`.
    - Optionally configures SeaDrive user service, SSH hardening, WireGuard WAN auto-connect, ThinkPad `trackpoint-scroller`, and Borgmatic 3-2-1 backups (`homelab.yaml` + `hetzner.yaml`).
 

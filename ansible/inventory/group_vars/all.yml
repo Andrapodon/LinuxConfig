@@ -24,8 +24,12 @@ features:
   pacman_hook: true
 
 # Hardware & bootloader options (keep hardware-specific tweaks opt-in)
-enable_grub_theme: true
+enable_grub_theme: false
 grub_theme_path: "/usr/share/grub/themes/breeze/theme.txt"
+grub_background_src: "{{ dotfiles_dir }}/pictures/bioshock.png"
+grub_background_dest: "/efi/grub/bioshock.png"
+grub_color_normal: "white/black"
+grub_color_highlight: "black/light-cyan"
 grub_timeout: "5"
 enable_trackpoint_scroller: false
 enable_tlp_custom_conf: false
@@ -201,6 +205,7 @@ aur_packages_core:
   - seadrive-gui
   - antigravity-ide
   - antigravity-cli
+  - proton-pass-cli-bin
 
 aur_packages_dev_science:
   - quarto-cli-bin

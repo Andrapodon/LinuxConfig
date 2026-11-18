@@ -7,8 +7,13 @@
       - snap-pac
       - grub-btrfs
       - inotify-tools
-      - breeze-grub
     state: present
+
+- name: Install breeze-grub package when GRUB theme is enabled
+  community.general.pacman:
+    name: breeze-grub
+    state: present
+  when: enable_grub_theme | default(false)
 
 - name: Check existing Snapper configs
   ansible.builtin.stat:
@@ -90,12 +95,36 @@
     replace: '\1 grub-btrfs-overlayfs)'
   notify: Rebuild initramfs
 
-- name: Configure GRUB Breeze theme when enabled
+- name: Copy custom GRUB background image to /efi/grub
+  ansible.builtin.copy:
+    src: "{{ grub_background_src }}"
+    dest: "{{ grub_background_dest }}"
+    remote_src: true
+    owner: root
+    group: root
+    mode: '0644'
+  when: (not (enable_grub_theme | default(false))) and (grub_background_src | default('') | length > 0)
+  notify: Regenerate GRUB config
+
+- name: Configure GRUB_BACKGROUND and disable GRUB_THEME when using custom wallpaper
+  ansible.builtin.lineinfile:
+    path: /etc/default/grub
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  loop:
+    - { regexp: '^#?GRUB_BACKGROUND=', line: 'GRUB_BACKGROUND="{{ grub_background_dest }}"' }
+    - { regexp: '^GRUB_THEME=', line: '#GRUB_THEME=""' }
+    - { regexp: '^#?GRUB_COLOR_NORMAL=', line: 'GRUB_COLOR_NORMAL="{{ grub_color_normal }}"' }
+    - { regexp: '^#?GRUB_COLOR_HIGHLIGHT=', line: 'GRUB_COLOR_HIGHLIGHT="{{ grub_color_highlight }}"' }
+  when: (not (enable_grub_theme | default(false))) and (grub_background_src | default('') | length > 0)
+  notify: Regenerate GRUB config
+
+- name: Configure GRUB Breeze theme when explicitly enabled
   ansible.builtin.lineinfile:
     path: /etc/default/grub
     regexp: '^#?GRUB_THEME='
     line: 'GRUB_THEME="{{ grub_theme_path }}"'
-  when: enable_grub_theme | default(true)
+  when: enable_grub_theme | default(false)
   notify: Regenerate GRUB config
 
 - name: Configure GRUB timeout

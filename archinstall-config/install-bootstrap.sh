@@ -132,6 +132,13 @@ fi
 archinstall --silent --skip-version-check --skip-wifi-check \
     --config "$CONFIG_FILE" --creds "$CREDS_FILE"
 
+if [ -f "$REPO_ROOT/pictures/bioshock.png" ] && [ -d /mnt/efi/grub ]; then
+    echo "[*] Installing GRUB background (/efi/grub/bioshock.png)..."
+    cp "$REPO_ROOT/pictures/bioshock.png" /mnt/efi/grub/bioshock.png
+    sed -i 's|^#\?GRUB_BACKGROUND=.*|GRUB_BACKGROUND="/efi/grub/bioshock.png"|' /mnt/etc/default/grub
+    arch-chroot /mnt grub-mkconfig -o /efi/grub/grub.cfg
+fi
+
 if [ -d "/mnt/home/$USERNAME_VAL" ]; then
     TARGET_REPO="/mnt/home/$USERNAME_VAL/LinuxConfig"
     if [ ! -e "$TARGET_REPO" ]; then

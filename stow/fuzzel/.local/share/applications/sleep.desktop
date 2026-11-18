@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Sleep
+Comment=Suspend to RAM
+Exec=systemctl suspend
+Icon=system-suspend
+Terminal=false
+Type=Application
+Categories=Utility;

@@ -10,3 +10,5 @@
 	helper = cache
 [protocol "file"]
 	allow = user
+[core]
+	pager = cat

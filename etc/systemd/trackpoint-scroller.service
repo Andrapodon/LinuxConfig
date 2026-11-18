@@ -1,0 +1,12 @@
+[Unit]
+Description=Trackpoint Dedicated Hardware Scroller Daemon
+After=systemd-udev-settle.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/bin/trackpoint-scroller.py
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

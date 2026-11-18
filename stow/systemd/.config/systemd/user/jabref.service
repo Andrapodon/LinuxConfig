@@ -1,0 +1,9 @@
+[Unit]
+Description=JabRef Bibliography Manager
+
+[Service]
+ExecStart=/usr/sbin/jabref
+Restart=on-failure
+
+[Install]
+WantedBy=workspace.target

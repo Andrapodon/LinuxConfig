@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Hibernate
+Comment=Suspend to Disk
+Exec=systemctl hibernate
+Icon=system-suspend-hibernate
+Terminal=false
+Type=Application
+Categories=Utility;

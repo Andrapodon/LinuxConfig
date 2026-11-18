@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "custom/spotify"],
     "modules-center": [],
-    "modules-right": ["tray", "pulseaudio", "network", "bluetooth", "battery", "clock"],
+    "modules-right": ["custom/scroll-speed", "tray", "pulseaudio", "network", "bluetooth", "battery", "clock"],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
@@ -90,5 +90,15 @@
         "interval": 15, // Remove this if your script is endless and write in loop
         "exec": "$HOME/.config/waybar/mediaplayer.sh 2> /dev/null", // Script in resources folder
         "exec-if": "pgrep spotify"
+    },
+    "custom/scroll-speed": {
+        "format": "󰏫 {}",
+        "return-type": "json",
+        "exec": "$HOME/.config/waybar/scripts/scroll-speed.sh get",
+        "on-scroll-up": "$HOME/.config/waybar/scripts/scroll-speed.sh up",
+        "on-scroll-down": "$HOME/.config/waybar/scripts/scroll-speed.sh down",
+        "on-click": "$HOME/.config/waybar/scripts/scroll-speed.sh slider",
+        "signal": 9,
+        "interval": "once"
     }
 }

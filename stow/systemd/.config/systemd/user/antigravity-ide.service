@@ -6,7 +6,7 @@ PartOf=workspace.target
 Type=forking
 Environment="DISPLAY=:0"
 Environment="WAYLAND_DISPLAY=wayland-1"
-ExecStart=/usr/bin/gamemoderun /usr/sbin/antigravity-ide
+ExecStart=/usr/sbin/antigravity-ide
 KillMode=mixed
 TimeoutStopSec=5
 Restart=on-failure

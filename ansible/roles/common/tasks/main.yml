@@ -22,7 +22,6 @@
   command: yay -S --noconfirm --needed {{ item }}
   loop:
     - visual-studio-code-bin  # Example AUR package
-    - albert                  # Because you have an albert stow config
   register: yay_install
   changed_when: "'there is nothing to do' not in yay_install.stdout and 'up to date' not in yay_install.stdout"
   ignore_errors: true

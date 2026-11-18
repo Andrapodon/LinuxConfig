@@ -1,0 +1,269 @@
+---
+# ==============================================================================
+# Global Defaults for Arch Linux Laptop Provisioning (LinuxConfig)
+# Personal secrets / machine-specific overrides belong in gitignored:
+#   ansible/inventory/group_vars/local.yml
+# (Copy local.yml.example -> local.yml and optionally encrypt with ansible-vault)
+# ==============================================================================
+
+target_user: "marc"
+target_user_shell: "/bin/bash"
+dotfiles_dir: "/home/{{ target_user }}/LinuxConfig"
+nvim_repo_url: "https://github.com/Andrapodon/config.nvim.git"
+
+# Feature groups (all selected stacks enabled by default)
+features:
+  dev_science: true
+  containers: true
+  maker_cad: true
+  creative: true
+  gaming: true
+  printing: true
+  peripherals: true
+  firewall: true
+  pacman_hook: true
+
+# Hardware & bootloader options (keep hardware-specific tweaks opt-in)
+enable_grub_theme: true
+grub_theme_path: "/usr/share/grub/themes/breeze/theme.txt"
+grub_timeout: "5"
+enable_trackpoint_scroller: false
+enable_tlp_custom_conf: false
+enable_custom_sleep_conf: false
+disable_ipv6: false
+enable_backlight_udev: true
+
+# Stow packages under LinuxConfig/stow/
+stow_packages:
+  - alacritty
+  - antigravity-ide
+  - Code
+  - fuzzel
+  - homedir
+  - htop
+  - keepassxc
+  - nano
+  - obsidian
+  - rstudio
+  - RStudio
+  - sway
+  - systemd
+  - waybar
+  - workstyle
+
+# Curated official pacman package groups
+pacman_packages_core:
+  - sway
+  - swaybg
+  - swayidle
+  - swayimg
+  - swaylock
+  - swaync
+  - waybar
+  - fuzzel
+  - alacritty
+  - ly
+  - autotiling
+  - grim
+  - slurp
+  - swappy
+  - wl-clipboard
+  - wl-clip-persist
+  - cliphist
+  - wtype
+  - wev
+  - udiskie
+  - zenity
+  - polkit-gnome
+  - xdg-desktop-portal-wlr
+  - xdg-desktop-portal-gtk
+  - xdg-user-dirs
+  - xorg-xwayland
+  - pipewire
+  - pipewire-alsa
+  - pipewire-jack
+  - pipewire-pulse
+  - gst-plugin-pipewire
+  - wireplumber
+  - pavucontrol
+  - pamixer
+  - playerctl
+  - brightnessctl
+  - noto-fonts
+  - noto-fonts-emoji
+  - otf-font-awesome
+  - ttf-jetbrains-mono-nerd
+  - ttf-nerd-fonts-symbols-mono
+  - ttf-hack-nerd
+  - papirus-icon-theme
+  - ufw
+  - wireguard-tools
+  - openresolv
+  - networkmanager
+  - network-manager-applet
+  - networkmanager-openconnect
+  - openconnect
+  - networkmanager-openvpn
+  - pacman-contrib
+  - rsync
+  - stow
+  - git
+  - bash-completion
+  - yazi
+  - neovim
+  - ranger
+  - btop
+  - tmux
+  - fzf
+  - fastfetch
+  - htop
+  - nano
+  - nano-syntax-highlighting
+  - firefox
+  - keepassxc
+  - obsidian
+  - libreoffice-still
+  - libreoffice-still-de
+  - libreoffice-still-en-gb
+  - calibre
+  - pdfarranger
+  - xournalpp
+  - zathura
+  - zathura-pdf-mupdf
+  - signal-desktop
+  - discord
+  - spotify-launcher
+  - mpv
+  - vlc
+  - yt-dlp
+  - transmission-gtk
+
+pacman_packages_dev_science:
+  - r
+  - jupyterlab
+  - texlive-basic
+  - texstudio
+  - pandoc-cli
+  - python-pynvim
+  - tree-sitter-cli
+
+pacman_packages_containers:
+  - docker
+  - docker-compose
+  - docker-buildx
+  - distrobox
+  - nodejs
+  - rust
+
+pacman_packages_maker_cad:
+  - kicad
+  - kicad-library
+  - kicad-library-3d
+  - freecad
+  - esptool
+  - esphome
+  - espflash
+
+pacman_packages_creative:
+  - gimp
+  - inkscape
+  - scribus
+  - imagemagick
+
+pacman_packages_gaming:
+  - steam
+  - gamemode
+  - mangohud
+  - lib32-gamemode
+  - lib32-mangohud
+
+pacman_packages_printing:
+  - cups
+  - system-config-printer
+  - sane-airscan
+
+pacman_packages_peripherals:
+  - tlp
+  - bluez
+  - bluez-utils
+  - blueman
+  - solaar
+  - piper
+
+# Curated AUR package groups (installed via yay)
+aur_packages_core:
+  - workstyle-git
+  - avizo
+  - volumectl
+  - swayhide
+  - joplin-beta-bin
+  - jabref-bin
+  - seadrive-gui
+  - antigravity-ide
+  - antigravity-cli
+
+aur_packages_dev_science:
+  - quarto-cli-bin
+  - tree-sitter-r
+
+aur_packages_maker_cad:
+  - orca-slicer-bin
+
+aur_packages_gaming:
+  - heroic-games-launcher-bin
+
+aur_packages_printing:
+  - brother-ql720nw
+  - epson-inkjet-printer-escpr
+
+aur_packages_peripherals:
+  - bluetuith
+
+# SSH remote hardening (only disables password auth cleanly when keys are supplied)
+ssh_remote:
+  enabled: true
+  maintainer_public_keys: []
+
+# Home WireGuard VPN auto-connect on WAN (configure real values in local.yml)
+home_wifi_ssids: []
+wireguard:
+  enabled: false
+  interface: "wg0"
+  address: ""
+  dns: ""
+  server_public_key: ""
+  server_endpoint: ""
+  allowed_ips: "0.0.0.0/0, ::/0"
+  keepalive: 25
+  client_private_key: ""
+
+# SeaDrive setup
+seadrive:
+  mount_point: "/home/{{ target_user }}/SeaDrive"
+  enable_autostart: true
+
+# 3-2-1 Backups with Borgmatic 2.x + native Btrfs snapshots
+borgmatic_policy:
+  source_directories:
+    - /home
+    - /etc
+  exclude_patterns:
+    - "*/.snapshots/*"
+    - "/home/*/.cache"
+    - "/home/*/.seadrive/data"
+    - "/home/*/.local/share/Trash"
+    - "/home/*/.local/share/Steam"
+    - "/home/*/.mozilla/firefox/*/storage/default/*/cache*"
+  archive_name_format: "{hostname}-{now}"
+  keep_daily: 7
+  keep_weekly: 4
+  keep_monthly: 6
+
+# Target credentials/endpoints (override all keys cleanly in local.yml)
+borgmatic_targets:
+  ssh_key_path: "/root/.ssh/id_ed25519"
+  encryption_passphrase: ""
+  homelab_enabled: false
+  homelab_repo: ""
+  hetzner_enabled: false
+  hetzner_repo: ""

@@ -1,0 +1,25 @@
+---
+- name: Install fuse2 and fuse3 for SeaDrive FUSE mount
+  community.general.pacman:
+    name:
+      - fuse2
+      - fuse3
+    state: present
+
+- name: Create SeaDrive mount directory
+  ansible.builtin.file:
+    path: "{{ seadrive.mount_point }}"
+    state: directory
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: '0755'
+
+- name: Enable stowed seadrive.service in user default.target
+  ansible.builtin.file:
+    src: "/home/{{ target_user }}/.config/systemd/user/seadrive.service"
+    dest: "/home/{{ target_user }}/.config/systemd/user/default.target.wants/seadrive.service"
+    state: link
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    force: true
+  when: seadrive.enable_autostart | default(true)

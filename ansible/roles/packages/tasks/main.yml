@@ -1,0 +1,146 @@
+---
+- name: Build enabled official pacman package list
+  ansible.builtin.set_fact:
+    enabled_pacman_packages: >-
+      {{
+        pacman_packages_core
+        + (pacman_packages_dev_science if features.dev_science else [])
+        + (pacman_packages_containers if features.containers else [])
+        + (pacman_packages_maker_cad if features.maker_cad else [])
+        + (pacman_packages_creative if features.creative else [])
+        + (pacman_packages_gaming if features.gaming else [])
+        + (pacman_packages_printing if features.printing else [])
+        + (pacman_packages_peripherals if features.peripherals else [])
+      }}
+
+- name: Install enabled official pacman packages
+  community.general.pacman:
+    name: "{{ enabled_pacman_packages }}"
+    state: present
+    update_cache: true
+
+- name: Build enabled AUR package list
+  ansible.builtin.set_fact:
+    enabled_aur_packages: >-
+      {{
+        aur_packages_core
+        + (aur_packages_dev_science if features.dev_science else [])
+        + (aur_packages_maker_cad if features.maker_cad else [])
+        + (aur_packages_gaming if features.gaming else [])
+        + (aur_packages_printing if features.printing else [])
+        + (aur_packages_peripherals if features.peripherals else [])
+      }}
+
+- name: Install enabled AUR packages via yay
+  when: enabled_aur_packages | length > 0
+  block:
+    - name: Temporarily allow target_user to run pacman without password during AUR install
+      ansible.builtin.copy:
+        content: "{{ target_user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman\n"
+        dest: /etc/sudoers.d/10-ansible-yay-pacman
+        mode: '0440'
+        validate: /usr/sbin/visudo -csf %s
+
+    - name: Run yay for enabled AUR packages
+      ansible.builtin.command:
+        cmd: "yay -S --noconfirm --needed {{ enabled_aur_packages | join(' ') }}"
+      become: true
+      become_user: "{{ target_user }}"
+      register: yay_install
+      changed_when: "'there is nothing to do' not in yay_install.stdout"
+
+  always:
+    - name: Remove temporary pacman sudoers rule
+      ansible.builtin.file:
+        path: /etc/sudoers.d/10-ansible-yay-pacman
+        state: absent
+
+- name: Disable getty on tty1 before enabling ly display manager
+  ansible.builtin.systemd:
+    name: getty@tty1.service
+    enabled: false
+    state: stopped
+  failed_when: false
+
+- name: Enable ly display manager on tty1
+  ansible.builtin.systemd:
+    name: ly@tty1.service
+    enabled: true
+
+- name: Enable core network service
+  ansible.builtin.systemd:
+    name: NetworkManager.service
+    enabled: true
+    state: started
+
+- name: Enable bluetooth service
+  ansible.builtin.systemd:
+    name: bluetooth.service
+    enabled: true
+    state: started
+  when: features.peripherals
+
+- name: Enable CUPS printing service
+  ansible.builtin.systemd:
+    name: cups.service
+    enabled: true
+    state: started
+  when: features.printing
+
+- name: Configure Docker service and group membership
+  when: features.containers
+  block:
+    - name: Enable Docker service
+      ansible.builtin.systemd:
+        name: docker.service
+        enabled: true
+        state: started
+
+    - name: Add target_user to docker group
+      ansible.builtin.user:
+        name: "{{ target_user }}"
+        groups: docker
+        append: true
+
+- name: Configure UFW firewall safely before enabling
+  when: features.firewall
+  block:
+    - name: Set default UFW policies (deny incoming, allow outgoing)
+      ansible.builtin.command: "ufw default {{ item }}"
+      loop:
+        - deny incoming
+        - allow outgoing
+      changed_when: false
+
+    - name: Allow SSH through UFW when remote SSH is enabled
+      ansible.builtin.command: ufw limit 22/tcp
+      when: ssh_remote.enabled | default(true)
+      changed_when: false
+
+    - name: Enable UFW ruleset
+      ansible.builtin.command: ufw --force enable
+      changed_when: false
+
+    - name: Enable ufw.service
+      ansible.builtin.systemd:
+        name: ufw.service
+        enabled: true
+        state: started
+
+- name: Ensure /etc/pacman.d/hooks directory exists
+  ansible.builtin.file:
+    path: /etc/pacman.d/hooks
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  when: features.pacman_hook
+
+- name: Install pacman package-list sync hook
+  ansible.builtin.template:
+    src: 99-sync-packages.hook.j2
+    dest: /etc/pacman.d/hooks/99-sync-packages.hook
+    owner: root
+    group: root
+    mode: '0644'
+  when: features.pacman_hook

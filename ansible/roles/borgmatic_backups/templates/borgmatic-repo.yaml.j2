@@ -1,0 +1,32 @@
+# Managed by Ansible (borgmatic 2.x schema with native Btrfs snapshotting)
+source_directories:
+{% for dir in borgmatic_policy.source_directories %}
+  - {{ dir }}
+{% endfor %}
+
+btrfs:
+
+repositories:
+  - path: {{ repo_path }}
+    label: {{ repo_label }}
+
+exclude_patterns:
+{% for pattern in borgmatic_policy.exclude_patterns %}
+  - "{{ pattern }}"
+{% endfor %}
+
+exclude_caches: true
+encryption_passphrase: "{{ borgmatic_targets.encryption_passphrase }}"
+archive_name_format: "{{ borgmatic_policy.archive_name_format }}"
+ssh_command: "ssh -i {{ borgmatic_targets.ssh_key_path }} -o BatchMode=yes"
+compression: auto,zstd
+
+keep_daily: {{ borgmatic_policy.keep_daily }}
+keep_weekly: {{ borgmatic_policy.keep_weekly }}
+keep_monthly: {{ borgmatic_policy.keep_monthly }}
+
+consistency:
+  checks:
+    - repository
+    - archives
+  frequency: 2 weeks

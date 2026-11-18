@@ -1,0 +1,106 @@
+---
+- name: Install Btrfs snapshot and GRUB integration packages
+  community.general.pacman:
+    name:
+      - btrfs-progs
+      - snapper
+      - snap-pac
+      - grub-btrfs
+      - inotify-tools
+      - breeze-grub
+    state: present
+
+- name: Check existing Snapper configs
+  ansible.builtin.stat:
+    path: "/etc/snapper/configs/{{ item }}"
+  loop:
+    - root
+    - home
+  register: snapper_configs_stat
+
+- name: Configure wheel group access on Snapper configs
+  ansible.builtin.lineinfile:
+    path: "/etc/snapper/configs/{{ item.item }}"
+    regexp: '^#?ALLOW_GROUPS='
+    line: 'ALLOW_GROUPS="wheel"'
+    owner: root
+    group: root
+    mode: '0640'
+  loop: "{{ snapper_configs_stat.results }}"
+  when: item.stat.exists
+
+- name: Enable SYNC_ACL on existing Snapper configs
+  ansible.builtin.lineinfile:
+    path: "/etc/snapper/configs/{{ item.item }}"
+    regexp: '^#?SYNC_ACL='
+    line: 'SYNC_ACL="yes"'
+    owner: root
+    group: root
+    mode: '0640'
+  loop: "{{ snapper_configs_stat.results }}"
+  when: item.stat.exists
+
+- name: Enable Snapper timeline and cleanup timers
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop:
+    - snapper-timeline.timer
+    - snapper-cleanup.timer
+
+- name: Point grub-btrfs to /efi/grub
+  ansible.builtin.lineinfile:
+    path: /etc/default/grub-btrfs/config
+    regexp: '^#?GRUB_BTRFS_GRUB_DIRNAME='
+    line: 'GRUB_BTRFS_GRUB_DIRNAME="/efi/grub"'
+  notify: Regenerate GRUB config
+
+- name: Ensure grub-btrfsd override directory exists
+  ansible.builtin.file:
+    path: /etc/systemd/system/grub-btrfsd.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Configure grub-btrfsd to watch /.snapshots with syslog output
+  ansible.builtin.copy:
+    content: |
+      [Service]
+      ExecStart=
+      ExecStart=/usr/bin/grub-btrfsd --syslog /.snapshots
+    dest: /etc/systemd/system/grub-btrfsd.service.d/override.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Reload and restart grub-btrfsd
+
+- name: Enable and start grub-btrfsd service
+  ansible.builtin.systemd:
+    name: grub-btrfsd.service
+    daemon_reload: true
+    enabled: true
+    state: started
+
+- name: Add grub-btrfs-overlayfs hook to /etc/mkinitcpio.conf
+  ansible.builtin.replace:
+    path: /etc/mkinitcpio.conf
+    regexp: '^(HOOKS=\((?![^)]*\bgrub-btrfs-overlayfs\b)[^)]*)\)$'
+    replace: '\1 grub-btrfs-overlayfs)'
+  notify: Rebuild initramfs
+
+- name: Configure GRUB Breeze theme when enabled
+  ansible.builtin.lineinfile:
+    path: /etc/default/grub
+    regexp: '^#?GRUB_THEME='
+    line: 'GRUB_THEME="{{ grub_theme_path }}"'
+  when: enable_grub_theme | default(true)
+  notify: Regenerate GRUB config
+
+- name: Configure GRUB timeout
+  ansible.builtin.lineinfile:
+    path: /etc/default/grub
+    regexp: '^#?GRUB_TIMEOUT='
+    line: 'GRUB_TIMEOUT="{{ grub_timeout | default("5") }}"'
+  notify: Regenerate GRUB config

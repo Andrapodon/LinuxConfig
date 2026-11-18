@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# NetworkManager dispatcher: bring WireGuard up on WAN, down on home Wi-Fi.
+INTERFACE="$1"
+ACTION="$2"
+WG_IFACE="{{ wireguard.interface | default('wg0') }}"
+
+if [ "$INTERFACE" = "$WG_IFACE" ] || [ "$INTERFACE" = "lo" ] || [ "${CONNECTION_ID:-}" = "$WG_IFACE" ]; then
+    exit 0
+fi
+
+HOME_SSIDS=(
+{% for ssid in home_wifi_ssids | default([]) %}
+  "{{ ssid }}"
+{% endfor %}
+)
+
+is_home_network() {
+    local current_ssid="$1"
+    for home_ssid in "${HOME_SSIDS[@]}"; do
+        if [ "$current_ssid" = "$home_ssid" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+case "$ACTION" in
+    up)
+        CURRENT_SSID="${CONNECTION_ID:-}"
+        if is_home_network "$CURRENT_SSID"; then
+            if /usr/bin/wg show "$WG_IFACE" &>/dev/null; then
+                logger -t nm-dispatcher-wg "Home network '$CURRENT_SSID': tearing down $WG_IFACE."
+                /usr/bin/wg-quick down "$WG_IFACE" || true
+            fi
+        else
+            if ! /usr/bin/wg show "$WG_IFACE" &>/dev/null; then
+                logger -t nm-dispatcher-wg "WAN network '$CURRENT_SSID': starting $WG_IFACE."
+                /usr/bin/wg-quick up "$WG_IFACE" || true
+            fi
+        fi
+        ;;
+    down)
+        ACTIVE_CONNECTIONS=$(nmcli -t -f STATE connection show --active | grep -c '^activated$' || true)
+        if [ "$ACTIVE_CONNECTIONS" -le 1 ]; then
+            if /usr/bin/wg show "$WG_IFACE" &>/dev/null; then
+                logger -t nm-dispatcher-wg "Connections down: tearing down $WG_IFACE."
+                /usr/bin/wg-quick down "$WG_IFACE" || true
+            fi
+        fi
+        ;;
+esac
+exit 0

@@ -1,0 +1,90 @@
+---
+- name: Configure backlight udev rule and video group membership
+  when: enable_backlight_udev | default(true)
+  block:
+    - name: Install backlight udev rule
+      ansible.builtin.copy:
+        src: "{{ dotfiles_dir }}/etc/udev/rules.d/backlight.rules"
+        dest: /etc/udev/rules.d/90-backlight.rules
+        remote_src: true
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Add target_user to video group
+      ansible.builtin.user:
+        name: "{{ target_user }}"
+        groups: video
+        append: true
+
+- name: Deploy custom TLP configuration when explicitly opted in
+  ansible.builtin.copy:
+    src: "{{ dotfiles_dir }}/etc/tlp.conf"
+    dest: /etc/tlp.conf
+    remote_src: true
+    owner: root
+    group: root
+    mode: '0644'
+  when: enable_tlp_custom_conf | default(false)
+
+- name: Deploy systemd sleep configuration when explicitly opted in
+  ansible.builtin.copy:
+    src: "{{ dotfiles_dir }}/etc/systemd/sleep.conf"
+    dest: /etc/systemd/sleep.conf
+    remote_src: true
+    owner: root
+    group: root
+    mode: '0644'
+  when: enable_custom_sleep_conf | default(false)
+
+- name: Deploy IPv6 sysctl disable rule when explicitly opted in
+  ansible.builtin.copy:
+    src: "{{ dotfiles_dir }}/etc/sysctl.d/40-ipv6.conf"
+    dest: /etc/sysctl.d/40-ipv6.conf
+    remote_src: true
+    owner: root
+    group: root
+    mode: '0644'
+  when: disable_ipv6 | default(false)
+
+- name: Configure ThinkPad TrackPoint hardware scroller daemon
+  when: enable_trackpoint_scroller | default(false)
+  block:
+    - name: Install python-evdev for TrackPoint scroller
+      community.general.pacman:
+        name: python-evdev
+        state: present
+
+    - name: Install trackpoint-scroller daemon script
+      ansible.builtin.copy:
+        src: "{{ dotfiles_dir }}/scripts/trackpoint-scroller.py"
+        dest: /usr/local/bin/trackpoint-scroller.py
+        remote_src: true
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Initialize user-adjustable /etc/trackpoint-scroller.conf
+      ansible.builtin.copy:
+        content: "5\n"
+        dest: /etc/trackpoint-scroller.conf
+        owner: root
+        group: "{{ target_user }}"
+        mode: '0664'
+        force: false
+
+    - name: Install trackpoint-scroller systemd service
+      ansible.builtin.copy:
+        src: "{{ dotfiles_dir }}/etc/systemd/trackpoint-scroller.service"
+        dest: /etc/systemd/system/trackpoint-scroller.service
+        remote_src: true
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Enable and start trackpoint-scroller.service
+      ansible.builtin.systemd:
+        name: trackpoint-scroller.service
+        daemon_reload: true
+        enabled: true
+        state: started

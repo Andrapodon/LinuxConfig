@@ -44,7 +44,7 @@ xwayland enable
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/marc/LinuxConfig/pictures/Wallpaper.jpg fill
+output * bg ~/LinuxConfig/pictures/Wallpaper.jpg fill
 ### Input configuration
 input "type:touchpad" {
        dwt enabled

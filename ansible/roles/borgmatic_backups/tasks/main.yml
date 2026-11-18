@@ -1,0 +1,55 @@
+---
+- name: Install borgmatic and borg packages
+  community.general.pacman:
+    name:
+      - borg
+      - borgmatic
+    state: present
+
+- name: Ensure /etc/borgmatic.d and /root/.ssh directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+  loop:
+    - /etc/borgmatic.d
+    - /root/.ssh
+
+- name: Deploy homelab borgmatic configuration (Copy 2 on LAN/WireGuard)
+  ansible.builtin.template:
+    src: borgmatic-repo.yaml.j2
+    dest: /etc/borgmatic.d/homelab.yaml
+    owner: root
+    group: root
+    mode: '0600'
+  vars:
+    repo_label: homelab
+    repo_path: "{{ borgmatic_targets.homelab_repo }}"
+  when: >-
+    (borgmatic_targets.homelab_enabled | default(false))
+    and (borgmatic_targets.homelab_repo | default('') | length > 0)
+
+- name: Deploy Hetzner Storage Box borgmatic configuration (Copy 3 off-site)
+  ansible.builtin.template:
+    src: borgmatic-repo.yaml.j2
+    dest: /etc/borgmatic.d/hetzner.yaml
+    owner: root
+    group: root
+    mode: '0600'
+  vars:
+    repo_label: hetzner-storagebox
+    repo_path: "{{ borgmatic_targets.hetzner_repo }}"
+  when: >-
+    (borgmatic_targets.hetzner_enabled | default(false))
+    and (borgmatic_targets.hetzner_repo | default('') | length > 0)
+
+- name: Enable borgmatic scheduled timer when at least one backup target is active
+  ansible.builtin.systemd:
+    name: borgmatic.timer
+    enabled: true
+    state: started
+  when: >-
+    ((borgmatic_targets.homelab_enabled | default(false)) and (borgmatic_targets.homelab_repo | default('') | length > 0))
+    or ((borgmatic_targets.hetzner_enabled | default(false)) and (borgmatic_targets.hetzner_repo | default('') | length > 0))

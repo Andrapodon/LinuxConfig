@@ -1,0 +1,36 @@
+---
+# Copy to ansible/inventory/group_vars/local.yml (gitignored) and adjust values.
+# Optionally encrypt after editing: ansible-vault encrypt inventory/group_vars/local.yml
+
+# Optional hardware toggles for specific laptops (e.g. ThinkPad TrackPoint)
+# enable_trackpoint_scroller: true
+# enable_tlp_custom_conf: true
+
+ssh_remote:
+  enabled: true
+  maintainer_public_keys:
+    - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... your-key-comment"
+
+home_wifi_ssids:
+  - "YourHomeWiFiSSID"
+
+wireguard:
+  enabled: false
+  interface: "wg0"
+  address: "10.0.1.X/24"
+  dns: "10.0.1.1"
+  server_public_key: "YOUR_WG_SERVER_PUBKEY"
+  server_endpoint: "vpn.example.org:51820"
+  allowed_ips: "10.0.1.0/24"
+  keepalive: 25
+  client_private_key: "YOUR_WG_CLIENT_PRIVKEY"
+
+borgmatic_targets:
+  ssh_key_path: "/root/.ssh/id_ed25519"
+  encryption_passphrase: "CHANGE_THIS_TO_A_STRONG_BORG_PASSPHRASE"
+  homelab_enabled: false
+  # Example homelab Borg repo on ext4/RAIDZ1 via SSH (port 22):
+  homelab_repo: "ssh://backup@homelab.local/mnt/backups/archlaptop"
+  hetzner_enabled: false
+  # Example Hetzner Storage Box Borg repo via SSH (port 23, ./ relative path):
+  hetzner_repo: "ssh://uXXXXXX@uXXXXXX.your-storagebox.de:23/./archlaptop"

@@ -7,3 +7,11 @@
 # Ansible specific
 *.retry
 .ansible/
+ansible/ansible.log
+ansible/inventory/group_vars/local.yml
+ansible/inventory/group_vars/vault.yml
+
+# Generated bootstrap configs and credentials (never commit secrets)
+archinstall-config/user_configuration.json
+archinstall-config/user_credentials.json
+

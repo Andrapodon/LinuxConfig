@@ -1,0 +1,12 @@
+---
+- name: Rebuild initramfs
+  ansible.builtin.command: mkinitcpio -P
+
+- name: Regenerate GRUB config
+  ansible.builtin.command: grub-mkconfig -o /efi/grub/grub.cfg
+
+- name: Reload and restart grub-btrfsd
+  ansible.builtin.systemd:
+    name: grub-btrfsd.service
+    daemon_reload: true
+    state: restarted

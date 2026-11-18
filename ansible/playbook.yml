@@ -1,19 +1,31 @@
 ---
 - name: Arch Linux Laptop Provisioning
-  hosts: localhost
-  become: false
-  
+  hosts: laptop
+  become: true
+
+  pre_tasks:
+    - name: Check for optional gitignored local.yml overrides
+      ansible.builtin.stat:
+        path: "{{ playbook_dir }}/inventory/group_vars/local.yml"
+      register: local_vars_file
+
+    - name: Load local.yml overrides if present
+      ansible.builtin.include_vars:
+        file: "{{ playbook_dir }}/inventory/group_vars/local.yml"
+      when: local_vars_file.stat.exists
+
+    - name: Verify target user account exists
+      ansible.builtin.getent:
+        database: passwd
+        key: "{{ target_user }}"
+
   roles:
-    - common
+    - aur_support
+    - packages
+    - btrfs_snapper
     - dotfiles
-
-  tasks:
-    - name: Ensure yay (AUR helper) is installed
-      command: pacman -Q yay
-      ignore_errors: yes
-      register: yay_check
-      changed_when: false
-
-    - name: System is ready for automation!
-      debug:
-        msg: "Ansible is correctly initialized on {{ ansible_facts['hostname'] }}"
+    - laptop_system
+    - seadrive
+    - ssh_remote
+    - wireguard_vpn
+    - borgmatic_backups

@@ -1,0 +1,56 @@
+---
+- name: Configure hardened OpenSSH access when public keys are configured
+  when: ssh_remote.enabled | default(true) and (ssh_remote.maintainer_public_keys | default([]) | length > 0)
+  block:
+    - name: Install OpenSSH package
+      community.general.pacman:
+        name: openssh
+        state: present
+
+    - name: Ensure /etc/ssh/sshd_config.d exists
+      ansible.builtin.file:
+        path: /etc/ssh/sshd_config.d
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Deploy key-only maintainer SSH configuration
+      ansible.builtin.template:
+        src: 10-maintainer.conf.j2
+        dest: /etc/ssh/sshd_config.d/10-maintainer.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Restart sshd
+
+    - name: Ensure .ssh directories exist for target_user and root
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: directory
+        owner: "{{ item.owner }}"
+        group: "{{ item.owner }}"
+        mode: '0700'
+      loop:
+        - { path: "/home/{{ target_user }}/.ssh", owner: "{{ target_user }}" }
+        - { path: "/root/.ssh", owner: "root" }
+
+    - name: Deploy maintainer public keys to target_user authorized_keys
+      ansible.posix.authorized_key:
+        user: "{{ target_user }}"
+        state: present
+        key: "{{ item }}"
+      loop: "{{ ssh_remote.maintainer_public_keys }}"
+
+    - name: Deploy maintainer public keys to root authorized_keys
+      ansible.posix.authorized_key:
+        user: root
+        state: present
+        key: "{{ item }}"
+      loop: "{{ ssh_remote.maintainer_public_keys }}"
+
+    - name: Enable and start sshd service
+      ansible.builtin.systemd:
+        name: sshd.service
+        enabled: true
+        state: started

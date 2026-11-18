@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Install
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Synchronizing package list to LinuxConfig repo...
+When = PostTransaction
+Exec = /usr/bin/su {{ target_user }} -c "{{ dotfiles_dir }}/pacman-hook/sync-packages.sh"

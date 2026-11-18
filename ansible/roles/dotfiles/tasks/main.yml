@@ -1,11 +1,77 @@
 ---
-- name: Find all stow packages
-  find:
-    paths: "{{ playbook_dir }}/../stow"
-    file_type: directory
-  register: stow_dirs
+- name: Ensure base dotfiles and XDG target directories exist before stowing
+  ansible.builtin.file:
+    path: "/home/{{ target_user }}/{{ item }}"
+    state: directory
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: '0755'
+  loop:
+    - .config
+    - .config/alacritty
+    - .config/Code
+    - .config/Code/User
+    - .config/fuzzel
+    - .config/htop
+    - .config/keepassxc
+    - .config/nano
+    - .config/obsidian
+    - .config/rstudio
+    - .config/RStudio
+    - .config/sway
+    - .config/systemd
+    - .config/systemd/user
+    - .config/systemd/user/default.target.wants
+    - .config/systemd/user/workspace.target.wants
+    - .config/waybar
+    - .config/waybar/scripts
+    - .config/workstyle
+    - .local
+    - .local/share
+    - .local/share/applications
+    - .config/conf_backups/pre-stow
 
-- name: Stow all dotfiles
-  command: "stow -R -t {{ ansible_env.HOME }} -d {{ playbook_dir }}/../stow {{ item.path | basename }}"
-  loop: "{{ stow_dirs.files }}"
-  changed_when: true
+- name: Check potentially conflicting regular files before stowing homedir
+  ansible.builtin.stat:
+    path: "/home/{{ target_user }}/{{ item }}"
+  loop:
+    - .bashrc
+    - .gitconfig
+    - .Rprofile
+    - .radian_profile
+  register: homedir_precheck
+
+- name: Back up existing non-symlink homedir files cleanly before stowing
+  ansible.builtin.command:
+    cmd: "mv /home/{{ target_user }}/{{ item.item }} /home/{{ target_user }}/.config/conf_backups/pre-stow/{{ item.item }}"
+  become: true
+  become_user: "{{ target_user }}"
+  loop: "{{ homedir_precheck.results }}"
+  when: item.stat.exists and not item.stat.islnk
+
+- name: Stow curated packages into user home directory
+  ansible.builtin.command:
+    cmd: "stow -v -R -t /home/{{ target_user }} -d {{ dotfiles_dir }}/stow {{ item }}"
+  become: true
+  become_user: "{{ target_user }}"
+  loop: "{{ stow_packages }}"
+  register: stow_results
+  changed_when: "'LINK:' in stow_results.stderr or 'UNLINK:' in stow_results.stderr"
+
+- name: Clone Neovim configuration (config.nvim) if absent
+  ansible.builtin.git:
+    repo: "{{ nvim_repo_url }}"
+    dest: "/home/{{ target_user }}/.config/nvim"
+    version: master
+    update: false
+  become: true
+  become_user: "{{ target_user }}"
+
+- name: Enable JabRef user service inside workspace.target
+  ansible.builtin.file:
+    src: "/home/{{ target_user }}/.config/systemd/user/jabref.service"
+    dest: "/home/{{ target_user }}/.config/systemd/user/workspace.target.wants/jabref.service"
+    state: link
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    force: true

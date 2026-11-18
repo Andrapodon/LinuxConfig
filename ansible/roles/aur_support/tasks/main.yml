@@ -1,0 +1,75 @@
+---
+- name: Enable ParallelDownloads in /etc/pacman.conf
+  ansible.builtin.replace:
+    path: /etc/pacman.conf
+    regexp: '^#?\s*ParallelDownloads\s*=.*$'
+    replace: 'ParallelDownloads = 5'
+
+- name: Enable Color in /etc/pacman.conf
+  ansible.builtin.replace:
+    path: /etc/pacman.conf
+    regexp: '^#\s*Color$'
+    replace: 'Color'
+
+- name: Enable multilib repository in /etc/pacman.conf (required for Steam/lib32)
+  ansible.builtin.replace:
+    path: /etc/pacman.conf
+    regexp: '^#\[multilib\]\s*\n#\s*(Include\s*=\s*/etc/pacman\.d/mirrorlist)'
+    replace: "[multilib]\n\\1"
+
+- name: Install base-devel, git, and curl for AUR builds
+  community.general.pacman:
+    name:
+      - base-devel
+      - git
+      - curl
+    state: present
+    update_cache: true
+
+- name: Check if yay is installed
+  ansible.builtin.command: which yay
+  register: yay_check
+  failed_when: false
+  changed_when: false
+
+- name: Bootstrap yay-bin from AUR when missing
+  when: yay_check.rc != 0
+  block:
+    - name: Temporarily allow target_user to run pacman without password during yay bootstrap
+      ansible.builtin.copy:
+        content: "{{ target_user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman\n"
+        dest: /etc/sudoers.d/10-ansible-yay-pacman
+        mode: '0440'
+        validate: /usr/sbin/visudo -csf %s
+
+    - name: Clone yay-bin repository
+      ansible.builtin.git:
+        repo: https://aur.archlinux.org/yay-bin.git
+        dest: /tmp/yay-bin
+        version: master
+        force: true
+      become: true
+      become_user: "{{ target_user }}"
+
+    - name: Build and install yay-bin
+      ansible.builtin.command:
+        cmd: makepkg -si --noconfirm
+        chdir: /tmp/yay-bin
+      become: true
+      become_user: "{{ target_user }}"
+
+  always:
+    - name: Remove temporary yay build directory
+      ansible.builtin.file:
+        path: /tmp/yay-bin
+        state: absent
+
+    - name: Clean up temporary bootstrap pacman sudoers rule
+      ansible.builtin.file:
+        path: /etc/sudoers.d/10-ansible-yay-pacman
+        state: absent
+
+- name: Ensure target_user uses configured login shell
+  ansible.builtin.user:
+    name: "{{ target_user }}"
+    shell: "{{ target_user_shell }}"

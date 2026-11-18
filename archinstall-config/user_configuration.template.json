@@ -1,0 +1,79 @@
+{
+  "version": "4.5",
+  "archinstall-language": "English",
+  "hostname": "archlaptop",
+  "timezone": "Europe/Zurich",
+  "ntp": true,
+  "kernels": [
+    "linux",
+    "linux-zen"
+  ],
+  "locale_config": {
+    "kb_layout": "de_CH-latin1",
+    "sys_enc": "UTF-8",
+    "sys_lang": "en_US.UTF-8",
+    "console_font": "default8x16"
+  },
+  "bootloader_config": {
+    "bootloader": "Grub",
+    "uki": false,
+    "removable": true
+  },
+  "app_config": {
+    "audio_config": {
+      "audio": "pipewire"
+    },
+    "bluetooth_config": {
+      "enabled": true
+    }
+  },
+  "network_config": {
+    "type": "nm"
+  },
+  "pacman_config": {
+    "color": true,
+    "parallel_downloads": 5
+  },
+  "profile_config": {
+    "profile": {
+      "main": "Minimal",
+      "details": []
+    }
+  },
+  "swap": {
+    "enabled": true,
+    "algorithm": "zstd"
+  },
+  "packages": [
+    "base",
+    "base-devel",
+    "linux-firmware",
+    "linux-headers",
+    "linux-zen-headers",
+    "btrfs-progs",
+    "dosfstools",
+    "efibootmgr",
+    "breeze-grub",
+    "snapper",
+    "snap-pac",
+    "grub-btrfs",
+    "inotify-tools",
+    "git",
+    "ansible",
+    "stow",
+    "openssh",
+    "sudo",
+    "networkmanager",
+    "curl",
+    "wget",
+    "htop",
+    "python"
+  ],
+  "custom_commands": [
+    "set -euo pipefail; if [ ! -f /etc/snapper/configs/root ]; then BTRFS_SRC=\"$(findmnt -no SOURCE /.snapshots)\"; BTRFS_DEV=\"${BTRFS_SRC%%\\[*}\"; umount /.snapshots; rmdir /.snapshots; snapper --no-dbus -c root create-config /; btrfs subvolume delete /.snapshots; mkdir -p /.snapshots; mount -o \"subvol=@snapshots,compress=zstd:1,noatime,discard=async\" \"$BTRFS_DEV\" /.snapshots; chmod 750 /.snapshots; chown :wheel /.snapshots; fi",
+    "set -euo pipefail; if [ ! -f /etc/snapper/configs/home ]; then snapper --no-dbus -c home create-config /home; chown :wheel /home/.snapshots; fi",
+    "set -euo pipefail; if [ -f /etc/default/grub-btrfs/config ]; then sed -i 's|^#\\?GRUB_BTRFS_GRUB_DIRNAME=.*|GRUB_BTRFS_GRUB_DIRNAME=\"/efi/grub\"|' /etc/default/grub-btrfs/config; fi; mkdir -p /etc/systemd/system/grub-btrfsd.service.d; printf '[Service]\\nExecStart=\\nExecStart=/usr/bin/grub-btrfsd --syslog /.snapshots\\n' > /etc/systemd/system/grub-btrfsd.service.d/override.conf",
+    "python3 -c 'import re; from pathlib import Path; p=Path(\"/etc/mkinitcpio.conf\"); t=p.read_text(); repl=lambda m: \"HOOKS=(\"+\" \".join(m.group(1).split()+([\"grub-btrfs-overlayfs\"] if \"grub-btrfs-overlayfs\" not in m.group(1).split() else []))+\")\"; nt,n=re.subn(r\"^HOOKS=\\(([^)]*)\\)\",repl,t,count=1,flags=re.MULTILINE); assert n==1; p.write_text(nt)' && mkinitcpio -P",
+    "set -euo pipefail; if [ -f /usr/share/grub/themes/breeze/theme.txt ]; then sed -i 's|^#\\?GRUB_THEME=.*|GRUB_THEME=\"/usr/share/grub/themes/breeze/theme.txt\"|' /etc/default/grub; fi; sed -i 's|^#\\?GRUB_TIMEOUT=.*|GRUB_TIMEOUT=\"5\"|' /etc/default/grub; grub-mkconfig -o /efi/grub/grub.cfg; systemctl enable snapper-timeline.timer snapper-cleanup.timer grub-btrfsd.service"
+  ]
+}

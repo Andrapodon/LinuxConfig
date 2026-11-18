@@ -3,14 +3,16 @@
   ansible.builtin.set_fact:
     enabled_pacman_packages: >-
       {{
-        pacman_packages_core
-        + (pacman_packages_dev_science if features.dev_science else [])
-        + (pacman_packages_containers if features.containers else [])
-        + (pacman_packages_maker_cad if features.maker_cad else [])
-        + (pacman_packages_creative if features.creative else [])
-        + (pacman_packages_gaming if features.gaming else [])
-        + (pacman_packages_printing if features.printing else [])
-        + (pacman_packages_peripherals if features.peripherals else [])
+        (
+          pacman_packages_core
+          + (pacman_packages_dev_science if features.dev_science else [])
+          + (pacman_packages_containers if features.containers else [])
+          + (pacman_packages_maker_cad if features.maker_cad else [])
+          + (pacman_packages_creative if features.creative else [])
+          + (pacman_packages_gaming if features.gaming else [])
+          + (pacman_packages_printing if features.printing else [])
+          + (pacman_packages_peripherals if features.peripherals else [])
+        ) | unique
       }}
 
 - name: Install enabled official pacman packages
@@ -85,6 +87,14 @@
     name: cups.service
     enabled: true
     state: started
+  when: features.printing
+
+- name: Install brother_ql CLI via pipx for ql-print label script
+  ansible.builtin.command:
+    cmd: pipx install brother-ql
+    creates: "/home/{{ target_user }}/.local/bin/brother_ql"
+  become: true
+  become_user: "{{ target_user }}"
   when: features.printing
 
 - name: Configure Docker service and group membership

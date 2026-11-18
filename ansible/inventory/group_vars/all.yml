@@ -50,6 +50,7 @@ stow_packages:
   - obsidian
   - rstudio
   - RStudio
+  - scripts
   - sway
   - systemd
   - waybar
@@ -185,6 +186,16 @@ pacman_packages_printing:
   - cups
   - system-config-printer
   - sane-airscan
+  - python-pipx
+  - net-snmp
+  - poppler
+  - imagemagick
+  - pandoc-cli
+  - chafa
+  - python-pillow
+  - texlive-basic
+  - texlive-latex
+  - texlive-latexrecommended
 
 pacman_packages_peripherals:
   - tlp

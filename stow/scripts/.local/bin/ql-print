@@ -1,0 +1,337 @@
+#!/usr/bin/env python3
+import sys
+import os
+import argparse
+import subprocess
+import socket
+# We use subprocess to call the brother_ql CLI installed by pipx
+import shutil
+
+if not shutil.which("brother_ql"):
+    print("Error: brother_ql is not installed or not in PATH. Run: pipx install brother_ql", file=sys.stderr)
+    sys.exit(1)
+
+def detect_label_size(ip_address):
+    """Queries the Brother QL printer for media size using SNMP."""
+    import re
+    import shutil
+    if not shutil.which("snmpget"):
+        print("Warning: snmpget not found. Cannot auto-detect label size via SNMP.", file=sys.stderr)
+        return None
+    try:
+        # 1.3.6.1.2.1.43.8.2.1.12.1.1 is prtInputMediaName.1.1 which returns strings like "62mm / 2.4\"" or "29mmx90mm / 1.1\"x3.5\""
+        result = subprocess.run(
+            ["snmpget", "-v", "1", "-c", "public", "-Oqv", ip_address, "1.3.6.1.2.1.43.8.2.1.12.1.1"],
+            capture_output=True, text=True, timeout=5
+        )
+        if result.returncode == 0:
+            out = result.stdout.strip().strip('"').replace(" ", "")
+            m = re.search(r'(\d+)(?:mm)?(?:x(\d+)(?:mm)?)?', out.lower())
+            if m:
+                if m.group(2):
+                    return f"{m.group(1)}x{m.group(2)}"
+                return m.group(1)
+            else:
+                print(f"Warning: Could not parse media size from SNMP string: {out}", file=sys.stderr)
+    except Exception as e:
+        print(f"Error querying SNMP: {e}", file=sys.stderr)
+        
+    return None
+
+def pdf_to_image(pdf_path, out_prefix, is_landscape=False):
+    """Converts a PDF to an image using pdftoppm, rotates if needed, and trims whitespace."""
+    # pdftoppm outputs out_prefix-1.png
+    subprocess.run(["pdftoppm", "-png", "-singlefile", "-r", "300", pdf_path, out_prefix], check=True)
+    img_path = f"{out_prefix}.png"
+    
+    if is_landscape and shutil.which("mogrify"):
+        subprocess.run(["mogrify", "-rotate", "-90", img_path], check=True)
+    
+    # Use ImageMagick to trim whitespace and add a small padding buffer
+    if shutil.which("mogrify"):
+        # First get the original width
+        result = subprocess.run(["identify", "-format", "%w", img_path], capture_output=True, text=True)
+        if result.returncode == 0:
+            width = result.stdout.strip()
+            # Trim and add top/bottom border
+            subprocess.run(["mogrify", "-trim", "-bordercolor", "white", "-border", "0x20", img_path], check=True)
+            # Get new height
+            res_h = subprocess.run(["identify", "-format", "%h", img_path], capture_output=True, text=True)
+            if res_h.returncode == 0:
+                height = res_h.stdout.strip()
+                # Pad back to original width
+                subprocess.run(["mogrify", "-background", "white", "-gravity", "center", "-extent", f"{width}x{height}", img_path], check=True)
+        else:
+            subprocess.run(["mogrify", "-trim", "-bordercolor", "white", "-border", "20", img_path], check=True)
+        
+    return img_path
+
+def text_to_pdf(text, pdf_path, width_mm, height_mm, fontsize="12pt"):
+    """Uses Pandoc to convert Markdown/LaTeX text into a PDF with specific dimensions."""
+    try:
+        # We use a standalone pandoc call with dynamically calculated geometry
+        # Requires pandoc and a latex engine (e.g., texlive-core) installed
+        process = subprocess.Popen(
+            [
+                "pandoc", "-f", "markdown", "-o", pdf_path, 
+                "-V", "documentclass=extarticle",
+                f"-V", f"geometry:paperwidth={width_mm}mm", 
+                f"-V", f"geometry:paperheight={height_mm}mm", 
+                "-V", "geometry:margin=2mm", 
+                "-V", f"fontsize={fontsize}"
+            ],
+            stdin=subprocess.PIPE
+        )
+        process.communicate(input=text.encode('utf-8'))
+        if process.returncode != 0:
+            raise Exception("Pandoc failed to render the text.")
+    except FileNotFoundError:
+        print("Error: 'pandoc' is not installed. Please install it to parse Markdown/LaTeX.", file=sys.stderr)
+        sys.exit(1)
+
+def terminal_preview(img_path, orientation='portrait'):
+    """Displays a high-res native terminal preview of the label using chafa or half-blocks."""
+    import shutil
+    import subprocess
+    
+    # If chafa is installed, use it! It supports braille/sixel/kitty graphics natively in the terminal.
+    if shutil.which("chafa"):
+        print("\n--- Chafa Terminal Preview ---")
+        try:
+            subprocess.run(["chafa", img_path])
+            print("------------------------------\n")
+            return
+        except Exception as e:
+            print(f"Notice: chafa failed ({e}), falling back to half-blocks...", file=sys.stderr)
+            
+    try:
+        from PIL import Image
+        img = Image.open(img_path).convert('L')
+        
+        # If the image was rotated for a landscape print, rotate it back for terminal viewing
+        if orientation == 'landscape':
+            try:
+                img = img.transpose(Image.Transpose.ROTATE_90)
+            except AttributeError:
+                img = img.transpose(Image.ROTATE_90)
+                
+        # Crop whitespace for better terminal viewing
+        bg = Image.new(img.mode, img.size, img.getpixel((0,0)))
+        diff = Image.eval(img, lambda x: 255 - x)
+        bbox = diff.getbbox()
+        if bbox:
+            img = img.crop(bbox)
+        
+        w, h = img.size
+        cols, _ = shutil.get_terminal_size((80, 24))
+        new_w = min(cols - 2, 100)
+        new_h = int((h / w) * new_w)
+        
+        try:
+            resample_filter = Image.Resampling.LANCZOS
+        except AttributeError:
+            resample_filter = Image.LANCZOS
+            
+        img = img.resize((new_w, new_h), resample_filter)
+        pixels = img.load()
+        if new_h % 2 != 0: new_h -= 1
+        
+        print("\n--- High-Res Terminal Preview ---")
+        for y in range(0, new_h, 2):
+            line = ""
+            for x in range(new_w):
+                top_on = pixels[x, y] < 128
+                bottom_on = pixels[x, y+1] < 128
+                if top_on and bottom_on: line += '█'
+                elif top_on: line += '▀'
+                elif bottom_on: line += '▄'
+                else: line += ' '
+            print(line)
+        print("---------------------------------\n")
+    except ImportError:
+        print("Notice: 'Pillow' python package not found. Skipping terminal ASCII preview.", file=sys.stderr)
+    except Exception as e:
+        print(f"Notice: Terminal preview failed: {e}", file=sys.stderr)
+
+def show_preview(img_path, mode='terminal', orientation='portrait'):
+    """Displays a preview of the label."""
+    if mode == 'terminal':
+        terminal_preview(img_path, orientation)
+        return None
+        
+    print("\n--- Launching Graphical Preview ---")
+    viewers = ["mpv", "imv", "feh", "xdg-open", "display"]
+    for viewer in viewers:
+        if shutil.which(viewer):
+            try:
+                cmd = [viewer, img_path]
+                if viewer == "mpv":
+                    cmd = [viewer, "--image-display-duration=inf", "--force-window", img_path]
+                
+                # Launch viewer in the background
+                proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                print(f"Launched preview using '{viewer}'. Please check your windows.")
+                return proc
+            except Exception as e:
+                print(f"Notice: Failed to launch {viewer}: {e}", file=sys.stderr)
+                
+    print("Notice: No supported graphical viewer found (mpv, imv, feh, xdg-open).", file=sys.stderr)
+    return None
+
+def print_image(image_path, label_size, ip_address, model="QL-720NW"):
+    """Converts and sends the image to the printer via brother_ql CLI."""
+    print(f"Sending print job to tcp://{ip_address} using brother_ql CLI...")
+    cmd = [
+        "brother_ql",
+        "-b", "network",
+        "-p", f"tcp://{ip_address}",
+        "-m", model,
+        "print",
+        "-l", label_size,
+        image_path
+    ]
+    try:
+        subprocess.run(cmd, check=True)
+        print("Done!")
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to print: {e}", file=sys.stderr)
+
+def main():
+    parser = argparse.ArgumentParser(description="Brother QL Label Printer CLI")
+    parser.add_argument("--ip", dest="ip", default="192.168.1.48", help="IP address of the Brother QL printer (default: 192.168.1.48)")
+    parser.add_argument("--model", default="QL-720NW", help="Printer model (default: QL-720NW)")
+    parser.add_argument("--label", help="Manually specify label size (e.g., 62x29, 62). Bypasses auto-detect.")
+    parser.add_argument("--orientation", choices=['portrait', 'landscape', 'auto'], default='auto', help="Print orientation (default: auto)")
+    parser.add_argument("--preview", choices=['terminal', 'gui'], default='terminal', help="Preview mode: 'terminal' (high-res ASCII blocks) or 'gui' (mpv/xdg-open). Default: terminal")
+    parser.add_argument("--no-preview", action="store_true", help="Skip preview and print immediately")
+    parser.add_argument("file", nargs="?", help="PDF or Image file to print (omit to read markdown from stdin)")
+    
+    args = parser.parse_args()
+    
+    if args.label:
+        print(f"Using manually specified label size: {args.label}")
+        label_size = args.label
+    else:
+        print(f"Detecting label size from {args.ip}...")
+        label_size = detect_label_size(args.ip)
+        
+        if not label_size:
+            print("Warning: Could not auto-detect label size. Falling back to default '62x29'...", file=sys.stderr)
+            label_size = "62x29"
+        else:
+            print(f"Detected label size: {label_size}")
+    
+    # Parse dimensions from label size
+    if 'x' in label_size:
+        parts = label_size.split('x')
+        width_mm = parts[0]
+        height_mm = parts[1]
+    else:
+        width_mm = label_size
+        # Use a massive virtual length (1000mm) for endless tapes. 
+        # Pandoc will layout the text on this, and then mogrify -trim will cut it down 
+        # to the exact minimal length needed!
+        height_mm = "1000" 
+
+    orientation = args.orientation
+    if orientation == 'auto':
+        if 'x' not in label_size:
+            # Endless tape: Default to portrait to wrap text and minimize tape length
+            orientation = 'portrait'
+            print("Optimization: Auto-selected orientation: portrait (for minimum tape length on endless tape)")
+        else:
+            w = float(width_mm)
+            h = float(height_mm)
+            # For 29mm tape or when height > width, landscape is usually better for text layout
+            if w < 40 or h > w:
+                orientation = 'landscape'
+                print("Optimization: Auto-selected orientation: landscape")
+            else:
+                orientation = 'portrait'
+                print("Optimization: Auto-selected orientation: portrait")
+
+    if orientation == 'landscape':
+        width_mm, height_mm = height_mm, width_mm
+
+    tmp_pdf = "/tmp/label_tmp.pdf"
+    tmp_png_prefix = "/tmp/label_tmp"
+    
+    try:
+        if args.file:
+            if args.file.lower().endswith(".pdf"):
+                print("Converting PDF to image...")
+                img_path = pdf_to_image(args.file, tmp_png_prefix, is_landscape=(orientation == 'landscape'))
+            else:
+                img_path = args.file
+        else:
+            print("Reading markdown/latex from stdin... (Press Ctrl+D to finish)")
+            text = sys.stdin.read()
+            
+            # Dynamic optimization: adjust font size based on text length and paper size
+            text_len = len(text.strip())
+            w_mm_float = float(width_mm)
+            h_mm_float = float(height_mm)
+            
+            # Heuristics for font size (extarticle supports 10pt, 11pt, 12pt, 14pt, 17pt, 20pt)
+            if text_len > 200:
+                fontsize = "10pt"
+            elif text_len > 100:
+                fontsize = "12pt"
+            elif text_len > 50:
+                fontsize = "14pt"
+            elif w_mm_float >= 60 or h_mm_float >= 60:
+                fontsize = "20pt"
+            else:
+                fontsize = "17pt"
+                
+            print(f"Optimization: Using {fontsize} font size for {text_len} characters.")
+            
+            print(f"Rendering markdown to PDF ({width_mm}x{height_mm}mm)...")
+            text_to_pdf(text, tmp_pdf, width_mm, height_mm, fontsize)
+            print("Converting PDF to image...")
+            img_path = pdf_to_image(tmp_pdf, tmp_png_prefix, is_landscape=(orientation == 'landscape'))
+            
+        # --- Preview & Length Calc ---
+        if shutil.which("identify"):
+            res = subprocess.run(["identify", "-format", "%h", img_path], capture_output=True, text=True)
+            if res.returncode == 0:
+                h_px = int(res.stdout.strip())
+                length_mm = (h_px / 300.0) * 25.4
+                print(f"Calculated label length: {length_mm:.1f} mm")
+        
+        if not args.no_preview:
+            preview_proc = show_preview(img_path, mode=args.preview, orientation=orientation)
+            
+            try:
+                # Read from /dev/tty because stdin might have been consumed for markdown
+                with open('/dev/tty', 'r') as tty:
+                    print("Print this label? [y/N]: ", end="", flush=True)
+                    ans = tty.readline().strip()
+                if ans.lower() not in ['y', 'yes']:
+                    print("Print cancelled by user.")
+                    if preview_proc:
+                        preview_proc.terminate()
+                    return
+            except Exception as e:
+                print(f"Could not prompt user ({e}). Skipping print.")
+                if preview_proc:
+                    preview_proc.terminate()
+                return
+            finally:
+                # Try to clean up the preview window when done prompting (optional)
+                if preview_proc and preview_proc.poll() is None:
+                    try:
+                        preview_proc.terminate()
+                    except:
+                        pass
+        # -----------------------------
+        
+        print_image(img_path, label_size, args.ip, args.model)
+        
+    finally:
+        # Cleanup temp files
+        if os.path.exists(tmp_pdf): os.remove(tmp_pdf)
+        if os.path.exists(f"{tmp_png_prefix}.png"): os.remove(f"{tmp_png_prefix}.png")
+
+if __name__ == "__main__":
+    main()

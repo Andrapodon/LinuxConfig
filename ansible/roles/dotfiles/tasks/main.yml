@@ -27,6 +27,7 @@
     - .config/waybar/scripts
     - .config/workstyle
     - .local
+    - .local/bin
     - .local/share
     - .local/share/applications
     - .config/conf_backups/pre-stow
